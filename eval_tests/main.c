@@ -71,12 +71,14 @@ int	main(void)
 		iterator->value = rand() % 100;
 		iterator = iterator->next;
 	}
+	/* Swap function */
 	printf("#### Before swap function ####\n");
 	print_stack(stack_a);
 	stack_a = swap(stack_a);
 	printf("#### After swap function ####\n");
 	print_stack(stack_a);
 
+	/* Push function */
 	printf("#### stack_a Before push() function ####\n");
 	print_stack(stack_a);
 	printf("#### stack_b Before push() function ####\n");
@@ -86,6 +88,20 @@ int	main(void)
 	print_stack(stack_a);
 	printf("#### stack_b After push() function ####\n");
 	print_stack(stack_b);
+
+	/* Rotate function */
+	printf("#### stack_a Before rotate() function ####\n");
+	print_stack(stack_a);
+	stack_a = rotate(stack_a);
+	printf("#### stack_a After rotate() function ####\n");
+	print_stack(stack_a);
+
+	printf("#### stack_b Before rotate() function ####\n");
+	print_stack(stack_b);
+	stack_b = rotate(stack_b);
+	printf("#### stack_b After rotate() function ####\n");
+	print_stack(stack_b);
+	
 	while (stack_a)
 	{
 		free(stack_a);

@@ -55,4 +55,8 @@ test:
 	@echo "#### Directing output to output.txt ####"
 	@./a.out > output.txt
 
+leaks: test
+	leaks -atExit -- ./a.out
+
+
 .PHONY: all clean fclean re

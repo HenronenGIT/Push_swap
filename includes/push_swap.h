@@ -23,7 +23,11 @@ typedef struct s_stack
 }	t_stack;
 
 t_stack	*swap(t_stack *stack);
-// t_stack	*push(t_stack *dest_stack, t_stack *source_stack);
 void	push(t_stack **dest_stack, t_stack **source_stack);
+t_stack	*rotate(t_stack *stack);
+t_stack	*reverse_rotate(t_stack *stack)
+
+
+
 
 #endif

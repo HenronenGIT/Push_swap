@@ -28,3 +28,23 @@
 72
 44
 78
+#### stack_a Before rotate() function ####
+30
+49
+7
+73
+58
+#### stack_a After rotate() function ####
+49
+7
+73
+58
+30
+#### stack_b Before rotate() function ####
+72
+44
+78
+#### stack_b After rotate() function ####
+44
+78
+72

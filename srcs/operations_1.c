@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_stack	*swap(t_stack *stack)
+t_stack	*swap(t_stack *stack) // Change to void func?
 {
 	long	temp;
 	t_stack	*temp_ptr;
@@ -28,7 +28,6 @@ t_stack	*swap(t_stack *stack)
 	return (stack);
 }
 
-// t_stack	*push(t_stack *dest_stack, t_stack *source_stack)
 void	push(t_stack **dest_stack, t_stack **source_stack)
 {
 	t_stack	*temp;
@@ -39,4 +38,25 @@ void	push(t_stack **dest_stack, t_stack **source_stack)
 	(*source_stack)->next = (*dest_stack);
 	(*dest_stack) = (*source_stack);
 	(*source_stack) = temp;
+}
+
+t_stack	*rotate(t_stack *stack)
+{
+	t_stack	*second_ptr;
+	t_stack	*tail_ptr;
+
+	if (stack->next == NULL)
+		return (stack);
+	second_ptr = stack->next;
+	tail_ptr = stack;
+	while (tail_ptr->next)
+		tail_ptr = tail_ptr->next;
+	tail_ptr->next = stack;
+	stack->next = NULL;
+	return (second_ptr);
+}
+
+t_stack	*reverse_rotate(t_stack *stack)
+{
+	
 }
