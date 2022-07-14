@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = push_swap
 
 CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-SRCS = ./srcs/operations_1.c
+SRCS = ./srcs/operations.c
 	
 OBJS = $(SRCS:.c=.o)
 
@@ -30,12 +30,9 @@ RM = /bin/rm -f
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	@echo "#### Compiling libft sources ####"
-	@make -C ./libft/ -I $(LIBFT_H) fclean && make -C ./libft/ -I $(LIBFT_H)
-	@$(CC) $(FLAGS) -I $(PRINTF_H) -I $(LIBFT_H) -c $(SRC)
-	@echo "#### Creating libft ####"
-	@ar rc -s $(NAME) *.o ./libft/*.o
+$(NAME):
+	@make -C ./libft/ all
+	$(CC) $(FLAGS) $(HEADERS) $(LIB) ./checker/checker.c
 
 clean:
 	@echo "#### Removing object files ####"

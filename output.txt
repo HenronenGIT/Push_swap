@@ -1,3 +1,27 @@
+Process:         a.out [51785]
+Path:            /Users/USER/*/a.out
+Load Address:    0x104670000
+Identifier:      a.out
+Version:         ???
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  bash [51784]
+
+Date/Time:       2022-07-14 19:09:43.428 +0300
+Launch Time:     2022-07-14 19:09:42.968 +0300
+OS Version:      macOS 12.4 (21F79)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 13.4.1 (13F100)
+
+Physical footprint:         704K
+Physical footprint (peak):  704K
+----
+
+leaks Report Version: 4.0
+Process 51785: 211 nodes malloced for 16 KB
+Process 51785: 0 leaks for 0 total leaked bytes.
+
 #### Before swap function ####
 7
 49
@@ -48,3 +72,35 @@
 44
 78
 72
+#### stack_a Before reverse_rotate() function ####
+49
+7
+73
+58
+30
+#### stack_a After reverse_rotate() function ####
+30
+49
+7
+73
+58
+#### stack_a Before reverse_rotate() function ####
+30
+49
+7
+73
+58
+#### stack_a After reverse_rotate() function ####
+58
+30
+49
+7
+73
+#### stack_b Before reverse_rotate() function ####
+44
+78
+72
+#### stack_b After reverse_rotate() function ####
+72
+44
+78

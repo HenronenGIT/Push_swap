@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// # include "libft.h"
+# include "libft.h"
 # include <stdio.h> //TEMP
 
 typedef struct s_stack
@@ -25,9 +25,6 @@ typedef struct s_stack
 t_stack	*swap(t_stack *stack);
 void	push(t_stack **dest_stack, t_stack **source_stack);
 t_stack	*rotate(t_stack *stack);
-t_stack	*reverse_rotate(t_stack *stack)
-
-
-
+t_stack	*reverse_rotate(t_stack *stack);
 
 #endif

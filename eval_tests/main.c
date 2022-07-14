@@ -101,6 +101,25 @@ int	main(void)
 	stack_b = rotate(stack_b);
 	printf("#### stack_b After rotate() function ####\n");
 	print_stack(stack_b);
+
+	/* reverse_rotate function */
+	printf("#### stack_a Before reverse_rotate() function ####\n");
+	print_stack(stack_a);
+	stack_a = reverse_rotate(stack_a);
+	printf("#### stack_a After reverse_rotate() function ####\n");
+	print_stack(stack_a);
+
+	printf("#### stack_a Before reverse_rotate() function ####\n");
+	print_stack(stack_a);
+	stack_a = reverse_rotate(stack_a);
+	printf("#### stack_a After reverse_rotate() function ####\n");
+	print_stack(stack_a);
+
+	printf("#### stack_b Before reverse_rotate() function ####\n");
+	print_stack(stack_b);
+	stack_b = reverse_rotate(stack_b);
+	printf("#### stack_b After reverse_rotate() function ####\n");
+	print_stack(stack_b);
 	
 	while (stack_a)
 	{

@@ -58,5 +58,15 @@ t_stack	*rotate(t_stack *stack)
 
 t_stack	*reverse_rotate(t_stack *stack)
 {
-	
+	t_stack	*temp;
+	t_stack	*tail_ptr;
+
+	temp = stack;
+	while (stack->next->next != NULL)
+		stack = stack->next;
+	tail_ptr = stack->next;
+	tail_ptr->next = temp;
+	stack->next = NULL;
+	stack = tail_ptr;
+	return (stack);
 }
