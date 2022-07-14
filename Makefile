@@ -52,6 +52,7 @@ re: fclean all
 test:
 	@echo "#### Compiling with test main.c ####"
 	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) ./eval_tests/main.c
-	@./a.out
+	@echo "#### Directing output to output.txt ####"
+	@./a.out > output.txt
 
 .PHONY: all clean fclean re

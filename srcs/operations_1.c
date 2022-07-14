@@ -12,54 +12,31 @@
 
 #include "push_swap.h"
 
-/* Swap the first 2 elements at the top of stack */
-// long	*swap(long *stack, long size)
-// {
-// 	long	temp;
-
-// 	temp = 0;
-
-// 	if (size > 1)
-// 	{
-// 		temp = stack[0];
-// 		stack[0] = stack[1];
-// 		stack[1] = temp;
-// 	}
-// 	return (stack);
-// }
-t_data	*swap(t_data *data)
+t_stack	*swap(t_stack *stack)
 {
 	long	temp;
+	t_stack	*temp_ptr;
 
 	temp = 0;
-	if (data->size > 1)
-	{
-		temp = data->stack[0];
-		data->stack[0] = data->stack[1];
-		data->stack[1] = temp;
-	}
-	return (data);
+	if (!stack || !stack->next)
+		return (stack);
+	else
+		temp_ptr = stack->next;
+	temp = stack->value;
+	stack->value = temp_ptr->value;
+	temp_ptr->value = temp;
+	return (stack);
 }
 
-/* 1 */
-// long	*push_a(long *stack_a, long size_a, long *stack_b, long size_b)
-// t_data	*push(t_data *dest, t_data *src)
-void	push(t_data *destination, t_data *source)
+// t_stack	*push(t_stack *dest_stack, t_stack *source_stack)
+void	push(t_stack **dest_stack, t_stack **source_stack)
 {
-	long	temp;
-	long	i;
-	
-	i = 0;
-	temp = 0;
-	if (source->size == 0)
+	t_stack	*temp;
+
+	if (source_stack == NULL)
 		return ;
-	while (i <= destination->size)
-	{
-		temp = destination->stack[i];
-		destination->stack[i] = source->stack[0];
-		source->stack[0] = temp;
-		i++;
-	}
-	destination->stack[i] = temp;
-	source->stack[0] = 0;
+	temp = (*source_stack)->next;
+	(*source_stack)->next = (*dest_stack);
+	(*dest_stack) = (*source_stack);
+	(*source_stack) = temp;
 }

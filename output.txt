@@ -1,1 +1,30 @@
-#### Compiling with test main.c ####
+#### Before swap function ####
+7
+49
+73
+58
+#### After swap function ####
+49
+7
+73
+58
+#### stack_a Before push() function ####
+49
+7
+73
+58
+#### stack_b Before push() function ####
+30
+72
+44
+78
+#### stack_a After push() function ####
+30
+49
+7
+73
+58
+#### stack_b After push() function ####
+72
+44
+78

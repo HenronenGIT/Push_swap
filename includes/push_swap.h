@@ -16,16 +16,14 @@
 // # include "libft.h"
 # include <stdio.h> //TEMP
 
-typedef struct s_data
+typedef struct s_stack
 {
-	long	*stack;
-	long	size;
-}	t_data;
+	long	value;
+	struct s_stack	*next;
+}	t_stack;
 
-/* 1 */
-// long	*swap(long *stack, long size);
-/* 2 */
-t_data	*swap(t_data *stack);
-void	push(t_data *destination, t_data *source);
+t_stack	*swap(t_stack *stack);
+// t_stack	*push(t_stack *dest_stack, t_stack *source_stack);
+void	push(t_stack **dest_stack, t_stack **source_stack);
 
 #endif
