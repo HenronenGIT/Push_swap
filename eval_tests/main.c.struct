@@ -1,0 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:01:19 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/07/13 15:01:22 by hmaronen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+
+void	print_stack(long *stack, long size)
+{
+	long	i;
+
+	i = 0;
+	while (i < size)
+	{	
+		printf("%ld\n", stack[i]);
+		i += 1;
+	}
+}
+
+int	main(void)
+{
+	t_data	*data_a;
+	t_data	*data_b;
+
+	long	size;
+	int	i;
+
+	i = 0;
+	size = 10;
+	
+	data_a = (t_data *)malloc(sizeof(t_data));
+	data_b = (t_data *)malloc(sizeof(t_data));
+
+	data_a->stack = (long *)malloc(sizeof(long) * size);
+	data_b->stack = (long *)malloc(sizeof(long) * size);
+
+	data_a->size = size;
+	data_b->size = size;
+
+	while (i <= size)
+	{
+		data_a->stack[i] = rand() % 100;
+		i++;
+	}
+
+	data_b->stack[0] = NULL;
+	exit(0);
+	printf("#### Before swap function ####\n");
+	print_stack(data_a->stack, size);
+	data_a = swap(data_a);
+	printf("#### After swap function ####\n");
+	print_stack(data_a->stack, size);
+
+	printf("#### Before push() function ####\n");
+	print_stack(data_a->stack, size);
+	push(data_a, data_b);
+	printf("#### After push() function ####\n");
+	print_stack(data_a->stack, size);
+}
