@@ -110,5 +110,7 @@ char	*ft_unsigned_itoa_base(unsigned long dec, int base);
 
 void	ft_puterror(char *error_msg);
 long	ft_atol(const char *str);
+int		ft_isnumber(char *string);
+
 
 #endif
