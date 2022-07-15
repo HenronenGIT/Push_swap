@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_puterror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 14:41:46 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/07/13 14:41:47 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/07/15 11:33:51 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/07/15 11:33:53 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft.h"
-# include <stdlib.h>
-# include <limits.h>
-# include <stdio.h> //TEMP
-
-typedef struct s_stack
+void	ft_puterror(char *error_msg)
 {
-	// long	value;
-	int	value;
-	struct s_stack	*next;
-}	t_stack;
-
-t_stack	*swap(t_stack *stack);
-void	push(t_stack **dest_stack, t_stack **source_stack);
-t_stack	*rotate(t_stack *stack);
-t_stack	*reverse_rotate(t_stack *stack);
-
-#endif
+	if (error_msg == NULL)
+		return ;
+	while (*error_msg)
+	{
+		write(2, &(*error_msg), 1);
+		error_msg++;
+	}
+}

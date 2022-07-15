@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = checker
 
 CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-SRCS = ./srcs/operations.c
+SRCS = ./srcs/operations.c ./srcs/checker.c
 	
 OBJS = $(SRCS:.c=.o)
 
@@ -30,9 +30,11 @@ RM = /bin/rm -f
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SRC)
+	@echo "#### Creating libft ####"
 	@make -C ./libft/ all
-	$(CC) $(FLAGS) $(HEADERS) $(LIB) ./checker/checker.c
+	@echo "#### Creating checker ####"
+	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(SRCS) -o checker
 
 clean:
 	@echo "#### Removing object files ####"

@@ -26,7 +26,8 @@ ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lcase.c					\
 ft_print_array.c ft_word_count.c ft_digit_counter.c ft_isspace.c			\
 ft_lstadd_back.c ft_swap_array.c ft_strndup.c find_eofl.c ft_realloc.c		\
 ft_get_next_line.c ft_arrnew.c ft_free_2d_array.c ft_strrev.c ft_isodd.c	\
-ft_strtoupper.c ft_pow.c ft_itoa_base.c ft_unsigned_itoa_base.c 			
+ft_strtoupper.c ft_pow.c ft_itoa_base.c ft_unsigned_itoa_base.c				\
+ft_puterror.c ft_atol.c
 
 HEADER = ./includes 
 O_FILES = $(SRCS:.c=.o)

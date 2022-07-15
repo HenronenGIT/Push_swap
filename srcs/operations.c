@@ -14,7 +14,7 @@
 
 t_stack	*swap(t_stack *stack) // Change to void func?
 {
-	long	temp;
+	int	temp;
 	t_stack	*temp_ptr;
 
 	temp = 0;

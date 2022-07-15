@@ -16,7 +16,7 @@
 				"-I./libft/includes",
 				"-I./includes",
 				// "-I./",
-                "${workspaceFolder}/checker/*.c", // Debug checker
+                "${workspaceFolder}/srcs/*.c", // Debug checker
                 // "${workspaceFolder}/srcs/*.c",
                 // "${workspaceFolder}/eval_tests/main.c",
 			    // "${workspaceFolder}/libft/*.c", // For debugging lib functions

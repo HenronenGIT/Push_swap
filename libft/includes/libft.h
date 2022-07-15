@@ -108,4 +108,7 @@ int		ft_pow(int base, int exponent);
 char	*ft_itoa_base(long dec, int base);
 char	*ft_unsigned_itoa_base(unsigned long dec, int base);
 
+void	ft_puterror(char *error_msg);
+long	ft_atol(const char *str);
+
 #endif
