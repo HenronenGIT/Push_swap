@@ -17,9 +17,9 @@ int	ft_nbr_in_array(int number, int *array, int array_size)
 	int	i;
 
 	i = 0;
-	if (array == NULL || array_size == 0)
+	if (array == NULL)
 		return (0);
-	while (i <= array_size)
+	while (i < array_size)
 	{
 		if (number == array[i])
 			return (1);
