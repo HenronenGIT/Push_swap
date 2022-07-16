@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/${workspaceFolderBasename}",
-			"args": ["-2147483648"],
+			"args": ["4", "2", "1", "0", "-2"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

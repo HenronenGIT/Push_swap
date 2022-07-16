@@ -16,7 +16,7 @@ CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-SRCS = ./srcs/operations.c ./srcs/checker.c
+SRCS = ./srcs/operations.c ./srcs/checker.c ./srcs/list_functions.c
 	
 OBJS = $(SRCS:.c=.o)
 
@@ -30,7 +30,7 @@ RM = /bin/rm -f
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(SRCS)
 	@echo "#### Creating libft ####"
 	@make -C ./libft/ all
 	@echo "#### Creating checker ####"
@@ -50,12 +50,16 @@ re: fclean all
 
 test:
 	@echo "#### Compiling with test main.c ####"
-	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) ./eval_tests/main.c
+	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) $(LIB) ./eval_tests/main.c
 	@echo "#### Directing output to output.txt ####"
 	@./a.out > output.txt
 
-leaks: test
-	leaks -atExit -- ./a.out
+leaks: re
+	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(SRCS) -o checker
+#	leaks -atExit -- ./a.out
+
+sanitize: re
+	@$(CC) $(FLAGS) -g -fsanitize=address $(HEADERS) $(LIB) $(SRCS) -o checker
 
 
 .PHONY: all clean fclean re

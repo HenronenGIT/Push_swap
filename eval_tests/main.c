@@ -20,7 +20,7 @@ void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{	
-		printf("%ld\n", stack->value);
+		printf("%d\n", stack->value);
 		stack = stack->next;
 	}
 }
@@ -74,7 +74,7 @@ int	main(void)
 	/* Swap function */
 	printf("#### Before swap function ####\n");
 	print_stack(stack_a);
-	stack_a = swap(stack_a);
+	swap(&stack_a);
 	printf("#### After swap function ####\n");
 	print_stack(stack_a);
 
@@ -92,32 +92,32 @@ int	main(void)
 	/* Rotate function */
 	printf("#### stack_a Before rotate() function ####\n");
 	print_stack(stack_a);
-	stack_a = rotate(stack_a);
+	rotate(&stack_a);
 	printf("#### stack_a After rotate() function ####\n");
 	print_stack(stack_a);
 
 	printf("#### stack_b Before rotate() function ####\n");
 	print_stack(stack_b);
-	stack_b = rotate(stack_b);
+	rotate(&stack_b);
 	printf("#### stack_b After rotate() function ####\n");
 	print_stack(stack_b);
 
 	/* reverse_rotate function */
 	printf("#### stack_a Before reverse_rotate() function ####\n");
 	print_stack(stack_a);
-	stack_a = reverse_rotate(stack_a);
+	reverse_rotate(&stack_a);
 	printf("#### stack_a After reverse_rotate() function ####\n");
 	print_stack(stack_a);
 
 	printf("#### stack_a Before reverse_rotate() function ####\n");
 	print_stack(stack_a);
-	stack_a = reverse_rotate(stack_a);
+	reverse_rotate(&stack_a);
 	printf("#### stack_a After reverse_rotate() function ####\n");
 	print_stack(stack_a);
 
 	printf("#### stack_b Before reverse_rotate() function ####\n");
 	print_stack(stack_b);
-	stack_b = reverse_rotate(stack_b);
+	reverse_rotate(&stack_b);
 	printf("#### stack_b After reverse_rotate() function ####\n");
 	print_stack(stack_b);
 	

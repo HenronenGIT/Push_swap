@@ -12,20 +12,17 @@
 
 #include "push_swap.h"
 
-t_stack	*swap(t_stack *stack) // Change to void func?
+void	swap(t_stack **stack)
 {
 	int	temp;
-	t_stack	*temp_ptr;
 
 	temp = 0;
-	if (!stack || !stack->next)
-		return (stack);
-	else
-		temp_ptr = stack->next;
-	temp = stack->value;
-	stack->value = temp_ptr->value;
-	temp_ptr->value = temp;
-	return (stack);
+	if (!*stack || !(*stack)->next)
+		return ;
+	temp = (*stack)->value;
+	(*stack)->value = (*stack)->next->value;
+	(*stack)->next->value = temp;
+	return ;
 }
 
 void	push(t_stack **dest_stack, t_stack **source_stack)
@@ -40,33 +37,36 @@ void	push(t_stack **dest_stack, t_stack **source_stack)
 	(*source_stack) = temp;
 }
 
-t_stack	*rotate(t_stack *stack)
+void	rotate(t_stack **stack)
 {
-	t_stack	*second_ptr;
+	t_stack	*new_head;
 	t_stack	*tail_ptr;
 
-	if (stack->next == NULL)
-		return (stack);
-	second_ptr = stack->next;
-	tail_ptr = stack;
+	if ((*stack)->next == NULL)
+		return ;
+	new_head = (*stack)->next;
+	tail_ptr = *stack;
 	while (tail_ptr->next)
 		tail_ptr = tail_ptr->next;
-	tail_ptr->next = stack;
-	stack->next = NULL;
-	return (second_ptr);
+	tail_ptr->next = *stack;
+	(*stack)->next = NULL;
+	*stack = new_head;
+	return ;
 }
 
-t_stack	*reverse_rotate(t_stack *stack)
+void	reverse_rotate(t_stack **stack)
 {
-	t_stack	*temp;
-	t_stack	*tail_ptr;
+	t_stack	*second_last;
+	t_stack	*tail;
 
-	temp = stack;
-	while (stack->next->next != NULL)
-		stack = stack->next;
-	tail_ptr = stack->next;
-	tail_ptr->next = temp;
-	stack->next = NULL;
-	stack = tail_ptr;
-	return (stack);
+	tail = *stack;
+	second_last = *stack;
+	while (tail->next)
+		tail = tail->next;
+	while (second_last->next->next)
+		second_last = second_last->next;
+	tail->next = *stack;
+	second_last->next = NULL;
+	*stack = tail;
+	return ;
 }

@@ -12,38 +12,19 @@
 
 #include "push_swap.h"
 
+// void	print_stack(t_stack *stack)
+// {
+// 	while (stack)
+// 	{	
+// 		printf("%d\n", stack->value);
+// 		stack = stack->next;
+// 	}
+// }
+
 void	panic(void)
 {
 	ft_puterror("Error\n");
 	exit(0);
-}
-
-int	ft_isnumber(char *string)
-{
-	if (*string == '-')
-		string++;
-	while (*string)
-	{
-		if (ft_isdigit(*string))
-			string++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-int	ft_in_array(int number, int *array, int array_size)
-{
-	int	i;
-
-	i = 0;
-	while (i <= array_size)
-	{
-		if (number == array[i])
-			return (1);
-		i += 1;
-	}
-	return (0);
 }
 
 // void	check_input(int argc, char **arguments)
@@ -55,9 +36,10 @@ int	*check_input(int argc, char **arguments)
 	int		i;
 
 	array_size = argc - 1;
-	i = 1;
+	i = 0;
 	if (argc < 2)
 		panic();
+	arguments++;
 	valid_numbers = (int *)malloc(sizeof(int) * (array_size));
 	while (arguments[i])
 	{
@@ -66,7 +48,7 @@ int	*check_input(int argc, char **arguments)
 		argument = ft_atol(arguments[i]);
 		if (argument > INT_MAX || argument < INT_MIN)
 			panic();
-		if (ft_in_array((int)argument, valid_numbers, array_size))
+		if (ft_nbr_in_array((int)argument, valid_numbers, i))
 			panic();
 		valid_numbers[i] = (int)argument;
 		i += 1;
@@ -75,11 +57,75 @@ int	*check_input(int argc, char **arguments)
 	return (valid_numbers);
 }
 
-int	main(int argc, char **argv)
-{
-	int	*valid_numbers;
+// char	*read_instructions(t_stack *stack)
+// {
+// 	char	*instruction;
 
-	valid_numbers = check_input(argc, argv);
-	
-	return (0);
+// 	stacic	jump_table
+// 	while (ft_get_next_line(1, &instruction))
+// 	{
+		
+// 	}
+// }
+
+t_stack	*create_stack(int *integers, int array_size)
+{
+	t_stack	*stack;
+	t_stack	*node;
+	int		i;
+
+	i = 0;
+	stack = create_node(integers[i++]);
+	while (i < array_size)
+	{
+		node = create_node(integers[i]);
+		node_add_back(&stack, node);
+		i += 1;
+	}
+	return (stack);
 }
+
+int	check_stack_order(t_stack *stack)
+{
+	t_stack	*node;
+	int		temp;
+
+	node = stack;
+	temp = 0;
+	while (node->next)
+	{
+		
+		if (node->value < node->next->value)
+			node = node->next;
+		else
+		{
+			return (0);
+			//temp = node->value;
+			//node->value = node->next->value;
+			//node->next->value = temp;
+			//node = stack;
+		}
+	}
+	return (1);
+}
+
+// int	main(int argc, char **argv)
+// {
+// 	t_stack *stack_a;
+// 	int		*valid_numbers;
+// 	int		array_size;
+
+// 	stack_a = NULL;
+// 	array_size = argc - 1;
+// 	valid_numbers = check_input(argc, argv);
+// 	stack_a = create_stack(valid_numbers, array_size);
+// 	// read_instructions(stack);
+// 	// check_stack_order(stack_a);
+// 	// print_stack(stack_a);
+// 	while (stack_a)
+// 	{
+// 		free(stack_a);
+// 		stack_a = stack_a->next;
+// 	}
+// 	return (0);
+// }
