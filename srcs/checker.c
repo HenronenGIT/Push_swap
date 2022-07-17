@@ -12,15 +12,6 @@
 
 #include "push_swap.h"
 
-// void	print_stack(t_stack *stack)
-// {
-// 	while (stack)
-// 	{	
-// 		printf("%d\n", stack->value);
-// 		stack = stack->next;
-// 	}
-// }
-
 void	panic(void)
 {
 	ft_puterror("Error\n");
@@ -57,75 +48,115 @@ int	*check_input(int argc, char **arguments)
 	return (valid_numbers);
 }
 
-// char	*read_instructions(t_stack *stack)
-// {
-// 	char	*instruction;
-
-// 	stacic	jump_table
-// 	while (ft_get_next_line(1, &instruction))
-// 	{
-		
-// 	}
-// }
-
-t_stack	*create_stack(int *integers, int array_size)
+// t_stack	*create_stacks(int *ints, int arr_len, t_stack **stack_a, t_stack **stack_b)
+void	create_stacks(int *ints, int arr_len, t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*stack;
 	t_stack	*node;
 	int		i;
 
 	i = 0;
-	stack = create_node(integers[i++]);
-	while (i < array_size)
+	*stack_a = create_node(ints[i++]);
+	while (i < arr_len)
 	{
-		node = create_node(integers[i]);
-		node_add_back(&stack, node);
+		node = create_node(ints[i]);
+		node_add_back(&(*stack_a), node);
 		i += 1;
 	}
-	return (stack);
+	// *stack_b = create_node(0);
+	// return (stack);
 }
 
 int	check_stack_order(t_stack *stack)
 {
 	t_stack	*node;
-	int		temp;
 
 	node = stack;
-	temp = 0;
 	while (node->next)
 	{
-		
 		if (node->value < node->next->value)
 			node = node->next;
 		else
-		{
 			return (0);
-			//temp = node->value;
-			//node->value = node->next->value;
-			//node->next->value = temp;
-			//node = stack;
-		}
 	}
 	return (1);
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_stack *stack_a;
-// 	int		*valid_numbers;
-// 	int		array_size;
+void	read_instructions(t_stack **stack_a, t_stack **stack_b)
+{
+	char	*instruction;
+	// static	t_operation	*jump_table[3] = {
+	// 	swap,
+	// 	rotate,
+	// 	reverse_rotate
+	// };
+	
+	// while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	// {
+	// 	t_operation[]
+	// 	print_stack(stack_a);
 
-// 	stack_a = NULL;
-// 	array_size = argc - 1;
-// 	valid_numbers = check_input(argc, argv);
-// 	stack_a = create_stack(valid_numbers, array_size);
-// 	// read_instructions(stack);
-// 	// check_stack_order(stack_a);
-// 	// print_stack(stack_a);
-// 	while (stack_a)
-// 	{
-// 		free(stack_a);
-// 		stack_a = stack_a->next;
-// 	}
-// 	return (0);
-// }
+	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	{
+		if (!ft_strcmp(instruction, "sa"))
+			swap(stack_a);
+		else if (!ft_strcmp(instruction, "sb"))
+			swap(stack_b);
+		else if (!ft_strcmp(instruction, "ss"))
+		{
+			swap(stack_a);
+			swap(stack_b);
+		}
+		else if (!ft_strcmp(instruction, "pa"))
+			push(stack_a, stack_b);
+		else if (!ft_strcmp(instruction, "pb"))
+			push(stack_b, stack_a);
+		else if (!ft_strcmp(instruction, "ra"))
+			rotate(stack_a);
+		else if (!ft_strcmp(instruction, "rb"))
+			rotate(stack_b);
+		else if (!ft_strcmp(instruction, "rr"))
+		{
+			rotate(stack_a);
+			rotate(stack_b);
+		}
+		else if (!ft_strcmp(instruction, "rra"))
+			reverse_rotate(stack_a);
+		else if (!ft_strcmp(instruction, "rrb"))
+			reverse_rotate(stack_b);
+		else if (!ft_strcmp(instruction, "rrr"))
+		{
+			reverse_rotate(stack_a);
+			reverse_rotate(stack_b);
+		}
+		else
+			exit(1); // Free everything
+		print_stacks(*stack_a, *stack_b);
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_stack *stack_a;
+	t_stack *stack_b; 
+	int		*valid_numbers;
+	int		array_len;
+
+	if (argc < 2)
+		return (1);
+	stack_a = NULL;
+	stack_b = NULL;
+	array_len = argc - 1;
+	valid_numbers = check_input(argc, argv);
+	create_stacks(valid_numbers, array_len, &stack_a, &stack_b);
+	read_instructions(&stack_a, &stack_b);
+	check_stack_order(stack_a);
+
+	free(valid_numbers);
+	while (stack_a)
+	{
+		free(stack_a);
+		stack_a = stack_a->next;
+	}
+	free(stack_b);
+	return (0);
+}

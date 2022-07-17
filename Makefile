@@ -16,7 +16,8 @@ CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-SRCS = ./srcs/operations.c ./srcs/checker.c ./srcs/list_functions.c
+SRCS = ./srcs/operations.c ./srcs/checker.c ./srcs/list_functions.c  \
+./srcs/tools.c
 	
 OBJS = $(SRCS:.c=.o)
 

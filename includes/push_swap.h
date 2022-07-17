@@ -38,22 +38,23 @@ typedef struct s_stack
 	int				value;
 }	t_stack;
 
-// typedef	void	instruction()
+typedef enum e_instruction
+{
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+}	t_instruction;
 
-// typedef enum e_instruction
-// {
-// 	sa,
-// 	sb,
-// 	ss,
-// 	pa,
-// 	pb,
-// 	ra,
-// 	rb,
-// 	rr,
-// 	rra,
-// 	rrb,
-// 	rrr
-// }	t_instruction;
+typedef	void	t_operation(t_stack **stack);
+// typedef void	t_handler_func(t_flags *flag);
 
 void	swap(t_stack **stack);
 void	push(t_stack **dest_stack, t_stack **source_stack);
@@ -62,5 +63,7 @@ void	reverse_rotate(t_stack **stack);
 
 t_stack	*create_node(int value);
 void	node_add_back(t_stack **stack, t_stack *node);
+
+void	print_stacks(t_stack *stack_a, t_stack *stack_b); // printf inside
 
 #endif

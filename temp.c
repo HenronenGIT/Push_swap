@@ -2,12 +2,26 @@
 #include <stdio.h>
 // #include "push_swap.h"
 
-
-int main(void)
+typedef enum e_instruction
 {
-	int array[5] = {1, 2, 3, 4, 5};
-	int size;
-	int	i;
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
+}	t_instruction;
 
-	array[0] = NULL;
+int main(int argc, char **argv)
+{
+	t_instruction temp;
+	enum test {sa, sb};
+
+
+	printf("%d\n", sa);
 }

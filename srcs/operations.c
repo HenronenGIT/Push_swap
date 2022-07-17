@@ -29,7 +29,7 @@ void	push(t_stack **dest_stack, t_stack **source_stack)
 {
 	t_stack	*temp;
 
-	if (source_stack == NULL)
+	if (*source_stack == NULL)
 		return ;
 	temp = (*source_stack)->next;
 	(*source_stack)->next = (*dest_stack);
@@ -42,7 +42,7 @@ void	rotate(t_stack **stack)
 	t_stack	*new_head;
 	t_stack	*tail_ptr;
 
-	if ((*stack)->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
 	new_head = (*stack)->next;
 	tail_ptr = *stack;
@@ -59,6 +59,8 @@ void	reverse_rotate(t_stack **stack)
 	t_stack	*second_last;
 	t_stack	*tail;
 
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
 	tail = *stack;
 	second_last = *stack;
 	while (tail->next)
