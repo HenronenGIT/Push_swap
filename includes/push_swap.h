@@ -13,19 +13,65 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// # include "libft.h"
+# include "libft.h"
+# include <stdlib.h>
+# include <limits.h>
 # include <stdio.h> //TEMP
 
-typedef struct s_data
-{
-	long	*stack;
-	long	size;
-}	t_data;
+# define A 0
+# define B 1
+# define BOTH 2
 
-/* 1 */
-// long	*swap(long *stack, long size);
-/* 2 */
-t_data	*swap(t_data *stack);
-void	push(t_data *destination, t_data *source);
+typedef struct s_stacks
+{
+	struct s_stack	*stack_a;
+	struct s_stack	*stack_b;
+}	t_stacks;
+
+typedef struct s_stack
+{
+	struct s_stack	*next;
+	int				value;
+}	t_stack;
+
+// typedef struct s_instruction
+// {
+// 	struct s_instruction	*next;
+// 	char					*operation;
+// }	t_instruction;
+
+// typedef enum e_instruction
+// {
+// 	sa,
+// 	sb,
+// 	ss,
+// 	pa,
+// 	pb,
+// 	ra,
+// 	rb,
+// 	rr,
+// 	rra,
+// 	rrb,
+// 	rrr
+// }	t_instruction;
+
+typedef	void	t_operation(t_stack **stack);
+// typedef void	t_handler_func(t_flags *flag);
+void	panic(char *error_message);
+void	print_stacks(t_stacks *stacks); // printf inside
+
+void	swap(t_stacks **stacks, int decider);
+void	push(t_stacks **stacks, int decider);
+void	rotate(t_stacks **stacks, int decider);
+void	reverse_rotate(t_stacks **stacks, int decider);
+
+t_stack	*create_node(int value);
+void	node_add_back(t_stack **stack, t_stack *node);
+
+// char	**read_instructions(t_instruction **instructions);
+void	execute_instructions(t_stacks **stacks);
+
+void	check_stack_order(t_stacks *stacks);
+
 
 #endif

@@ -10,13 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = checker
 
 CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-SRCS = ./srcs/operations_1.c
+SRCS = ./srcs/operations.c ./srcs/list_functions.c ./srcs/tools.c \
+./srcs/checker.c ./srcs/instructions.c
 	
 OBJS = $(SRCS:.c=.o)
 
@@ -30,12 +31,11 @@ RM = /bin/rm -f
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	@echo "#### Compiling libft sources ####"
-	@make -C ./libft/ -I $(LIBFT_H) fclean && make -C ./libft/ -I $(LIBFT_H)
-	@$(CC) $(FLAGS) -I $(PRINTF_H) -I $(LIBFT_H) -c $(SRC)
+$(NAME): $(SRCS)
 	@echo "#### Creating libft ####"
-	@ar rc -s $(NAME) *.o ./libft/*.o
+	@make -C ./libft/ all
+	@echo "#### Creating checker ####"
+	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(SRCS) -o checker
 
 clean:
 	@echo "#### Removing object files ####"
@@ -51,7 +51,16 @@ re: fclean all
 
 test:
 	@echo "#### Compiling with test main.c ####"
-	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) ./eval_tests/main.c
-	@./a.out
+	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) $(LIB) ./eval_tests/main.c -o Push_swap
+	@echo "#### Directing output to output.txt ####"
+	@./Push_swap > output.txt
+
+leaks: re
+	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(SRCS) -o checker
+#	leaks -atExit -- ./a.out
+
+sanitize: re
+	@$(CC) $(FLAGS) -g -fsanitize=address $(HEADERS) $(LIB) $(SRCS) -o checker
+
 
 .PHONY: all clean fclean re
