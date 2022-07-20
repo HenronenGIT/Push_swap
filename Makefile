@@ -44,7 +44,8 @@ clean:
 
 fclean: clean
 	@echo "#### Removing libprintf.a ####"
-	@/bin/rm -f $(NAME)
+	@$(RM) $(NAME)
+	@$(RM) checker
 	@make fclean -C ./libft/
 
 re: fclean all

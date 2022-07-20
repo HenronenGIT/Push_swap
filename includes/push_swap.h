@@ -57,6 +57,10 @@ typedef struct s_stack
 
 typedef	void	t_operation(t_stack **stack);
 // typedef void	t_handler_func(t_flags *flag);
+
+int		*check_input(int argc, char **arguments);
+void	create_stacks(int *ints, int arr_len, t_stacks **stacks);
+
 void	panic(char *error_message);
 void	print_stacks(t_stacks *stacks); // printf inside
 

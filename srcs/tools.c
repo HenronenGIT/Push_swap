@@ -21,19 +21,18 @@ void	print_stacks(t_stacks *stacks)
 	stack_b = stacks->stack_b;
 	ft_printf("|A||B|\n");
 	ft_printf(" -  -\n");
-	// printf("--\n");
 	while (stack_a || stack_b)
 	{
 		if (stack_a && stack_b)
-			printf("|%d||%d|\n", stack_a->value, stack_b->value);
+			ft_printf("|%d||%d|\n", stack_a->value, stack_b->value);
 		else if (stack_a)
-			printf("|%d|| |\n", stack_a->value);
+			ft_printf("|%d|| |\n", stack_a->value);
 		else
-			printf("| ||%d|\n", stack_b->value);
+			ft_printf("| ||%d|\n", stack_b->value);
 		if (stack_a)
 			stack_a = stack_a->next;
 		if (stack_b)
 			stack_b = stack_b->next;
 	}
-	printf("--\n");
+	ft_printf("--\n");
 }
