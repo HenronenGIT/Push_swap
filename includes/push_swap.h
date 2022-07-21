@@ -36,8 +36,8 @@ typedef struct s_stack
 
 // typedef struct s_instruction
 // {
-// 	struct s_instruction	*next;
 // 	char					*operation;
+// 	struct s_instruction	*next;
 // }	t_instruction;
 
 // typedef enum e_instruction
@@ -56,10 +56,10 @@ typedef struct s_stack
 // }	t_instruction;
 
 typedef	void	t_operation(t_stack **stack);
-// typedef void	t_handler_func(t_flags *flag);
 
 int		*check_input(int argc, char **arguments);
 void	create_stacks(int *ints, int arr_len, t_stacks **stacks);
+void	read_instructions(t_list **instructions);
 
 void	panic(char *error_message);
 void	print_stacks(t_stacks *stacks); // printf inside

@@ -1,0 +1,23 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "C/C++: push_swap",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/${workspaceFolderBasename}",
+			// "program": "${workspaceFolder}/checker",
+			// "args": [],
+			"args": ["4", "2", "1", "0", "-2"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"preLaunchTask": "C/C++: push_swap"
+		}
+	]
+}

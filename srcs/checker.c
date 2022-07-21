@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
 	// t_instruction	*instructions;
+	t_list			*instructions;
 	int				*valid_numbers;
 	int				array_len;
 	// char	**instructions;
@@ -97,8 +98,8 @@ int	main(int argc, char **argv)
 	array_len = argc - 1;
 	valid_numbers = check_input(argc, argv);
 	create_stacks(valid_numbers, array_len, &stacks);
-	// read_instructions(&instructions);
-	execute_instructions(&stacks);
+	read_instructions(&instructions);
+	// execute_instructions(&stacks);
 	check_stack_order(stacks);
 	
 	// free(valid_numbers);
