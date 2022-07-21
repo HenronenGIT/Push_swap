@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-// void	swap(t_stack **stack)
 void	swap(t_stacks **stacks, int decider)
 {
 	int		temp;
@@ -33,39 +32,59 @@ void	swap(t_stacks **stacks, int decider)
 	return ;
 }
 
-// void	push(t_stack **dest_stack, t_stack **source_stack)
 void	push(t_stacks **stacks, int decider)
 {
 	t_stack	*new_head;
-	t_stack	*source_stack;
-	t_stack	*dest_stack;
+	t_stack	**source_stack;
+	t_stack	**dest_stack;
 
-	if (decider == A)
-	{
-		dest_stack = (*stacks)->stack_a;
-		source_stack = (*stacks)->stack_b;
-	}
-	else
-	{
-		dest_stack = (*stacks)->stack_b;
-		source_stack = (*stacks)->stack_a;
-	}
 	if (source_stack == NULL)
 		return ;
-	new_head = source_stack->next;
-	source_stack->next = dest_stack;
-	dest_stack = source_stack;
-	source_stack = new_head;
 	if (decider == A)
 	{
-		(*stacks)->stack_b = source_stack;
-		(*stacks)->stack_a = dest_stack;
+		dest_stack = &(*stacks)->stack_a;
+		source_stack = &(*stacks)->stack_b;
 	}
 	else
 	{
-		(*stacks)->stack_a = source_stack;
-		(*stacks)->stack_b = dest_stack;
+		dest_stack = &(*stacks)->stack_b;
+		source_stack = &(*stacks)->stack_a;
 	}
+	new_head = (*source_stack)->next;
+	(*source_stack)->next = (*dest_stack);
+	(*dest_stack) = (*source_stack);
+	(*source_stack) = new_head;
+
+	// t_stack	*new_head;
+	// t_stack	*source_stack;
+	// t_stack	*dest_stack;
+
+	// if (decider == A)
+	// {
+	// 	dest_stack = (*stacks)->stack_a;
+	// 	source_stack = (*stacks)->stack_b;
+	// }
+	// else
+	// {
+	// 	dest_stack = (*stacks)->stack_b;
+	// 	source_stack = (*stacks)->stack_a;
+	// }
+	// if (source_stack == NULL)
+	// 	return ;
+	// new_head = source_stack->next;
+	// source_stack->next = dest_stack;
+	// dest_stack = source_stack;
+	// source_stack = new_head;
+	// if (decider == A)
+	// {
+	// 	(*stacks)->stack_b = source_stack;
+	// 	(*stacks)->stack_a = dest_stack;
+	// }
+	// else
+	// {
+	// 	(*stacks)->stack_a = source_stack;
+	// 	(*stacks)->stack_b = dest_stack;
+	// }
 }
 
 // void	rotate(t_stack **stack)
