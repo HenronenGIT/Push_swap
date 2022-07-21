@@ -56,15 +56,14 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 
 	i = 0;
 	(*stacks) = (t_stacks *)malloc(sizeof(t_stacks));
-
 	(*stacks)->stack_a = create_node(ints[i++]);
 	while (i < arr_len)
 	{
 		node = create_node(ints[i]);
-		// node_add_back(&(*stack_a), node);
 		node_add_back(&(*stacks)->stack_a, node);
 		i += 1;
 	}
+	(*stacks)->stack_b = NULL;
 }
 
 void	check_stack_order(t_stacks *stacks)
@@ -72,26 +71,24 @@ void	check_stack_order(t_stacks *stacks)
 	t_stack	*node;
 
 	if (stacks->stack_b != NULL)
-		panic("KO");
+		panic("KO\n");
 	node = stacks->stack_a;
 	while (node->next)
 	{
 		if (node->value < node->next->value)
 			node = node->next;
 		else
-			panic("KO");
+			panic("KO\n");
 	}
-	ft_putstr("OK");
+	ft_putstr("OK\n");
 }
 
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
-	// t_instruction	*instructions;
-	t_list			*instructions;
+	t_instruction	*instructions;
 	int				*valid_numbers;
 	int				array_len;
-	// char	**instructions;
 
 	if (argc < 2)
 		return (1);
@@ -99,7 +96,7 @@ int	main(int argc, char **argv)
 	valid_numbers = check_input(argc, argv);
 	create_stacks(valid_numbers, array_len, &stacks);
 	read_instructions(&instructions);
-	// execute_instructions(&stacks);
+	execute_instructions(instructions, &stacks);
 	check_stack_order(stacks);
 	
 	// free(valid_numbers);

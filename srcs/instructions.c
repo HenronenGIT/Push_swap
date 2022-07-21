@@ -12,28 +12,50 @@
 
 #include "push_swap.h"
 
-// void	add_to_list(t_instruction **instructions)
-void	add_to_list(char *instruction, t_list **instructions)
+void	instruction_addback(t_instruction **list, t_instruction *node)
 {
-	t_list	*node;
+	t_instruction	*temp;
 
-	if (!(*instructions))
-		(*instructions) = (t_list *)malloc(sizeof(t_list *));
-	else
-	{
-		node = ft_lstnew(instruction, ft_strlen(instruction));
-		ft_lstadd_back(instructions, node);
-		free(node);	
-	}
-		// (*instructions) = (t_instruction *)malloc(sizeof(t_instruction *));
-
+	if (!*list || !node)
+		return ;
+	temp = *list;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = node;
+	node->next = NULL;
 }
 
-void	read_instructions(t_list **instructions)
+// void	add_to_list(t_instruction **instructions)
+void	add_to_list(char *instruction, t_instruction **instructions)
+{
+	t_instruction	*node;
+
+	if (!(*instructions))
+	{
+		(*instructions) = (t_instruction *)malloc(sizeof(t_instruction));
+		(*instructions)->operation = ft_strdup(instruction);
+		(*instructions)->next = NULL;
+	}
+	else
+	{
+		node = (t_instruction *)malloc(sizeof(t_instruction));
+		node->operation = ft_strdup(instruction);
+		node->next = NULL;
+		instruction_addback(instructions, node);
+		// free(node);	
+	}
+}
+
+void	read_instructions(t_instruction **instructions)
 {
 	char *instruction;
-
 	instruction = NULL;
+
+	// instruction = ft_strdup("pa"); // TEMP
+	// int i; // TEMP
+
+	// i = 0; // TEMP
+	// while (i < 1) // TEMP
 	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
 	{
 		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
@@ -44,40 +66,42 @@ void	read_instructions(t_list **instructions)
 			!ft_strcmp("rrr", instruction))
 				add_to_list(instruction, instructions);
 		else
-			panic("Error\n");
+			panic("Error\n"); // FREE ALL
+		free(instruction);
+		// instruction = ft_strcpy(instruction, "pb"); // TEMP
+		// i++;
 	}
 }
 
-void	execute_instructions(t_stacks **stacks)
+void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 {
-	char	*instruction;
-	// Jump table
-	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	while (instructions) // Jump table possible ???
 	{
-		if (!ft_strcmp(instruction, "sa"))
+		if (!ft_strcmp(instructions->operation, "sa"))
 			swap(stacks, A);
-		else if (!ft_strcmp(instruction, "sb"))
+		else if (!ft_strcmp(instructions->operation, "sb"))
 			swap(stacks, B);
-		else if (!ft_strcmp(instruction, "ss"))
+		else if (!ft_strcmp(instructions->operation, "ss"))
 			swap(stacks, BOTH);
-		else if (!ft_strcmp(instruction, "pa"))
+		else if (!ft_strcmp(instructions->operation, "pa"))
 			push(stacks, A);
-		else if (!ft_strcmp(instruction, "pb"))
+		else if (!ft_strcmp(instructions->operation, "pb"))
 			push(stacks, B);
-		else if (!ft_strcmp(instruction, "ra"))
+		else if (!ft_strcmp(instructions->operation, "ra"))
 			rotate(stacks, A);
-		else if (!ft_strcmp(instruction, "rb"))
+		else if (!ft_strcmp(instructions->operation, "rb"))
 			rotate(stacks, B);
-		else if (!ft_strcmp(instruction, "rr"))
+		else if (!ft_strcmp(instructions->operation, "rr"))
 			rotate(stacks, BOTH);
-		else if (!ft_strcmp(instruction, "rra"))
+		else if (!ft_strcmp(instructions->operation, "rra"))
 			reverse_rotate(stacks, A);
-		else if (!ft_strcmp(instruction, "rrb"))
+		else if (!ft_strcmp(instructions->operation, "rrb"))
 			reverse_rotate(stacks, B);
-		else if (!ft_strcmp(instruction, "rrr"))
+		else if (!ft_strcmp(instructions->operation, "rrr"))
 			reverse_rotate(stacks, BOTH);
 		else
 			panic("Error\n"); // Free everything
-		print_stacks(*stacks);
+		instructions = instructions->next;
+		print_stacks(*stacks); // TEMP
 	}
 }

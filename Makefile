@@ -17,7 +17,7 @@ FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
 SRCS = ./srcs/operations.c ./srcs/list_functions.c ./srcs/tools.c \
-./srcs/checker.c ./srcs/instructions.c
+	./srcs/instructions.c ./srcs/checker.c
 	
 OBJS = $(SRCS:.c=.o)
 
@@ -52,7 +52,7 @@ re: fclean all
 
 test:
 	@echo "#### Compiling with test main.c ####"
-	@$(CC) $(FLAGS) $(HEADERS) $(SRCS) $(LIB) ./eval_tests/main.c -o Push_swap
+	@$(CC) $(FLAGS) $(HEADERS) ./srcs/operations.c ./srcs/tools.c $(LIB) ./eval_tests/main.c -o Push_swap
 	@echo "#### Directing output to output.txt ####"
 	@./Push_swap > output.txt
 

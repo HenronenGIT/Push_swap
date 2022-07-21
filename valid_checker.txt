@@ -1,8 +1,0 @@
-
-./checker 1 2 3 4
-./checker 1 2 3 4
-./checker `getconf INT_MAX`
-./checker `getconf INT_MIN`
-./checker "1321" "-312"
-./checker "1321" "-312"
-./checker "1321" "-312" "312"

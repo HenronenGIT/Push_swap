@@ -7,9 +7,9 @@
             "args": [
                "-fdiagnostics-color=always",
                "-g",
-			   "./libft/libft.a",
-				// "-L./libft",
-				// "-lft",
+			//    "./libft/libft.a",
+				"-L./libft",
+				"-lft",
 				// "-Wall",
 				//"-Wextra",
 				//"-Werror",
@@ -17,9 +17,10 @@
 				"-I./libft/includes",
 				"-I./includes",
 				// "-I./",
-				"${workspaceFolder}/srcs/*.c", // Debug checker
-				// "${workspaceFolder}/srcs/checker.c", 
-				// "${workspaceFolder}/eval_tests/main.c",
+				// "${workspaceFolder}/srcs/*.c", // Debugging checker
+				"${workspaceFolder}/srcs/tools.c", //Debugging operation functions
+				"${workspaceFolder}/srcs/operations.c", //Debugging operation functions
+				"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
 				// "${workspaceFolder}/libft/*.c", // For debugging lib functions
                "-o",
                "${workspaceFolder}/${workspaceFolderBasename}",
