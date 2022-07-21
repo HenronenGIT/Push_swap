@@ -71,16 +71,16 @@ void	check_stack_order(t_stacks *stacks)
 	t_stack	*node;
 
 	if (stacks->stack_b != NULL)
-		panic("KO");
+		panic("KO\n");
 	node = stacks->stack_a;
 	while (node->next)
 	{
 		if (node->value < node->next->value)
 			node = node->next;
 		else
-			panic("KO");
+			panic("KO\n");
 	}
-	ft_putstr("OK");
+	ft_putstr("OK\n");
 }
 
 int	main(int argc, char **argv)
@@ -97,11 +97,7 @@ int	main(int argc, char **argv)
 	create_stacks(valid_numbers, array_len, &stacks);
 	read_instructions(&instructions);
 	execute_instructions(instructions, &stacks);
-
-
-
-	// execute_instructions(&stacks);
-	// check_stack_order(stacks);
+	check_stack_order(stacks);
 	
 	// free(valid_numbers);
 	// while (stack_a)

@@ -73,12 +73,10 @@ void	read_instructions(t_instruction **instructions)
 	}
 }
 
-// void	execute_instructions(t_stacks **stacks)
 void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 {
 	while (instructions) // Jump table possible ???
 	{
-		printf("execute_instructions() = %s\n", instructions->operation);
 		if (!ft_strcmp(instructions->operation, "sa"))
 			swap(stacks, A);
 		else if (!ft_strcmp(instructions->operation, "sb"))
@@ -103,9 +101,7 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 			reverse_rotate(stacks, BOTH);
 		else
 			panic("Error\n"); // Free everything
-		// printf("HERE\n");
 		instructions = instructions->next;
-
-		print_stacks(*stacks);
+		print_stacks(*stacks); // TEMP
 	}
 }
