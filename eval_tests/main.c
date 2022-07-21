@@ -18,24 +18,36 @@
 
 void	test_push(t_stacks *stacks)
 {
-	printf("#### stacks Before push() function ####\n");
-	print_stacks(stacks);
-
-	push(&stacks, B);
-	printf("#### push() B ####\n");
-	print_stacks(stacks);
-
-	push(&stacks, B);
-	printf("#### push() B ####\n");
+	ft_printf("#### stacks Before push() function ####\n");
 	print_stacks(stacks);
 
 	push(&stacks, A);
-	printf("#### push() A ####\n");
+	ft_printf("#### push() A ####\n");
 	print_stacks(stacks);
 
-	push(&stacks, B);
-	printf("#### push() B ####\n");
-	print_stacks(stacks);
+	// push(&stacks, A);
+	// ft_printf("#### push() A ####\n");
+	// print_stacks(stacks);
+
+	// push(&stacks, A);
+	// ft_printf("#### push() A ####\n");
+	// print_stacks(stacks);
+
+	// push(&stacks, B);
+	// ft_printf("#### push() B ####\n");
+	// print_stacks(stacks);
+
+	// push(&stacks, B);
+	// ft_printf("#### push() B ####\n");
+	// print_stacks(stacks);
+
+	// push(&stacks, A);
+	// ft_printf("#### push() A ####\n");
+	// print_stacks(stacks);
+
+	// push(&stacks, B);
+	// ft_printf("#### push() B ####\n");
+	// print_stacks(stacks);
 }
 
 void	test_swap(t_stacks *stacks)
@@ -117,14 +129,15 @@ int	main(void)
 	stacks = (t_stacks *)malloc(sizeof(t_stacks));
 	
 	stacks->stack_a = (t_stack *)malloc(sizeof(t_stack));
-	node_a_1 = (t_stack *)malloc(sizeof(t_stack));
-	node_a_2 = (t_stack *)malloc(sizeof(t_stack));
-	node_a_3 = (t_stack *)malloc(sizeof(t_stack));
+	// node_a_1 = (t_stack *)malloc(sizeof(t_stack));
+	// node_a_2 = (t_stack *)malloc(sizeof(t_stack));
+	// node_a_3 = (t_stack *)malloc(sizeof(t_stack));
 
-	stacks->stack_a->next = node_a_1;
-	stacks->stack_a->next->next = node_a_2;
-	stacks->stack_a->next->next->next = node_a_3;
-	stacks->stack_a->next->next->next->next = NULL;
+	stacks->stack_a->next = NULL;
+	// stacks->stack_a->next = node_a_1;
+	// stacks->stack_a->next->next = node_a_2;
+	// stacks->stack_a->next->next->next = node_a_3;
+	// stacks->stack_a->next->next->next->next = NULL;
 
 	stacks->stack_b = NULL;
 

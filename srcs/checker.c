@@ -56,15 +56,14 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 
 	i = 0;
 	(*stacks) = (t_stacks *)malloc(sizeof(t_stacks));
-
 	(*stacks)->stack_a = create_node(ints[i++]);
 	while (i < arr_len)
 	{
 		node = create_node(ints[i]);
-		// node_add_back(&(*stack_a), node);
 		node_add_back(&(*stacks)->stack_a, node);
 		i += 1;
 	}
+	(*stacks)->stack_b = NULL;
 }
 
 void	check_stack_order(t_stacks *stacks)
@@ -97,7 +96,11 @@ int	main(int argc, char **argv)
 	valid_numbers = check_input(argc, argv);
 	create_stacks(valid_numbers, array_len, &stacks);
 	read_instructions(&instructions);
-	execute_instructions(&stacks);
+	execute_instructions(instructions, &stacks);
+
+
+
+	// execute_instructions(&stacks);
 	// check_stack_order(stacks);
 	
 	// free(valid_numbers);

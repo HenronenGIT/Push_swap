@@ -33,7 +33,6 @@ void	swap(t_stacks **stacks, int decider)
 	return ;
 }
 
-// void	push(t_stack **dest_stack, t_stack **source_stack)
 void	push(t_stacks **stacks, int decider)
 {
 	t_stack	*new_head;
@@ -52,7 +51,7 @@ void	push(t_stacks **stacks, int decider)
 	}
 	if (source_stack == NULL)
 		return ;
-	new_head = source_stack->next;
+	new_head = source_stack->next; // Causing seg
 	source_stack->next = dest_stack;
 	dest_stack = source_stack;
 	source_stack = new_head;

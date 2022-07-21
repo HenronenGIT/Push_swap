@@ -19,7 +19,7 @@ void	instruction_addback(t_instruction **list, t_instruction *node)
 	if (!*list || !node)
 		return ;
 	temp = *list;
-	while (temp->next != 0)
+	while (temp->next)
 		temp = temp->next;
 	temp->next = node;
 	node->next = NULL;
@@ -42,24 +42,21 @@ void	add_to_list(char *instruction, t_instruction **instructions)
 		node->operation = ft_strdup(instruction);
 		node->next = NULL;
 		instruction_addback(instructions, node);
-		free(node);	
+		// free(node);	
 	}
 }
 
 void	read_instructions(t_instruction **instructions)
 {
-	// char *instruction;
-	// instruction = NULL;
+	char *instruction;
+	instruction = NULL;
 
-	/* Temp */
-	char	*instruction;
+	// instruction = ft_strdup("pa"); // TEMP
+	// int i; // TEMP
 
-	instruction = ft_strdup("rra");
-	int i;
-
-	i = 0;
-	// while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
-	while (i <= 2) // better way to clean huge if tree?
+	// i = 0; // TEMP
+	// while (i < 1) // TEMP
+	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
 	{
 		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
 			!ft_strcmp("ss", instruction) || !ft_strcmp("pa", instruction) ||
@@ -69,42 +66,46 @@ void	read_instructions(t_instruction **instructions)
 			!ft_strcmp("rrr", instruction))
 				add_to_list(instruction, instructions);
 		else
-			panic("Error\n");
-		instruction = ft_strcpy(instruction, "pb");
-		i++;
+			panic("Error\n"); // FREE ALL
+		free(instruction);
+		// instruction = ft_strcpy(instruction, "pb"); // TEMP
+		// i++;
 	}
 }
 
-void	execute_instructions(t_stacks **stacks)
+// void	execute_instructions(t_stacks **stacks)
+void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 {
-	char	*instruction;
-	// Jump table
-	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	while (instructions) // Jump table possible ???
 	{
-		if (!ft_strcmp(instruction, "sa"))
+		printf("execute_instructions() = %s\n", instructions->operation);
+		if (!ft_strcmp(instructions->operation, "sa"))
 			swap(stacks, A);
-		else if (!ft_strcmp(instruction, "sb"))
+		else if (!ft_strcmp(instructions->operation, "sb"))
 			swap(stacks, B);
-		else if (!ft_strcmp(instruction, "ss"))
+		else if (!ft_strcmp(instructions->operation, "ss"))
 			swap(stacks, BOTH);
-		else if (!ft_strcmp(instruction, "pa"))
+		else if (!ft_strcmp(instructions->operation, "pa"))
 			push(stacks, A);
-		else if (!ft_strcmp(instruction, "pb"))
+		else if (!ft_strcmp(instructions->operation, "pb"))
 			push(stacks, B);
-		else if (!ft_strcmp(instruction, "ra"))
+		else if (!ft_strcmp(instructions->operation, "ra"))
 			rotate(stacks, A);
-		else if (!ft_strcmp(instruction, "rb"))
+		else if (!ft_strcmp(instructions->operation, "rb"))
 			rotate(stacks, B);
-		else if (!ft_strcmp(instruction, "rr"))
+		else if (!ft_strcmp(instructions->operation, "rr"))
 			rotate(stacks, BOTH);
-		else if (!ft_strcmp(instruction, "rra"))
+		else if (!ft_strcmp(instructions->operation, "rra"))
 			reverse_rotate(stacks, A);
-		else if (!ft_strcmp(instruction, "rrb"))
+		else if (!ft_strcmp(instructions->operation, "rrb"))
 			reverse_rotate(stacks, B);
-		else if (!ft_strcmp(instruction, "rrr"))
+		else if (!ft_strcmp(instructions->operation, "rrr"))
 			reverse_rotate(stacks, BOTH);
 		else
 			panic("Error\n"); // Free everything
+		// printf("HERE\n");
+		instructions = instructions->next;
+
 		print_stacks(*stacks);
 	}
 }
