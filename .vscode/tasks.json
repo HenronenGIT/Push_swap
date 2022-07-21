@@ -7,9 +7,9 @@
             "args": [
                "-fdiagnostics-color=always",
                "-g",
-			   "./libft/libft.a",
-				// "-L./libft",
-				// "-lft",
+			//    "./libft/libft.a",
+				"-L./libft",
+				"-lft",
 				// "-Wall",
 				//"-Wextra",
 				//"-Werror",

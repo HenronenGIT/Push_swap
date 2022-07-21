@@ -87,11 +87,9 @@ void	check_stack_order(t_stacks *stacks)
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
-	// t_instruction	*instructions;
-	t_list			*instructions;
+	t_instruction	*instructions;
 	int				*valid_numbers;
 	int				array_len;
-	// char	**instructions;
 
 	if (argc < 2)
 		return (1);
@@ -99,8 +97,8 @@ int	main(int argc, char **argv)
 	valid_numbers = check_input(argc, argv);
 	create_stacks(valid_numbers, array_len, &stacks);
 	read_instructions(&instructions);
-	// execute_instructions(&stacks);
-	check_stack_order(stacks);
+	execute_instructions(&stacks);
+	// check_stack_order(stacks);
 	
 	// free(valid_numbers);
 	// while (stack_a)

@@ -12,29 +12,54 @@
 
 #include "push_swap.h"
 
-// void	add_to_list(t_instruction **instructions)
-void	add_to_list(char *instruction, t_list **instructions)
+void	instruction_addback(t_instruction **list, t_instruction *node)
 {
-	t_list	*node;
+	t_instruction	*temp;
 
-	if (!(*instructions))
-		(*instructions) = (t_list *)malloc(sizeof(t_list *));
-	else
-	{
-		node = ft_lstnew(instruction, ft_strlen(instruction));
-		ft_lstadd_back(instructions, node);
-		free(node);	
-	}
-		// (*instructions) = (t_instruction *)malloc(sizeof(t_instruction *));
-
+	if (!*list || !node)
+		return ;
+	temp = *list;
+	while (temp->next != 0)
+		temp = temp->next;
+	temp->next = node;
+	node->next = NULL;
 }
 
-void	read_instructions(t_list **instructions)
+// void	add_to_list(t_instruction **instructions)
+void	add_to_list(char *instruction, t_instruction **instructions)
 {
-	char *instruction;
+	t_instruction	*node;
 
-	instruction = NULL;
-	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	if (!(*instructions))
+	{
+		(*instructions) = (t_instruction *)malloc(sizeof(t_instruction));
+		(*instructions)->operation = ft_strdup(instruction);
+		(*instructions)->next = NULL;
+	}
+	else
+	{
+		node = (t_instruction *)malloc(sizeof(t_instruction));
+		node->operation = ft_strdup(instruction);
+		node->next = NULL;
+		instruction_addback(instructions, node);
+		free(node);	
+	}
+}
+
+void	read_instructions(t_instruction **instructions)
+{
+	// char *instruction;
+	// instruction = NULL;
+
+	/* Temp */
+	char	*instruction;
+
+	instruction = ft_strdup("rra");
+	int i;
+
+	i = 0;
+	// while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
+	while (i <= 2) // better way to clean huge if tree?
 	{
 		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
 			!ft_strcmp("ss", instruction) || !ft_strcmp("pa", instruction) ||
@@ -45,6 +70,8 @@ void	read_instructions(t_list **instructions)
 				add_to_list(instruction, instructions);
 		else
 			panic("Error\n");
+		instruction = ft_strcpy(instruction, "pb");
+		i++;
 	}
 }
 

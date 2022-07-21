@@ -34,13 +34,14 @@ typedef struct s_stack
 	int				value;
 }	t_stack;
 
-// typedef struct s_instruction
-// {
-// 	char					*operation;
-// 	struct s_instruction	*next;
-// }	t_instruction;
+typedef struct s_instruction
+{
+	char					*operation;
+	// enum					operation;
+	struct s_instruction	*next;
+}	t_instruction;
 
-// typedef enum e_instruction
+// typedef enum e_operation
 // {
 // 	sa,
 // 	sb,
@@ -53,13 +54,11 @@ typedef struct s_stack
 // 	rra,
 // 	rrb,
 // 	rrr
-// }	t_instruction;
-
-typedef	void	t_operation(t_stack **stack);
+// }	t_operation;
 
 int		*check_input(int argc, char **arguments);
 void	create_stacks(int *ints, int arr_len, t_stacks **stacks);
-void	read_instructions(t_list **instructions);
+void	read_instructions(t_instruction **instructions);
 
 void	panic(char *error_message);
 void	print_stacks(t_stacks *stacks); // printf inside
