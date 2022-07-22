@@ -63,7 +63,7 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks);
 void	check_stack_order(t_stacks *stacks);
 
 void	panic(char *error_message);
-void	print_stacks(t_stacks *stacks); // printf inside
+void	print_stacks(t_stacks *stacks);
 
 void	swap(t_stacks **stacks, int decider);
 void	push(t_stacks **stacks, int decider);

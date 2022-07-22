@@ -12,7 +12,7 @@
 			// "program": "${workspaceFolder}/checker",
 			// "args": [],
 			// "args": ["4", "2", "1", "0", "-2"],
-		"args": ["1", "2"],
+			"args": ["1", "2"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

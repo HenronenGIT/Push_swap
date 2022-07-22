@@ -20,7 +20,6 @@ void	print_stacks(t_stacks *stacks)
 	stack_a = stacks->stack_a;
 	stack_b = stacks->stack_b;
 	ft_printf("|A||B|\n");
-	ft_printf(" -  -\n");
 	while (stack_a || stack_b)
 	{
 		if (stack_a && stack_b)
@@ -34,5 +33,4 @@ void	print_stacks(t_stacks *stacks)
 		if (stack_b)
 			stack_b = stack_b->next;
 	}
-	ft_printf("--\n");
 }

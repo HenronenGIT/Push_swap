@@ -18,8 +18,10 @@ int	main(int argc, char **argv)
 	int				array_len;
 	t_stacks		*stacks; 
 
+	stacks = NULL;
 	valid_numbers = check_input(argc, argv);
 	create_stacks(valid_numbers, array_len, &stacks);
+	print_stacks(stacks);
 	
 
 }
