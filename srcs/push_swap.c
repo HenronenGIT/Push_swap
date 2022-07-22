@@ -26,6 +26,10 @@ int	main(int argc, char **argv)
 	valid_numbers = check_input(argv);
 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
 	if (stack_in_order(stacks))
+	{
 		ft_printf("0\n");
+		return (0); // Free all
+	}
+	
 	print_stacks(stacks);
 }
