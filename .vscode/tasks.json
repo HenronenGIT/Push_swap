@@ -17,10 +17,10 @@
 				"-I./libft/includes",
 				"-I./includes",
 				// "-I./",
-				// "${workspaceFolder}/srcs/*.c", // Debugging checker
-				"${workspaceFolder}/srcs/tools.c", //Debugging operation functions
-				"${workspaceFolder}/srcs/operations.c", //Debugging operation functions
-				"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
+				"${workspaceFolder}/srcs/*.c", // Debugging checker
+				//"${workspaceFolder}/srcs/tools.c", //Debugging operation functions
+				//"${workspaceFolder}/srcs/operations.c", //Debugging operation functions
+				//"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
 				// "${workspaceFolder}/libft/*.c", // For debugging lib functions
                "-o",
                "${workspaceFolder}/${workspaceFolderBasename}",

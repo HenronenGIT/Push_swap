@@ -49,13 +49,13 @@ void	add_to_list(char *instruction, t_instruction **instructions)
 void	read_instructions(t_instruction **instructions)
 {
 	char *instruction;
+
+	// instruction = ft_strdup("pa"); // FOR TESTING COMMANDS
+	// int i; // FOR TESTING COMMANDS
+
+	// i = 0; // FOR TESTING COMMANDS
+	// while (i < 1) // FOR TESTING COMMANDS
 	instruction = NULL;
-
-	// instruction = ft_strdup("pa"); // TEMP
-	// int i; // TEMP
-
-	// i = 0; // TEMP
-	// while (i < 1) // TEMP
 	while (ft_get_next_line(1, &instruction)) // better way to clean huge if tree?
 	{
 		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
@@ -68,8 +68,8 @@ void	read_instructions(t_instruction **instructions)
 		else
 			panic("Error\n"); // FREE ALL
 		free(instruction);
-		// instruction = ft_strcpy(instruction, "pb"); // TEMP
-		// i++;
+		// instruction = ft_strcpy(instruction, "pb"); // FOR TESTING COMMANDS
+		// i++; FOR TESTING COMMANDS
 	}
 }
 
@@ -102,6 +102,6 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 		else
 			panic("Error\n"); // Free everything
 		instructions = instructions->next;
-		print_stacks(*stacks); // TEMP
+		// print_stacks(*stacks); // TEMP
 	}
 }
