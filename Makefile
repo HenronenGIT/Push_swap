@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = checker
+NAME_1 = checker
+NAME_2 = push_swap
 
 CC = gcc
 FLAGS = #-Wall -Wextra -Werror
@@ -32,7 +33,7 @@ LIB = -L ./libft -lft
 
 RM = /bin/rm -f
 
-all: $(NAME)
+all: $(NAME_1) $(NAME_2)
 
 $(NAME): $(CHECKER_SRCS) $(PS_SRCS)
 	@echo "#### Creating libft ####"
@@ -41,6 +42,18 @@ $(NAME): $(CHECKER_SRCS) $(PS_SRCS)
 	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
 	@echo "#### Creating Push_swap ####"
 	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(PS_SRCS) -o Push_swap
+
+$(NAME_1): $(CHECKER_SRCS)
+	@echo "#### Creating libft ####"
+	@make -C ./libft/ all
+	@echo "#### Creating checker ####"
+	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
+
+$(NAME_2): $(PS_SRCS)
+	@echo "#### Creating libft ####"
+	@make -C ./libft/ all
+	@echo "#### Creating Push_swap ####"
+	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
 
 clean:
 	@echo "#### Removing object files ####"

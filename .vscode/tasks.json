@@ -21,7 +21,7 @@
 				//"${workspaceFolder}/srcs/tools.c", //Debugging operation functions
 				//"${workspaceFolder}/srcs/operations.c", //Debugging operation functions
 				//"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
-				// "${workspaceFolder}/libft/*.c", // For debugging lib functions
+				"${workspaceFolder}/libft/*.c", // For debugging lib functions
                "-o",
                "${workspaceFolder}/${workspaceFolderBasename}",
             ],

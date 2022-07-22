@@ -12,19 +12,21 @@
 
 #include "push_swap.h"
 
-int	*check_input(int argc, char **arguments)
+char	**explode_arguments(int argc, char **argv)
+{
+	if (argc >= 2 && ft_isnumber(argv[0]))
+		return (argv);
+	return (ft_strsplit(argv[0], ' '));
+}
+
+int	*check_input(char **arguments)
 {
 	int		*valid_numbers;
-	int		array_size;
 	long	argument;
 	int		i;
 
-	array_size = argc - 1;
 	i = 0;
-	if (argc < 2)
-		panic("Error\n");
-	arguments++;
-	valid_numbers = (int *)malloc(sizeof(int) * (array_size));
+	valid_numbers = (int *)malloc(sizeof(int) * (ft_count_pointers(arguments)));
 	while (arguments[i])
 	{
 		if (!ft_isnumber(arguments[i]))
@@ -57,4 +59,26 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 		i += 1;
 	}
 	(*stacks)->stack_b = NULL;
+}
+
+// void	check_stack_order(t_stacks *stacks)
+// int	check_stack_order(t_stacks *stacks)
+int	stack_in_order(t_stacks *stacks)
+{
+	t_stack	*node;
+
+	if (stacks->stack_b != NULL)
+		return (0);
+		// panic("KO\n");
+	node = stacks->stack_a;
+	while (node->next)
+	{
+		if (node->value < node->next->value)
+			node = node->next;
+		else
+			return (0);
+			// panic("KO\n");
+	}
+	return (1);
+	// ft_putstr("OK\n");
 }

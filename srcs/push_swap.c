@@ -14,14 +14,18 @@
 
 int	main(int argc, char **argv)
 {
+	t_stacks		*stacks; 
 	int				*valid_numbers;
 	int				array_len;
-	t_stacks		*stacks; 
 
 	stacks = NULL;
-	valid_numbers = check_input(argc, argv);
-	create_stacks(valid_numbers, array_len, &stacks);
+	argv++;
+	if (argc < 2)
+		exit(1);
+	argv = explode_arguments(argc, argv); // Might cause memory leak?
+	valid_numbers = check_input(argv);
+	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
+	if (stack_in_order(stacks))
+		ft_printf("0\n");
 	print_stacks(stacks);
-	
-
 }

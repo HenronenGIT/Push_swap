@@ -18,41 +18,28 @@ void	panic(char *error_message)
 	exit(0);
 }
 
-void	check_stack_order(t_stacks *stacks)
-{
-	t_stack	*node;
-
-	if (stacks->stack_b != NULL)
-		panic("KO\n");
-	node = stacks->stack_a;
-	while (node->next)
-	{
-		if (node->value < node->next->value)
-			node = node->next;
-		else
-			panic("KO\n");
-	}
-	ft_putstr("OK\n");
-}
-
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
 	t_instruction	*instructions;
 	int				*valid_numbers;
-	int				array_len;
 
+	stacks = NULL;
 	instructions = NULL;
-	// stacks = NULL;
+	argv++;
 	if (argc < 2)
-		return (1);
-	array_len = argc - 1;
-	valid_numbers = check_input(argc, argv);
-	create_stacks(valid_numbers, array_len, &stacks);
+		exit(1);
+	argv = explode_arguments(argc, argv); // Might cause memory leak?
+	valid_numbers = check_input(argv);
+	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
 	read_instructions(&instructions);
 	execute_instructions(instructions, &stacks);
 	print_stacks(stacks); // TEMP
-	check_stack_order(stacks);
+	if (stack_in_order(stacks))
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+	// check_stack_order(stacks);
 
 	// free(valid_numbers);
 	// while (stack_a)

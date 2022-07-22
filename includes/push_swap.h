@@ -56,11 +56,12 @@ typedef struct s_instruction
 // 	rrr
 // }	t_operation;
 
-int		*check_input(int argc, char **arguments);
+char	**explode_arguments(int argc, char **argv);
+int		*check_input(char **arguments);
 void	create_stacks(int *ints, int arr_len, t_stacks **stacks);
 void	read_instructions(t_instruction **instructions);
 void	execute_instructions(t_instruction *instructions, t_stacks **stacks);
-void	check_stack_order(t_stacks *stacks);
+int		stack_in_order(t_stacks *stacks);
 
 void	panic(char *error_message);
 void	print_stacks(t_stacks *stacks);
