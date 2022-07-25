@@ -10,8 +10,12 @@ int	ft_count_pointers(char **array)
 	return (count);
 }
 
+void	quick_short()
+{
+
+}
+
 int main(int argc, char **argv)
 {
-	printf("%d\n", argc);
-	printf("%s\n", argv[1]);
+	
 }

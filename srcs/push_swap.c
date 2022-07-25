@@ -12,6 +12,37 @@
 
 #include "push_swap.h"
 
+t_stack	*fetch_last_node(t_stack *list)
+{
+	while (list->next)
+		list = list->next;
+	return (list);
+}
+
+t_stacks	*quick_short(t_stacks *stacks)
+{
+	t_stack	*pivot;
+	t_stack	*stack_a;
+	t_stack	*iterator;
+
+	iterator = NULL;
+	pivot = NULL;
+	stack_a = NULL;
+
+	stack_a = stacks->stack_a;
+	pivot = fetch_last_node(stacks->stack_a);
+	while (stack_a)
+	{
+		if (iterator && stack_a->value <= pivot->value)
+			
+		else
+			iterator = stack_a;
+		stack_a = stack_a->next;
+	}
+	// printf("%d\n", pivot->value);
+	return (stacks);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
@@ -30,6 +61,8 @@ int	main(int argc, char **argv)
 		ft_printf("0\n");
 		return (0); // Free all
 	}
+	
+	stacks = quick_short(stacks);
 	
 	print_stacks(stacks);
 }
