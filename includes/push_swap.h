@@ -21,8 +21,11 @@
 # define A 0
 # define B 1
 # define BOTH 2
+
 # define FIRST_NODE stacks->stack_a->value
 # define SECOND_NODE stacks->stack_a->next->value
+# define STACK_A stacks->stack_a
+# define STACK_B stacks->stack_b // add to all functions // add to all functions
 
 typedef struct s_stacks
 {

@@ -63,6 +63,7 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 
 // void	check_stack_order(t_stacks *stacks)
 // int	check_stack_order(t_stacks *stacks)
+
 int	stack_in_order(t_stacks *stacks)
 {
 	t_stack	*node;

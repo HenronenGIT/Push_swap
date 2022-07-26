@@ -17,10 +17,10 @@ CC = gcc
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-CHECKER_SRCS = ./srcs/input.c ./srcs/operations.c ./srcs/list_functions.c	\
-./srcs/tools.c ./srcs/instructions.c ./srcs/checker.c
+CHECKER_SRCS = ./srcs/checker/checker.c ./srcs/input.c ./srcs/operations.c ./srcs/list_functions.c	\
+./srcs/tools.c ./srcs/instructions.c
 
-PS_SRCS = ./srcs/input.c ./srcs/push_swap.c ./srcs/list_functions.c \
+PS_SRCS = ./srcs/push_swap/push_swap.c ./srcs/operations.c ./srcs/input.c ./srcs/list_functions.c \
 ./srcs/tools.c
 	
 OBJS = $(CHECKER_SRCS:.c=.o)
