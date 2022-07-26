@@ -21,6 +21,8 @@
 # define A 0
 # define B 1
 # define BOTH 2
+# define FIRST_NODE stacks->stack_a->value
+# define SECOND_NODE stacks->stack_a->next->value
 
 typedef struct s_stacks
 {

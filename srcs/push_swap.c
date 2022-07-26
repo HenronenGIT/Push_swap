@@ -1,16 +1,16 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   push_swap.c                                        :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2022/07/19 16:54:28 by hmaronen          #+#    #+#             */
-// /*   Updated: 2022/07/19 16:54:28 by hmaronen         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/19 16:54:28 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/07/19 16:54:28 by hmaronen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "push_swap.h"
+#include "push_swap.h"
 
 // t_stack	*fetch_last_node(t_stack *list)
 // {
@@ -43,26 +43,45 @@
 // 	return (stacks);
 // }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_stacks		*stacks; 
-// 	int				*valid_numbers;
-// 	int				array_len;
 
-// 	stacks = NULL;
-// 	argv++;
-// 	if (argc < 2)
-// 		exit(1);
-// 	argv = explode_arguments(argc, argv); // Might cause memory leak?
-// 	valid_numbers = check_input(argv);
-// 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
-// 	if (stack_in_order(stacks))
-// 	{
-// 		ft_printf("0\n");
-// 		return (0); // Free all
-// 	}
+void	sort_stack(t_stacks *stacks)
+{
+	// Decide if recursion of while
+	if (stack_in_order(stacks))
+		return (stacks);
+	else if (smallest_in_stack())
+		push(&stacks, B);
+	if (FIRST_NODE > SECOND_NODE)
+		swap(&stacks, A);
+	else if (FIRST_NODE > last_node_value()) // Add last_node_value to variable to save from extra loopping
+		rotate(&stacks, A);
+	else if (FIRST_NODE < last_node_value())
+		reverse_rotate(&stacks, A);
+	sort_stack(stacks);
+}
+
+int	main(int argc, char **argv)
+{
+	t_stacks		*stacks; 
+	int				*valid_numbers;
+	int				array_len;
+
+	stacks = NULL;
+	argv++;
+	if (argc < 2)
+		exit(1);
+	argv = explode_arguments(argc, argv); // Might cause memory leak?
+	valid_numbers = check_input(argv);
+	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
+	if (stack_in_order(stacks))
+	{
+		ft_printf("0\n");
+		return (0); // Free all
+	}
 	
-// 	stacks = quick_short(stacks);
+	// stacks = quick_sort(stacks);
+	stacks = sort_stack(stacks);
+
 	
-// 	print_stacks(stacks);
-// }
+	print_stacks(stacks);
+}
