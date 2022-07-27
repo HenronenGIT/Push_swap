@@ -99,10 +99,10 @@ void	sort_stack(t_stacks *stacks)
 	}
 	else if (smallest_in_stack(STACK_A, FIRST_NODE))
 		push(&stacks, B, 1);
-	else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
-		swap(&stacks, A, 1);
 	else if (FIRST_NODE > last_node_value(STACK_A)) // Add last_node_value to variable to save from extra loopping
 	 	reverse_rotate(&stacks, A, 1);
+	else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
+		swap(&stacks, A, 1);
 	//else if (FIRST_NODE < last_node_value())
 	//	reverse_rotate(&stacks, A);
 	else
