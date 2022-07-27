@@ -59,6 +59,7 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 		i += 1;
 	}
 	(*stacks)->stack_b = NULL;
+	(*stacks)->stack_size = arr_len;
 }
 
 // void	check_stack_order(t_stacks *stacks)

@@ -69,7 +69,6 @@ void	push(t_stacks **stacks, int decider, int output)
 		ft_putstr("pb\n");
 }
 
-// void	rotate(t_stacks **stacks, int decider)
 void	rotate(t_stacks **stacks, int decider, int output)
 {
 	t_stack	*new_head;

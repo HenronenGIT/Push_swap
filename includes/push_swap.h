@@ -31,6 +31,7 @@ typedef struct s_stacks
 {
 	struct s_stack	*stack_a;
 	struct s_stack	*stack_b;
+	int				stack_size;
 }	t_stacks;
 
 typedef struct s_stack
