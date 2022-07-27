@@ -1,0 +1,27 @@
+./eval_tests/test.sh
+===== [0;31m5 values #1[0m =====
+[1;32mOperation count =>[0m       9
+===== [0;31m5 values #2[0m =====
+[1;32mOperation count =>[0m       5
+===== [0;31m5 values #3[0m =====
+[1;32mOperation count =>[0m      11
+===== [0;31m5 values #4[0m =====
+[1;32mOperation count =>[0m      12
+===== [0;31m5 values #5[0m =====
+[1;32mOperation count =>[0m      11
+===== [0;31m10 values[0m =====
+[1;32mOperation count =>[0m      29
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m    3096
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m    1876
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m    2996
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m    3206
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m   93002
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m   95758
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m   92393
