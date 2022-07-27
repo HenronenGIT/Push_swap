@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+void	panic(char *error_message)
+{
+	ft_puterror(error_message);
+	exit(0);
+}
+
 void	print_stacks(t_stacks *stacks)
 {
 	t_stack	*stack_a;

@@ -78,27 +78,38 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 	while (instructions) // Jump table possible ???
 	{
 		if (!ft_strcmp(instructions->operation, "sa"))
-			swap(stacks, A);
+			swap(stacks, A, 0);
+			// swap(stacks, A);
 		else if (!ft_strcmp(instructions->operation, "sb"))
-			swap(stacks, B);
+			swap(stacks, B, 0);
+			// swap(stacks, B);
 		else if (!ft_strcmp(instructions->operation, "ss"))
-			swap(stacks, BOTH);
+			swap(stacks, BOTH, 0);
+			// swap(stacks, BOTH);
 		else if (!ft_strcmp(instructions->operation, "pa"))
-			push(stacks, A);
+			push(stacks, A, 0);
+			// push(stacks, A);
 		else if (!ft_strcmp(instructions->operation, "pb"))
-			push(stacks, B);
+			push(stacks, B, 0);
+			// push(stacks, B);
 		else if (!ft_strcmp(instructions->operation, "ra"))
-			rotate(stacks, A);
+			rotate(stacks, A, 0);
+			// rotate(stacks, A);
 		else if (!ft_strcmp(instructions->operation, "rb"))
-			rotate(stacks, B);
+			rotate(stacks, B, 0);
+			// rotate(stacks, B);
 		else if (!ft_strcmp(instructions->operation, "rr"))
-			rotate(stacks, BOTH);
+			rotate(stacks, BOTH, 0);
+			// rotate(stacks, BOTH);
 		else if (!ft_strcmp(instructions->operation, "rra"))
-			reverse_rotate(stacks, A);
+			reverse_rotate(stacks, A, 0);
+			// reverse_rotate(stacks, A);
 		else if (!ft_strcmp(instructions->operation, "rrb"))
-			reverse_rotate(stacks, B);
+			reverse_rotate(stacks, B, 0);
+			// reverse_rotate(stacks, B);
 		else if (!ft_strcmp(instructions->operation, "rrr"))
-			reverse_rotate(stacks, BOTH);
+			reverse_rotate(stacks, BOTH, 0);
+			// reverse_rotate(stacks, BOTH);
 		else
 			panic("Error\n"); // Free everything
 		instructions = instructions->next;
