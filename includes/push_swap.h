@@ -71,10 +71,14 @@ int		stack_in_order(t_stacks *stacks);
 void	panic(char *error_message);
 void	print_stacks(t_stacks *stacks);
 
-void	swap(t_stacks **stacks, int decider);
-void	push(t_stacks **stacks, int decider);
-void	rotate(t_stacks **stacks, int decider);
-void	reverse_rotate(t_stacks **stacks, int decider);
+void	swap(t_stacks **stacks, int decider, int output);
+void	push(t_stacks **stacks, int decider, int output);
+void	rotate(t_stacks **stacks, int decider, int output);
+void	reverse_rotate(t_stacks **stacks, int decider, int output);
+// void	swap(t_stacks **stacks, int decider);
+// void	push(t_stacks **stacks, int decider);
+// void	rotate(t_stacks **stacks, int decider);
+// void	reverse_rotate(t_stacks **stacks, int decider);
 
 t_stack	*create_node(int value);
 void	node_add_back(t_stack **stack, t_stack *node);

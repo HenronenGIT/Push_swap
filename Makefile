@@ -41,7 +41,7 @@ $(NAME): $(CHECKER_SRCS) $(PS_SRCS)
 	@echo "#### Creating checker ####"
 	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
 	@echo "#### Creating Push_swap ####"
-	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(PS_SRCS) -o Push_swap
+	@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
 
 $(NAME_1): $(CHECKER_SRCS)
 	@echo "#### Creating libft ####"
@@ -70,10 +70,12 @@ fclean: clean
 re: fclean all
 
 test:
-	@echo "#### Compiling with test main.c ####"
-	@$(CC) $(FLAGS) $(HEADERS) ./srcs/operations.c ./srcs/tools.c $(LIB) ./eval_tests/main.c -o Push_swap
-	@echo "#### Directing output to output.txt ####"
-	@./Push_swap > output.txt
+	./eval_tests/test.sh
+# test:
+# 	@echo "#### Compiling with test main.c ####"
+# 	@$(CC) $(FLAGS) $(HEADERS) ./srcs/operations.c ./srcs/tools.c $(LIB) ./eval_tests/main.c -o Push_swap
+# 	@echo "#### Directing output to output.txt ####"
+# 	@./Push_swap > output.txt
 
 leaks: re
 	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
