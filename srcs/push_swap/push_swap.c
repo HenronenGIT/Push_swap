@@ -107,6 +107,26 @@ void	sort_stack(t_stacks *stacks)
 	sort_stack(stacks);
 }
 
+void	brute_short(t_stacks *stacks) // Taken from 1st algo
+{
+	if (a_in_order(STACK_A))
+	{
+		push_all_to_a(stacks);
+		return ;
+	}
+	else if (smallest_in_stack(STACK_A, FIRST_NODE))
+		push(&stacks, B, 1);
+	else if (FIRST_NODE > last_node_value(STACK_A)) // Add last_node_value to variable to save from extra loopping
+	 	reverse_rotate(&stacks, A, 1);
+	else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
+		swap(&stacks, A, 1);
+	else
+		reverse_rotate(&stacks, A, 1);
+	if (stack_in_order(stacks))
+		return ;
+	sort_stack(stacks);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
@@ -127,6 +147,7 @@ int	main(int argc, char **argv)
 	}
 	// stacks = quick_sort(stacks);
 	// stacks = sort_stack(stacks);
-	sort_stack(stacks);
+	brute_short(stacks);
+	// sort_stack(stacks);
 	// print_stacks(stacks);
 }
