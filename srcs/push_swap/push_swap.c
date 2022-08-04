@@ -28,6 +28,22 @@ int		a_in_order(t_stack *stack_a)
 	return (1);
 	// ft_putstr("OK\n");
 }
+int		b_in_order(t_stack *stack_b)
+{
+	t_stack	*node;
+
+	node = stack_b;
+	while (node->next)
+	{
+		if (node->value > node->next->value)
+			node = node->next;
+		else
+			return (0);
+			// panic("KO\n");
+	}
+	return (1);
+	// ft_putstr("OK\n");
+}
 
 static int	smallest_in_stack(t_stack *stack_a, int value)
 {
@@ -80,20 +96,30 @@ int	smallest_closer_to_top(t_stack *stack_a, int stack_size)
 
 void	sort_stack(t_stacks *stacks)
 {
-	if (a_in_order(STACK_A))
+	if (a_in_order(STACK_A) && b_in_order(STACK_B))
 	{
 		push_all_to_a(stacks);
 		return ;
 	}
 	if (FIRST_A <= HALF_VALUE)
 		push(&stacks, B, 1);
-	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_A > SECOND_B)
+	else if (last_node_value(STACK_A) < FIRST_A && STACK_B && last_node_value(STACK_B) > FIRST_B)
+		rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
+	else if (last_node_value(STACK_B) > FIRST_B)
+		rotate(&stacks, B, 1);
+	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
 		swap(&stacks, BOTH, 1);
-	// else if (FIRST_A > SECOND_A)
-		// swap(&stacks, A, 1);
-		
+	else if (last_node_value(STACK_A) < FIRST_A)
+		rotate(&stacks, A, 1);
+	else if (FIRST_A > SECOND_A)
+		swap(&stacks, A, 1);
+	else if (smallest_closer_to_top(STACK_A, stacks->stack_size))
+		rotate(&stacks, A, 1);
+	else if (smallest_closer_to_top(STACK_A, stacks->stack_size))
+		reverse_rotate(&stacks, B, 1);
 	else
 		rotate(&stacks, A, 1);
+	print_stacks(stacks);
 	if (stack_in_order(stacks))
 		return ;
 	sort_stack(stacks);
@@ -135,6 +161,7 @@ int	main(int argc, char **argv)
 		ft_printf("0\n");
 		return (0); // Free all
 	}
+	// print_stacks(stacks);
 	sort_stack(stacks);
 	// print_stacks(stacks);
 }

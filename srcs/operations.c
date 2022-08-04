@@ -30,10 +30,13 @@ void	swap(t_stacks **stacks, int decider, int output)
 	stack->next->value = temp;
 	if (output && decider == A)
 		ft_putstr("sa\n");
-	else
-		ft_putstr("sa\n");
+	else if (output && decider == B)
+		ft_putstr("sb\n");
 	if (decider == BOTH)
-		swap(stacks, B, output);
+	{
+		ft_putstr("ss\n");
+		swap(stacks, B, 0);
+	}
 	return ;
 }
 
@@ -75,7 +78,6 @@ void	rotate(t_stacks **stacks, int decider, int output)
 	t_stack	*tail_ptr;
 	t_stack	**stack;
 
-
 	if (decider == A || decider == BOTH)
 		stack = &(*stacks)->stack_a;
 	else
@@ -91,10 +93,13 @@ void	rotate(t_stacks **stacks, int decider, int output)
 	(*stack) = new_head;
 	if (output && decider == A)
 		ft_putstr("ra\n");
-	else
+	if (output && decider == B)
 		ft_putstr("rb\n");
 	if (decider == BOTH)
-		rotate(stacks, B, output);
+	{
+		rotate(stacks, B, 0);
+		ft_putstr("rr\n");
+	}
 	return ;
 }
 
