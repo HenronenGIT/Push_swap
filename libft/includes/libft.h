@@ -116,8 +116,8 @@ int		ft_isnumber(char *string);
 int		ft_nbr_in_array(int number, int *array, int array_size);
 int		ft_count_pointers(char **array);
 
-
 int		ft_printf(const char *format, ...);
 
+void	sort_int_tab(int *tab, int length);
 
 #endif

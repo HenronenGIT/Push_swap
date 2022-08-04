@@ -77,55 +77,45 @@ int	smallest_closer_to_top(t_stack *stack_a, int stack_size)
 		return (1);
 	return (0);
 }
-// t_stacks	*sort_stack(t_stacks *stacks)
+
 void	sort_stack(t_stacks *stacks)
 {
-	/* Decide if recursion of while */
-
-	// if (stack_in_order(stacks))
-		// return (stacks);
 	if (a_in_order(STACK_A))
 	{
 		push_all_to_a(stacks);
 		return ;
 	}
-	else if (smallest_in_stack(STACK_A, FIRST_NODE))
+	if (FIRST_A <= HALF_VALUE)
 		push(&stacks, B, 1);
-	else if (smallest_closer_to_top(STACK_A, stacks->stack_size))
-		rotate(&stacks, A, 1);
-	// else if (FIRST_NODE > last_node_value(STACK_A)) // Add last_node_value to variable to save from extra loopping
-	 	// reverse_rotate(&stacks, A, 1);
-	// else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
+	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_A > SECOND_B)
+		swap(&stacks, BOTH, 1);
+	// else if (FIRST_A > SECOND_A)
 		// swap(&stacks, A, 1);
-	//else if (FIRST_NODE < last_node_value())
-	//	reverse_rotate(&stacks, A);
+		
 	else
-		reverse_rotate(&stacks, A, 1);
-		// reverse_rotate(&stacks, A, 1);
+		rotate(&stacks, A, 1);
 	if (stack_in_order(stacks))
 		return ;
 	sort_stack(stacks);
 }
 
-void	brute_short(t_stacks *stacks) // Taken from 1st algo
-{
-	if (a_in_order(STACK_A))
-	{
-		push_all_to_a(stacks);
-		return ;
-	}
-	else if (smallest_in_stack(STACK_A, FIRST_NODE))
-		push(&stacks, B, 1);
-	else if (FIRST_NODE > last_node_value(STACK_A)) // Add last_node_value to variable to save from extra loopping
-	 	reverse_rotate(&stacks, A, 1);
-	else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
-		swap(&stacks, A, 1);
-	else
-		reverse_rotate(&stacks, A, 1);
-	if (stack_in_order(stacks))
-		return ;
-	sort_stack(stacks);
-}
+// void	sort_stack(t_stacks *stacks)
+// {
+// 	if (a_in_order(STACK_A))
+// 	{
+// 		push_all_to_a(stacks);
+// 		return ;
+// 	}
+// 	else if (smallest_in_stack(STACK_A, FIRST_NODE))
+// 		push(&stacks, B, 1);
+// 	else if (smallest_closer_to_top(STACK_A, stacks->stack_size))
+// 		rotate(&stacks, A, 1);
+// 	else
+// 		reverse_rotate(&stacks, A, 1);
+// 	if (stack_in_order(stacks))
+// 		return ;
+// 	sort_stack(stacks);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -145,9 +135,6 @@ int	main(int argc, char **argv)
 		ft_printf("0\n");
 		return (0); // Free all
 	}
-	// stacks = quick_sort(stacks);
-	// stacks = sort_stack(stacks);
-	brute_short(stacks);
-	// sort_stack(stacks);
+	sort_stack(stacks);
 	// print_stacks(stacks);
 }

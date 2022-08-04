@@ -22,8 +22,11 @@
 # define B 1
 # define BOTH 2
 
-# define FIRST_NODE stacks->stack_a->value
-# define SECOND_NODE stacks->stack_a->next->value
+# define FIRST_A stacks->stack_a->value
+# define FIRST_B stacks->stack_b->value
+# define SECOND_A stacks->stack_a->next->value
+# define SECOND_B stacks->stack_b->next->value
+# define HALF_VALUE stacks->half_value
 # define STACK_A stacks->stack_a
 # define STACK_B stacks->stack_b // add to all functions // add to all functions
 
@@ -31,7 +34,9 @@ typedef struct s_stacks
 {
 	struct s_stack	*stack_a;
 	struct s_stack	*stack_b;
+	int				*template;
 	int				stack_size;
+	int				half_value;
 }	t_stacks;
 
 typedef struct s_stack
