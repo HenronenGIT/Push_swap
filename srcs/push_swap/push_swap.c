@@ -119,65 +119,71 @@ t_stacks	*sort_b_stack(t_stacks *stacks)
 	return (sort_b_stack(stacks));
 }
 
-void	sort_stack(t_stacks *stacks)
-{
-	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
-	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
-	{
-		stacks = sort_b_stack(stacks); // check if even need return?
-		push_all_to_a(stacks);
-		return ;
-	}
-	if (FIRST_A < HALF_VALUE)
-		push(&stacks, B, 1);
-	else if (smallest_in_stack(STACK_A, FIRST_A))
-		push(&stacks, B, 1);
-		
-	else if (FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B)
-		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
-	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
-		swap(&stacks, BOTH, 1);
-
-	// else if (last_value_bigger(STACK_B))
-	// 	rotate(&stacks, B, 1);
-	// else if (FIRST_B < SECOND_B)
-	// 	swap(&stacks, B, 1);
-	else if (last_value_bigger(STACK_B))
-		reverse_rotate(&stacks, B, 1);
-
-	else if (FIRST_A > SECOND_A)
-		swap(&stacks, A, 1);
-	else if (!last_value_bigger(STACK_A))
-		reverse_rotate(&stacks, A, 1);
-	// else if (!last_value_bigger(STACK_A))
-	// 	rotate(&stacks, A, 1);
-
-	else
-		reverse_rotate(&stacks, A, 1);
-
-	print_stacks(stacks); 
-	if (stack_in_order(stacks))
-		return ;
-	sort_stack(stacks);
-}
-
 // void	sort_stack(t_stacks *stacks)
 // {
-// 	if (a_in_order(STACK_A))
+// 	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
+// 	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
 // 	{
+// 		stacks = sort_b_stack(stacks); // check if even need return?
 // 		push_all_to_a(stacks);
 // 		return ;
 // 	}
-// 	else if (smallest_in_stack(STACK_A, FIRST_NODE))
+// 	if (FIRST_A < HALF_VALUE)
 // 		push(&stacks, B, 1);
-// 	else if (smallest_closer_to_top(STACK_A, stacks->stack_size))
-// 		rotate(&stacks, A, 1);
+// 	else if (smallest_in_stack(STACK_A, FIRST_A))
+// 		push(&stacks, B, 1);
+		
+// 	else if (FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B)
+// 		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
+// 	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
+// 		swap(&stacks, BOTH, 1);
+
+// 	// else if (last_value_bigger(STACK_B))
+// 	// 	rotate(&stacks, B, 1);
+// 	// else if (FIRST_B < SECOND_B)
+// 	// 	swap(&stacks, B, 1);
+// 	else if (last_value_bigger(STACK_B))
+// 		reverse_rotate(&stacks, B, 1);
+
+// 	else if (FIRST_A > SECOND_A)
+// 		swap(&stacks, A, 1);
+// 	else if (!last_value_bigger(STACK_A))
+// 		reverse_rotate(&stacks, A, 1);
+// 	// else if (!last_value_bigger(STACK_A))
+// 	// 	rotate(&stacks, A, 1);
+
 // 	else
 // 		reverse_rotate(&stacks, A, 1);
+
+// 	print_stacks(stacks); 
 // 	if (stack_in_order(stacks))
 // 		return ;
 // 	sort_stack(stacks);
 // }
+
+void	sort_stack(t_stacks *stacks)
+{
+	/* Decide if recursion of while */
+
+	// if (stack_in_order(stacks))
+		// return (stacks);
+	if (a_in_order(STACK_A))
+	{
+		push_all_to_a(stacks);
+		return ;
+	}
+	else if (smallest_in_stack(STACK_A, FIRST_A))
+		push(&stacks, B, 1);
+	else if (last_value_bigger(STACK_A)) // Add last_node_value to variable to save from extra loopping
+	 	reverse_rotate(&stacks, A, 1);
+	else if (FIRST_A > SECOND_A) // What happens if you but this only to if and not "else if"
+		swap(&stacks, A, 1);
+	else
+		reverse_rotate(&stacks, A, 1);
+	if (stack_in_order(stacks))
+		return ;
+	sort_stack(stacks);
+}
 
 int	main(int argc, char **argv)
 {
