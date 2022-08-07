@@ -135,7 +135,5 @@ int	main(int argc, char **argv)
 	// stacks = quick_sort(stacks);
 	// stacks = sort_stack(stacks);
 	sort_stack(stacks);
-
-	
 	// print_stacks(stacks);
 }
