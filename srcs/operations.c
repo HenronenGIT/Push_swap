@@ -97,8 +97,8 @@ void	rotate(t_stacks **stacks, int decider, int output)
 		ft_putstr("rb\n");
 	if (decider == BOTH)
 	{
-		rotate(stacks, B, 0);
 		ft_putstr("rr\n");
+		rotate(stacks, B, 0);
 	}
 	return ;
 }
@@ -127,9 +127,12 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 	(*stack) = tail;
 	if (output && decider == A)
 		ft_putstr("rra\n");
-	else
+	else if (output && decider == B)
 		ft_putstr("rrb\n");
 	if (decider == BOTH)
-		reverse_rotate(stacks, B, output);
+	{
+		ft_putstr("rrr\n");
+		reverse_rotate(stacks, B, 0);
+	}
 	return ;
 }
