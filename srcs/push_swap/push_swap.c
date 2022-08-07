@@ -130,6 +130,9 @@ void	sort_stack(t_stacks *stacks)
 	}
 	if (FIRST_A < HALF_VALUE)
 		push(&stacks, B, 1);
+	else if (smallest_in_stack(STACK_A, FIRST_A))
+		push(&stacks, B, 1);
+		
 	else if (FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B)
 		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
 	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
@@ -148,8 +151,7 @@ void	sort_stack(t_stacks *stacks)
 		reverse_rotate(&stacks, A, 1);
 	// else if (!last_value_bigger(STACK_A))
 	// 	rotate(&stacks, A, 1);
-	// else if (smallest_in_stack(STACK_A, FIRST_A))
-		// swap(&stacks, A, 1);
+
 	else
 		reverse_rotate(&stacks, A, 1);
 
@@ -198,4 +200,6 @@ int	main(int argc, char **argv)
 	// print_stacks(stacks);
 	sort_stack(stacks);
 	// print_stacks(stacks);
+	// if (stack_in_order(stacks)) // TEMP
+		// ft_printf("OK\n"); //TEMP
 }
