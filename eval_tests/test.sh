@@ -4,7 +4,7 @@ NC='\033[0m' # No Color
 push_swap='./push_swap'
 
 # 5 VALUES
-five_values_1="1 5 2 4 0"
+five_values_1="2 5 3 4 1"
 five_values_2="-26 -4 -48 -56 -39"
 five_values_3="-95 18 -30 -73 31"
 five_values_4="21 19 -66 7 78"
