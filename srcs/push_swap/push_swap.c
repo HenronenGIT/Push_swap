@@ -166,6 +166,7 @@ void	sort_stack(t_stacks *stacks)
 	// print_stacks(stacks);
 	if (stack_in_order(stacks))
 		return ;
+	// print_stacks(stacks);
 	sort_stack(stacks);
 }
 
