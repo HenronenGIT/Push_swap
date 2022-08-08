@@ -104,6 +104,7 @@ void	sort_stack(t_stacks *stacks)
 		// reverse_rotate(&stacks, A, 1);
 	if (stack_in_order(stacks))
 		return ;
+	// print_stacks(stacks);
 	sort_stack(stacks);
 }
 
