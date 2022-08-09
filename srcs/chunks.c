@@ -38,17 +38,21 @@ static t_chunks *create_chunk_list(int chunk_count)
 }
 
 // void	fill_chunk(t_chunks *chunk, int chunk_size, t_stacks *stacks)
-void	fill_chunk(t_chunks *chunk, int chunk_size, t_stack *sorted_tab)
+void	fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack)
 {
-	static size_t	i;
-
+	static int	last_position;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (i <= chunk_size)
+	j = last_position; // Can cause problems on first run if last_position is not 0
+	while (i < chunk_size)
 	{
-		chunk->array[i] = stacks->sorted_stack[i];
+		chunk->array[i] = sorted_stack[j];
 		i++;
+		j++;
 	}
+	last_position += i;
 	return ;
 }
 
@@ -63,7 +67,7 @@ static void	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
 	while (temp)
 	{
 		temp->array = (int *)malloc(sizeof(int) * chunk_size);
-		fill_chunk(temp, chunk_size, stacks->sorted_tab);
+		fill_chunk(temp, chunk_size, stacks->sorted_stack);
 		temp = temp->next;
 	}
 	// while (i <= stacks->stack_size)

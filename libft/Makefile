@@ -30,7 +30,7 @@ ft_lstadd_back.c ft_swap_array.c ft_strndup.c find_eofl.c ft_realloc.c		\
 ft_get_next_line.c ft_arrnew.c ft_free_2d_array.c ft_strrev.c ft_isodd.c	\
 ft_strtoupper.c ft_pow.c ft_itoa_base.c ft_unsigned_itoa_base.c				\
 ft_puterror.c ft_atol.c ft_isnumber.c ft_nbr_in_array.c ft_count_pointers.c	\
-sort_int_tab.c
+sort_int_tab.c ft_print_tab.c
 
 # Better style??
 PRINTF_SRC = ./ft_printf/src/ft_printf.c ./ft_printf/src/handlers.c 		\

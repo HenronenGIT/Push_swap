@@ -184,12 +184,23 @@ int	main(int argc, char **argv)
 	valid_numbers = check_input(argv);
 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
 	chunks = create_chunks(stacks);
-	if (stack_in_order(stacks))
-	{
-		ft_printf("0\n");
-		return (0); // Free all
-	}
+
+	printf("%d\n", chunks->array[0]);
+	printf("%d\n", chunks->next->array[0]);
+	printf("%d\n", chunks->next->next->array[0]);
+	printf("%d\n", chunks->next->next->next->array[0]);
+
+	printf("%d ", chunks->next->next->next->next->array[0]);
+	printf("%d\n", chunks->next->next->next->next->array[19]);
+	//ft_print_tab(chunks->array, 20);
+	//printf("\n");
+	//ft_print_tab(chunks->next->array, 20);
+	// if (stack_in_order(stacks))
+	// {
+		// ft_printf("0\n");
+		// return (0); // Free all
+	// }
 	// print_stacks(stacks);
-	sort_stack(stacks);
+	// sort_stack(stacks);
 	// print_stacks(stacks);
 }
