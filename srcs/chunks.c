@@ -16,28 +16,73 @@ static t_chunks *create_chunk_list(int chunk_count)
 {
 	t_chunks	*head;
 	t_chunks	*node_pointer;
+	t_chunks	*temp;
 	int			i;
 
-	i = 0;
-	head = NULL;
+	i = 1;
+	head = (t_chunks *)malloc(sizeof(t_chunks));
+	head->next = NULL;
 	node_pointer = head;
-	while (i <= chunk_count)
+	while (++i <= chunk_count) // mayby goes 1 over
 	{
-		node_pointer = (t_chunks *)malloc(sizeof(t_chunks));
-		if (!node_pointer)
+		temp = (t_chunks *)malloc(sizeof(t_chunks));
+		if (!temp)
 			return (NULL);
-		node_pointer->next = NULL;
-		i++;
+		temp->next = NULL;
+		node_pointer->next = temp;
+		node_pointer = node_pointer->next;
+		// free(temp);
+		// i++;
 	}
 	return (head);
 }
 
-t_chunks	*create_chunk_list(t_stacks *stacks)
+// void	fill_chunk(t_chunks *chunk, int chunk_size, t_stacks *stacks)
+void	fill_chunk(t_chunks *chunk, int chunk_size, t_stack *sorted_tab)
 {
-	t_chunks *head;
-	int		i;
+	static size_t	i;
+
 
 	i = 0;
-	head = create_chunk_list(stacks->chunk_count);
-	return (head);
+	while (i <= chunk_size)
+	{
+		chunk->array[i] = stacks->sorted_stack[i];
+		i++;
+	}
+	return ;
+}
+
+static void	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
+{
+	t_chunks	*temp;
+	int			chunk_size;
+	int			i;
+
+	i = 0;
+	chunk_size = stacks->stack_size / stacks->chunk_count;
+	while (temp)
+	{
+		temp->array = (int *)malloc(sizeof(int) * chunk_size);
+		fill_chunk(temp, chunk_size, stacks->sorted_tab);
+		temp = temp->next;
+	}
+	// while (i <= stacks->stack_size)
+	// {
+
+	// 	i++;
+	// }
+
+	return ;
+}
+
+t_chunks	*create_chunks(t_stacks *stacks)
+{
+	t_chunks	*chunk_list;
+	int			i;
+
+	i = 0;
+	chunk_list = create_chunk_list(stacks->chunk_count);
+	allocate_chunk_arrays(chunk_list, stacks);
+
+	return (chunk_list);
 }

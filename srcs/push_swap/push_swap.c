@@ -183,7 +183,7 @@ int	main(int argc, char **argv)
 	argv = explode_arguments(argc, argv); // Might cause memory leak?
 	valid_numbers = check_input(argv);
 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
-	stacks = create_chunk_list(stacks);
+	chunks = create_chunks(stacks);
 	if (stack_in_order(stacks))
 	{
 		ft_printf("0\n");

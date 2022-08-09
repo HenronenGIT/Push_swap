@@ -34,10 +34,10 @@ typedef struct s_stacks
 {
 	struct s_stack	*stack_a;
 	struct s_stack	*stack_b;
-	int				*template;
+	int				*sorted_stack;
 	int				stack_size;
-	// int				half_value;
 	int				chunk_count;
+	// int				half_value;
 }	t_stacks;
 
 typedef struct s_chunks
@@ -75,6 +75,7 @@ typedef struct s_instruction
 // 	rrr
 // }	t_operation;
 
+
 char		**explode_arguments(int argc, char **argv);
 int			*check_input(char **arguments);
 void		create_stacks(int *ints, int arr_len, t_stacks **stacks);
@@ -94,7 +95,8 @@ void		reverse_rotate(t_stacks **stacks, int decider, int output);
 // void	rotate(t_stacks **stacks, int decider);
 // void	reverse_rotate(t_stacks **stacks, int decider);
 
-t_chunks	*create_chunk_list(t_stacks *stacks);
+t_chunks	*create_chunks(t_stacks *stacks);
+
 
 
 t_stack		*create_node(int value);
