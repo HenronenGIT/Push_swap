@@ -132,47 +132,47 @@ t_stacks	*sort_b_stack(t_stacks *stacks)
 
 void	sort_stack(t_stacks *stacks)
 {
-	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
-	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
-	{
-		stacks = sort_b_stack(stacks); // check if even need return?
-		push_all_to_a(stacks);
-		return ;
-	}
-	if (FIRST_A < HALF_VALUE)
-		push(&stacks, B, 1);
-		
-	else if (biggest_in_stack(STACK_A, FIRST_A))
-		reverse_rotate(&stacks, A, 1);
-	else if (FIRST_A > SECOND_A)
-		swap(&stacks, A, 1);
 
-	else if ((FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B) || (STACK_B && !b_in_order(STACK_B)))
-		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
-	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
-		swap(&stacks, BOTH, 1);
-
-	else if (FIRST_A > SECOND_A)
-		swap(&stacks, A, 1);
-
-	else if (!last_value_bigger(STACK_A))
-		reverse_rotate(&stacks, A, 1);
-
-
-	else
-		reverse_rotate(&stacks, A, 1);
-
-
-	// print_stacks(stacks);
-	if (stack_in_order(stacks))
-		return ;
-	// print_stacks(stacks);
-	sort_stack(stacks);
 }
+
+/* Old algo */
+// void	sort_stack(t_stacks *stacks)
+// {
+// 	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
+// 	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
+// 	{
+// 		stacks = sort_b_stack(stacks); // check if even need return?
+// 		push_all_to_a(stacks);
+// 		return ;
+// 	}
+// 	if (FIRST_A < HALF_VALUE)
+// 		push(&stacks, B, 1);
+// 	else if (biggest_in_stack(STACK_A, FIRST_A))
+// 		reverse_rotate(&stacks, A, 1);
+// 	else if (FIRST_A > SECOND_A)
+// 		swap(&stacks, A, 1);
+// 	else if ((FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B) || (STACK_B && !b_in_order(STACK_B)))
+// 		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
+// 	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
+// 		swap(&stacks, BOTH, 1);
+// 	else if (FIRST_A > SECOND_A)
+// 		swap(&stacks, A, 1);
+// 	else if (!last_value_bigger(STACK_A))
+// 		reverse_rotate(&stacks, A, 1);
+// 	else
+// 		reverse_rotate(&stacks, A, 1);
+// 	// print_stacks(stacks);
+// 	if (stack_in_order(stacks))
+// 		return ;
+// 	sort_stack(stacks);
+// }
+
+
 
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
+	t_chunks		*chunks; 
 	int				*valid_numbers;
 	int				array_len;
 
@@ -183,6 +183,7 @@ int	main(int argc, char **argv)
 	argv = explode_arguments(argc, argv); // Might cause memory leak?
 	valid_numbers = check_input(argv);
 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
+	stacks = create_chunk_list(stacks);
 	if (stack_in_order(stacks))
 	{
 		ft_printf("0\n");
@@ -191,6 +192,4 @@ int	main(int argc, char **argv)
 	// print_stacks(stacks);
 	sort_stack(stacks);
 	// print_stacks(stacks);
-	// if (stack_in_order(stacks)) // TEMP
-		// ft_printf("OK\n"); //TEMP
 }

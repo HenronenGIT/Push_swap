@@ -62,7 +62,13 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 	(*stacks)->stack_size = arr_len;
 	(*stacks)->template = ints;
 	sort_int_tab((*stacks)->template, (*stacks)->stack_size);
-	(*stacks)->half_value = (*stacks)->template[arr_len / 2];
+	
+	if (arr_len >= 500)
+		(*stacks)->chunk_count = 11;
+	else if (arr_len >= 100)
+		(*stacks)->chunk_count = 5;
+
+	// (*stacks)->half_value = (*stacks)->template[arr_len / 2]; // mayby useless
 	return ;
 }
 

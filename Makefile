@@ -21,7 +21,7 @@ CHECKER_SRCS = ./srcs/checker/checker.c ./srcs/input.c ./srcs/operations.c ./src
 ./srcs/tools.c ./srcs/instructions.c
 
 PS_SRCS = ./srcs/push_swap/push_swap.c ./srcs/operations.c ./srcs/input.c ./srcs/list_functions.c \
-./srcs/tools.c
+./srcs/tools.c ./srcs/chunks.c
 	
 OBJS = $(CHECKER_SRCS:.c=.o)
 
