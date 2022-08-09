@@ -12,38 +12,7 @@
 
 #include "push_swap.h"
 
-// t_stack	*fetch_last_node(t_stack *list)
-// {
-// 	while (list->next)
-// 		list = list->next;
-// 	return (list);
-// }
-
-// t_stacks	*quick_short(t_stacks *stacks)
-// {
-// 	t_stack	*pivot;
-// 	t_stack	*stack_a;
-// 	t_stack	*iterator;
-
-// 	iterator = NULL;
-// 	pivot = NULL;
-// 	stack_a = NULL;
-
-// 	stack_a = stacks->stack_a;
-// 	pivot = fetch_last_node(stacks->stack_a);
-// 	while (stack_a)
-// 	{
-// 		if (iterator && stack_a->value <= pivot->value)
-			
-// 		else
-// 			iterator = stack_a;
-// 		stack_a = stack_a->next;
-// 	}
-// 	// printf("%d\n", pivot->value);
-// 	return (stacks);
-// }
-
-int	a_in_order(t_stack *stack_a)
+int		a_in_order(t_stack *stack_a)
 {
 	t_stack	*node;
 
@@ -51,6 +20,23 @@ int	a_in_order(t_stack *stack_a)
 	while (node->next)
 	{
 		if (node->value < node->next->value)
+			node = node->next;
+		else
+			return (0);
+			// panic("KO\n");
+	}
+	return (1);
+	// ft_putstr("OK\n");
+}
+
+int		b_in_order(t_stack *stack_b)
+{
+	t_stack	*node;
+
+	node = stack_b;
+	while (node->next)
+	{
+		if (node->value > node->next->value)
 			node = node->next;
 		else
 			return (0);
@@ -71,6 +57,17 @@ static int	smallest_in_stack(t_stack *stack_a, int value)
 	return (1);
 }
 
+static int	biggest_in_stack(t_stack *stack_a, int value)
+{
+	while (stack_a->next)
+	{
+		if (value < stack_a->next->value)
+			return (0);
+		stack_a = stack_a->next;
+	}
+	return (1);
+}
+
 void	push_all_to_a(t_stacks *stacks)
 {
 	// while (stacks->stack_b)
@@ -78,40 +75,111 @@ void	push_all_to_a(t_stacks *stacks)
 		push(&stacks, A, 1);
 }
 
-int	last_node_value(t_stack *stack_a)
+int		last_value_bigger(t_stack *stack)
 {
-	while (stack_a->next)
-		stack_a = stack_a->next;
-	return (stack_a->value);
+	int	first_value;
+
+	if (!stack)
+		return (0);
+	first_value = stack->value;
+	while (stack->next)
+		stack = stack->next;
+	if (first_value < stack->value)
+		return (1);
+	return (0);
 }
 
-// t_stacks	*sort_stack(t_stacks *stacks)
+int	smallest_closer_to_top(t_stack *stack_a, int stack_size)
+{
+	int	smallest_index;
+	int	smallest_value;
+	int	i;
+
+	i = 0;
+	smallest_value = stack_a->value;
+	smallest_index = 0;
+	while (stack_a)
+	{
+		if (stack_a->value < smallest_value)
+		{
+			smallest_value = stack_a->value;
+			smallest_index = i;
+		}
+		i += 1;
+		stack_a = stack_a->next;
+	}
+	if (smallest_index < (stack_size / 2))
+		return (1);
+	return (0);
+}
+
+t_stacks	*sort_b_stack(t_stacks *stacks)
+{
+	if (b_in_order(STACK_B))
+		return (stacks);
+	else if (smallest_in_stack(STACK_B, FIRST_B))
+		rotate(&stacks, B, 1);
+	else if (FIRST_B < SECOND_B)
+		swap(&stacks, B, 1);
+	else if (last_value_bigger(STACK_B))
+		rotate(&stacks, B, 1);
+	else
+		rotate(&stacks, B, 1);
+	if (b_in_order(STACK_B))
+		return (stacks);
+	return (sort_b_stack(stacks));
+}
+
+
+int	find_chunk_value(t_stacks *stacks, t_stack *stack_a)
+{
+	int	chunk[stacks->stack_size / stacks->chunk_count];
+
+
+	while (stack_a)
+	{
+		stack_a = stack_a->next;
+	}
+}
+
 void	sort_stack(t_stacks *stacks)
 {
-	/* Decide if recursion of while */
+	int	option_1;
+	int	option_2;
 
-	// if (stack_in_order(stacks))
-		// return (stacks);
-	if (a_in_order(STACK_A))
-	{
-		push_all_to_a(stacks);
-		return ;
-	}
-	else if (smallest_in_stack(STACK_A, FIRST_NODE))
-		push(&stacks, B, 1);
-	else if (FIRST_NODE > last_node_value(STACK_A)) // Add last_node_value to variable to save from extra loopping
-	 	reverse_rotate(&stacks, A, 1);
-	else if (FIRST_NODE > SECOND_NODE) // What happens if you but this only to if and not "else if"
-		swap(&stacks, A, 1);
-	//else if (FIRST_NODE < last_node_value())
-	//	reverse_rotate(&stacks, A);
-	else
-		reverse_rotate(&stacks, A, 1);
-		// rotate(&stacks, A, 1);
-	if (stack_in_order(stacks))
-		return ;
-	sort_stack(stacks);
+	find_chunk_value(stacks, STACK_A);
 }
+/* Old algo */
+// void	sort_stack(t_stacks *stacks)
+// {
+// 	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
+// 	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
+// 	{
+// 		stacks = sort_b_stack(stacks); // check if even need return?
+// 		push_all_to_a(stacks);
+// 		return ;
+// 	}
+// 	if (FIRST_A < HALF_VALUE)
+// 		push(&stacks, B, 1);
+// 	else if (biggest_in_stack(STACK_A, FIRST_A))
+// 		reverse_rotate(&stacks, A, 1);
+// 	else if (FIRST_A > SECOND_A)
+// 		swap(&stacks, A, 1);
+// 	else if ((FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B) || (STACK_B && !b_in_order(STACK_B)))
+// 		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
+// 	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
+// 		swap(&stacks, BOTH, 1);
+// 	else if (FIRST_A > SECOND_A)
+// 		swap(&stacks, A, 1);
+// 	else if (!last_value_bigger(STACK_A))
+// 		reverse_rotate(&stacks, A, 1);
+// 	else
+// 		reverse_rotate(&stacks, A, 1);
+// 	// print_stacks(stacks);
+// 	if (stack_in_order(stacks))
+// 		return ;
+// 	sort_stack(stacks);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -131,9 +199,7 @@ int	main(int argc, char **argv)
 		ft_printf("0\n");
 		return (0); // Free all
 	}
-	
-	// stacks = quick_sort(stacks);
-	// stacks = sort_stack(stacks);
+	// print_stacks(stacks);
 	sort_stack(stacks);
 	// print_stacks(stacks);
 }

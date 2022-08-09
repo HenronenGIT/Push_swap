@@ -43,7 +43,6 @@ int	*check_input(char **arguments)
 	return (valid_numbers);
 }
 
-// t_stack	*create_stacks(int *ints, int arr_len, t_stack **stack_a, t_stack **stack_b)
 void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 {
 	t_stack	*node;
@@ -59,10 +58,19 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 		i += 1;
 	}
 	(*stacks)->stack_b = NULL;
+	(*stacks)->template = NULL;
+	(*stacks)->stack_size = arr_len;
+	(*stacks)->template = ints;
+	sort_int_tab((*stacks)->template, (*stacks)->stack_size);
+	if (arr_len >= 500)
+		(*stacks)->chunk_count = 11;
+	else if (arr_len >= 100)
+		(*stacks)->chunk_count = 5;
+
+	(*stacks)->half_value = (*stacks)->template[arr_len / 2]; // mayby useless
+	return ;
 }
 
-// void	check_stack_order(t_stacks *stacks)
-// int	check_stack_order(t_stacks *stacks)
 
 int	stack_in_order(t_stacks *stacks)
 {
