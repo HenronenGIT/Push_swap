@@ -98,11 +98,8 @@ void		reverse_rotate(t_stacks **stacks, int decider, int output);
 
 t_chunks	*create_chunks(t_stacks *stacks);
 
-
-
 t_stack		*create_node(int value);
 void		node_add_back(t_stack **stack, t_stack *node);
-
-
+void		sort_stack(t_stacks *stacks, t_chunks *chunks);
 
 #endif

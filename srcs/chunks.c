@@ -37,7 +37,6 @@ static t_chunks *create_chunk_list(int chunk_count)
 	return (head);
 }
 
-// void	fill_chunk(t_chunks *chunk, int chunk_size, t_stacks *stacks)
 void	fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack)
 {
 	static int	last_position;
@@ -71,12 +70,6 @@ static void	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
 		fill_chunk(temp, chunk_size, stacks->sorted_stack);
 		temp = temp->next;
 	}
-	// while (i <= stacks->stack_size)
-	// {
-
-	// 	i++;
-	// }
-
 	return ;
 }
 

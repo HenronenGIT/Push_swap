@@ -89,9 +89,15 @@ void	rotate(t_stacks **stacks, int decider, int output)
 	while (tail_ptr->next)
 		tail_ptr = tail_ptr->next;
 	tail_ptr->next = (*stack);
+
+	tail_ptr->back = NULL;
+	
 	(*stack)->next = NULL;
+
+	(*stack)->back = tail_ptr;
 	(*stack) = new_head;
-	if (output && decider == A)
+
+	if (output && decider == A)// Mayby to own fucntion to save space
 		ft_putstr("ra\n");
 	if (output && decider == B)
 		ft_putstr("rb\n");

@@ -46,16 +46,7 @@ int		b_in_order(t_stack *stack_b)
 	// ft_putstr("OK\n");
 }
 
-static int	smallest_in_stack(t_stack *stack_a, int value)
-{
-	while (stack_a->next)
-	{
-		if (value > stack_a->next->value)
-			return (0);
-		stack_a = stack_a->next;
-	}
-	return (1);
-}
+
 
 static int	biggest_in_stack(t_stack *stack_a, int value)
 {
@@ -113,73 +104,22 @@ int	smallest_closer_to_top(t_stack *stack_a, int stack_size)
 	return (0);
 }
 
-t_stacks	*sort_b_stack(t_stacks *stacks)
-{
-	if (b_in_order(STACK_B))
-		return (stacks);
-	else if (smallest_in_stack(STACK_B, FIRST_B))
-		rotate(&stacks, B, 1);
-	else if (FIRST_B < SECOND_B)
-		swap(&stacks, B, 1);
-	else if (last_value_bigger(STACK_B))
-		rotate(&stacks, B, 1);
-	else
-		rotate(&stacks, B, 1);
-	if (b_in_order(STACK_B))
-		return (stacks);
-	return (sort_b_stack(stacks));
-}
-
-int	fetch_index_from_top(t_stack *stack_a, t_chunks *chunks)
-{
-	int	i;
-
-	i = 0;
-	while (stack_a)
-	{
-		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
-			return (i);
-		stack_a = stack_a->next;
-		i++;
-	}
-	return (0); // temp
-}
-
-/* Finds index from stack to certain value - starting from bottom */
-int	fetch_index_from_bottom(t_stack *stack_a, t_chunks *chunks)
-{
-	int	i;
-
-	i = 0;
-	while (stack_a->next)
-	{
-		stack_a = stack_a->next;
-		i++;
-	}
-	while (stack_a)
-	{
-		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
-			return (i);
-		stack_a = stack_a->back;
-		i--;
-	}
-	return (0); // temp
-}
-
-void	sort_stack(t_stacks *stacks, t_chunks *chunks)
-{
-	int	option_1_index;
-	int	option_2_index;
-
-	while (chunks)
-	{
-		option_1_index = fetch_index_from_top(STACK_A, chunks);
-		option_2_index = fetch_index_from_bottom(STACK_A, chunks);
-		// Operations !
-		chunks = chunks->next;
-	}
-
-}
+// t_stacks	*sort_b_stack(t_stacks *stacks)
+// {
+// 	if (b_in_order(STACK_B))
+// 		return (stacks);
+// 	else if (smallest_in_stack(STACK_B, FIRST_B))
+// 		rotate(&stacks, B, 1);
+// 	else if (FIRST_B < SECOND_B)
+// 		swap(&stacks, B, 1);
+// 	else if (last_value_bigger(STACK_B))
+// 		rotate(&stacks, B, 1);
+// 	else
+// 		rotate(&stacks, B, 1);
+// 	if (b_in_order(STACK_B))
+// 		return (stacks);
+// 	return (sort_b_stack(stacks));
+// }
 
 /* Old algo */
 // void	sort_stack(t_stacks *stacks)
@@ -212,8 +152,6 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 // 		return ;
 // 	sort_stack(stacks);
 // }
-
-
 
 int	main(int argc, char **argv)
 {

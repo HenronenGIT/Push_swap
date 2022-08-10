@@ -67,6 +67,8 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 		(*stacks)->chunk_count = 11;
 	else if (arr_len >= 100)
 		(*stacks)->chunk_count = 5;
+	else
+		(*stacks)->chunk_count = 1;	// temp
 
 	// (*stacks)->half_value = (*stacks)->sorted_stack[arr_len / 2]; // mayby useless
 	return ;
