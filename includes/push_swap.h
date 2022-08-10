@@ -50,6 +50,7 @@ typedef struct s_chunks
 typedef struct s_stack
 {
 	struct s_stack	*next;
+	struct s_stack	*back;
 	int				value;
 }	t_stack;
 

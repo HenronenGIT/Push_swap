@@ -130,8 +130,24 @@ t_stacks	*sort_b_stack(t_stacks *stacks)
 	return (sort_b_stack(stacks));
 }
 
-void	sort_stack(t_stacks *stacks)
+int	find_from_top(t_stack *stack_a, t_chunks *chunks)
 {
+	while (stack_a)
+	{
+		// if (stack_a->value == )
+		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
+
+		stack_a = stack_a->next;
+	}
+	return (0); // temp
+}
+
+void	sort_stack(t_stacks *stacks, t_chunks *chunks)
+{
+	int	option_1;
+	int	option_2;
+
+	option_1 = find_from_top(STACK_A, chunks);
 
 }
 
@@ -185,14 +201,17 @@ int	main(int argc, char **argv)
 	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
 	chunks = create_chunks(stacks);
 
-	printf("%d\n", chunks->array[0]);
-	printf("%d\n", chunks->next->array[0]);
-	printf("%d\n", chunks->next->next->array[0]);
-	printf("%d\n", chunks->next->next->next->array[0]);
+	/* Test for chunks */
+	// printf("%d\n", chunks->array[0]);
+	// printf("%d\n", chunks->next->array[0]);
+	// printf("%d\n", chunks->next->next->array[0]);
+	// printf("%d\n", chunks->next->next->next->array[0]);
 
-	printf("%d ", chunks->next->next->next->next->array[0]);
-	printf("%d\n", chunks->next->next->next->next->array[19]);
-	//ft_print_tab(chunks->array, 20);
+	// printf("%d ", chunks->next->next->next->next->array[0]);
+	// printf("%d\n", chunks->next->next->next->next->array[19]);
+
+
+	// ft_print_tab(chunks->array, 20);
 	//printf("\n");
 	//ft_print_tab(chunks->next->array, 20);
 	// if (stack_in_order(stacks))
@@ -201,6 +220,6 @@ int	main(int argc, char **argv)
 		// return (0); // Free all
 	// }
 	// print_stacks(stacks);
-	// sort_stack(stacks);
+	sort_stack(stacks, chunks);
 	// print_stacks(stacks);
 }

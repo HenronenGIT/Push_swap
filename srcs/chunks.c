@@ -46,6 +46,7 @@ void	fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack)
 
 	i = 0;
 	j = last_position; // Can cause problems on first run if last_position is not 0
+	chunk->array_size = chunk_size;
 	while (i < chunk_size)
 	{
 		chunk->array[i] = sorted_stack[j];
@@ -82,9 +83,7 @@ static void	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
 t_chunks	*create_chunks(t_stacks *stacks)
 {
 	t_chunks	*chunk_list;
-	int			i;
 
-	i = 0;
 	chunk_list = create_chunk_list(stacks->chunk_count);
 	allocate_chunk_arrays(chunk_list, stacks);
 
