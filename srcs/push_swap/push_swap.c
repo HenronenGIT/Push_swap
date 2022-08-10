@@ -130,24 +130,54 @@ t_stacks	*sort_b_stack(t_stacks *stacks)
 	return (sort_b_stack(stacks));
 }
 
-int	find_from_top(t_stack *stack_a, t_chunks *chunks)
+int	fetch_index_from_top(t_stack *stack_a, t_chunks *chunks)
 {
+	int	i;
+
+	i = 0;
 	while (stack_a)
 	{
-		// if (stack_a->value == )
 		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
-
+			return (i);
 		stack_a = stack_a->next;
+		i++;
+	}
+	return (0); // temp
+}
+
+/* Finds index from stack to certain value - starting from bottom */
+int	fetch_index_from_bottom(t_stack *stack_a, t_chunks *chunks)
+{
+	int	i;
+
+	i = 0;
+	while (stack_a->next)
+	{
+		stack_a = stack_a->next;
+		i++;
+	}
+	while (stack_a)
+	{
+		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
+			return (i);
+		stack_a = stack_a->back;
+		i--;
 	}
 	return (0); // temp
 }
 
 void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 {
-	int	option_1;
-	int	option_2;
+	int	option_1_index;
+	int	option_2_index;
 
-	option_1 = find_from_top(STACK_A, chunks);
+	while (chunks)
+	{
+		option_1_index = fetch_index_from_top(STACK_A, chunks);
+		option_2_index = fetch_index_from_bottom(STACK_A, chunks);
+		// Operations !
+		chunks = chunks->next;
+	}
 
 }
 
