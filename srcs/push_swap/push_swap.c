@@ -29,42 +29,6 @@ int		a_in_order(t_stack *stack_a)
 	// ft_putstr("OK\n");
 }
 
-int		b_in_order(t_stack *stack_b)
-{
-	t_stack	*node;
-
-	node = stack_b;
-	while (node->next)
-	{
-		if (node->value > node->next->value)
-			node = node->next;
-		else
-			return (0);
-			// panic("KO\n");
-	}
-	return (1);
-	// ft_putstr("OK\n");
-}
-
-
-
-static int	biggest_in_stack(t_stack *stack_a, int value)
-{
-	while (stack_a->next)
-	{
-		if (value < stack_a->next->value)
-			return (0);
-		stack_a = stack_a->next;
-	}
-	return (1);
-}
-
-void	push_all_to_a(t_stacks *stacks)
-{
-	// while (stacks->stack_b)
-	while (STACK_B)
-		push(&stacks, A, 1);
-}
 
 int		last_value_bigger(t_stack *stack)
 {

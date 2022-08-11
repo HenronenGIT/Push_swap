@@ -5,8 +5,8 @@ push_swap='./push_swap'
 
 # 5 VALUES
 five_values_1="2 5 3 4 1"
-five_values_2="-26 -4 -48 -56 -39"
-five_values_3="-95 18 -30 -73 31"
+five_values_2="4 5 2 1 3"
+five_values_3="1 4 3 2 5"
 five_values_4="21 19 -66 7 78"
 five_values_5="8611 -2271 -6004 3325 314"
 
@@ -16,6 +16,8 @@ ten_values_2="9 5 10 4 8 2 6 1 7 3"
 ten_values_3="10 1 3 6 7 8 5 9 4 2"
 ten_values_4="2173 -4522 5468 9164 -7988 -2502 -568 -638 1588 -2666"
 ten_values_5="-8337 1247 5327 -618 1128 4324 -6484 -7073 9791 4858"
+ten_values_6="3 2 1 10 5 7 9 4 8 6"
+ten_values_7="1 5 3 2 10 4 7 6 9 8"
 
 # 100 Values
 hundred_values_1="467 444 159 966 34 293 221 698 624 196 551 45 394 502 515 563 550 254 746 926 331 689 962 19 657 287 114 107 600 264 345 192 735 57 720 456 117 558 266 31 626 120 859 227 479 678 131 434 374 292 0 819 477 378 132 115 162 137 375 74 330 855 505 945 503 307 299 248 653 548 781 267 603 530 392 760 424 362 405 970 351 840 870 874 59 249 813 826 915 610 123 408 16 460 738 119 384 942 793 5"
@@ -59,16 +61,19 @@ echo "===== ${RED}#2 10 values${NC} ====="
 printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_2 | wc -l
 
 echo "===== ${RED}#3 10 values${NC} ====="
-# $push_swap 593 293 422 788 28 287 856 763 447 284
 printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_3 | wc -l
 
 echo "===== ${RED}#4 10 values${NC} ====="
-# $push_swap 593 293 422 788 28 287 856 763 447 284
 printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_4 | wc -l
 
 echo "===== ${RED}#5 10 values${NC} ====="
-# $push_swap 593 293 422 788 28 287 856 763 447 284
 printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_5 | wc -l
+
+echo "===== ${RED}#5 10 values${NC} ====="
+printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_6 | wc -l
+
+echo "===== ${RED}#5 10 values${NC} ====="
+printf "${GREEN}Operation count =>${NC}";$push_swap $ten_values_7 | wc -l
 echo ""
 echo "===== ${RED}100 values${NC} ====="
 printf "${GREEN}Operation count =>${NC}";$push_swap $hundred_values_1 | wc -l

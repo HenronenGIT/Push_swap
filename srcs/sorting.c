@@ -126,31 +126,81 @@ static int	smallest_in_stack(t_stack *stack, int value)
 	return (1);
 }
 
+static int	biggest_in_stack(t_stack *stack, int value)
+{
+	while (stack->next)
+	{
+		if (value < stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+
+int	last_value(t_stack *stack)
+{
+	// Check if seg faults
+	while (stack->next)
+		stack = stack->next;
+	return (stack->value);
+}
+
+int		b_in_order(t_stack *stack_b)
+{
+	t_stack	*node;
+
+	node = stack_b;
+	while (node->next)
+	{
+		if (node->value > node->next->value)
+			node = node->next;
+		else
+			return (0);
+			// panic("KO\n");
+	}
+	return (1);
+	// ft_putstr("OK\n");
+}
+
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	int	right_spot;
 
 	right_spot = 0;
-	if (!stacks->stack_b)
+	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;
 	// if (FIRST_A < FIRST_B) // make better by searching do we need to rb or rrb
 	// if (!smallest_in_stack(STACK_B, FIRST_B)) // make better by searching do we need to rb or rrb
-	while (1)
-	{
+	if (b_in_order(STACK_B))
+		return ;
 
-	if (right_spot)
+	if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
 		return ;
-	if (FIRST_A > FIRST_B)
-	{
-		right_spot = 1;
-		rotate(&stacks, B, 1);
-	}
-	if (right_spot && FIRST_A < FIRST_B)
+	if (FIRST_A > FIRST_B && FIRST_A < last_value(STACK_B)/*not_any_bigger*/)
 		return ;
-	// else
-	}
-		// return ;
-	// rotate_b_to_correct_spot(stacks);
+	if (FIRST_A < FIRST_B && biggest_in_stack(STACK_B, FIRST_B) && FIRST_A < last_value(STACK_B))
+		return ;
+	rotate(&stacks, B, 1);
+	// print_stacks(stacks);
+	rotate_b_to_correct_spot(stacks);
+	/* First algo */
+	// if (smallest_in_stack(STACK_A, FIRST_A) && smallest_in_stack(STACK_B, FIRST_B))
+	// 	return ;
+	// if (right_spot)
+	// 	return ;
+	// if (FIRST_A > FIRST_B)
+	// 	right_spot = 1;
+	// if (right_spot && FIRST_A < FIRST_B)
+	// 	return ;
+	// rotate(&stacks, B, 1);
+	// print_stacks(stacks);
+}
+
+void	push_all_to_a(t_stacks *stacks)
+{
+	while (STACK_B)
+		push(&stacks, A, 1);
 }
 
 void	sort_stack(t_stacks *stacks, t_chunks *chunks)
@@ -174,8 +224,15 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-
 		print_stacks(stacks);
 	}
-
+	// while (!biggest_in_stack(STACK_B, FIRST_B))
+	while (STACK_B)
+	{
+		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
+			rotate(&stacks, B, 1);
+		else
+			push(&stacks, A, 1);
+		// print_stacks(stacks);
+	}
 }
