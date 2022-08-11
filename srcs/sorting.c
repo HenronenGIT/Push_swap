@@ -128,14 +128,29 @@ static int	smallest_in_stack(t_stack *stack, int value)
 
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
+	int	right_spot;
+
+	right_spot = 0;
 	if (!stacks->stack_b)
 		return ;
-	if (smallest_in_stack(STACK_B, FIRST_B)) // make better by searching do we need to rb or rrb
 	// if (FIRST_A < FIRST_B) // make better by searching do we need to rb or rrb
-		rotate(&stacks, B, 1);
-	else
+	// if (!smallest_in_stack(STACK_B, FIRST_B)) // make better by searching do we need to rb or rrb
+	while (1)
+	{
+
+	if (right_spot)
 		return ;
-	rotate_b_to_correct_spot(stacks);
+	if (FIRST_A > FIRST_B)
+	{
+		right_spot = 1;
+		rotate(&stacks, B, 1);
+	}
+	if (right_spot && FIRST_A < FIRST_B)
+		return ;
+	// else
+	}
+		// return ;
+	// rotate_b_to_correct_spot(stacks);
 }
 
 void	sort_stack(t_stacks *stacks, t_chunks *chunks)
