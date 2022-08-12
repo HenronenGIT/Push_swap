@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-int		a_in_order(t_stack *stack_a)
-{
-	t_stack	*node;
-
-	node = stack_a;
-	while (node->next)
-	{
-		if (node->value < node->next->value)
-			node = node->next;
-		else
-			return (0);
-			// panic("KO\n");
-	}
-	return (1);
-	// ft_putstr("OK\n");
-}
-
-
 int		last_value_bigger(t_stack *stack)
 {
 	int	first_value;

@@ -163,41 +163,75 @@ int		b_in_order(t_stack *stack_b)
 	// ft_putstr("OK\n");
 }
 
-int	find_place_from_b(t_stacks *stacks)
-{
-	t_stack	*node_pointer;
-	int	index;
+// int	find_place_from_b(t_stacks *stacks)
+// {
+// 	t_stack	*node_ptr;
+// 	int	rotations_needed;
 
-	index = 0;
-	while (STACK_B)
+// 	rotations_needed = 1;
+// 	node_ptr = STACK_B;
+// 	if (!node_ptr || !node_ptr->next)
+// 		return (0);
+// 	while (STACK_B)
+// 	{
+// 		if (FIRST_A > node_ptr->value && node_ptr->next && FIRST_A < node_ptr->next->value)
+// 			return (rotations_needed);
+// 		else
+// 			node_ptr = node_ptr->next;
+// 		rotations_needed += 1;
+// 	}
+// 	return (rotations_needed);
+// }
+
+int		stack_in_ascending_order(t_stack *stack)
+{
+	t_stack	*node;
+
+	node = stack;
+	while (node->next)
 	{
-		if (node_pointer->value > FIRST_A && node_pointer->next->value < FIRST_A)
-			return (index);
-		index += 1;
+		if (node->value < node->next->value)
+			node = node->next;
+		else
+			return (0);
 	}
-	return (index);
+	return (1);
 }
 
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
-	int	right_spot;
+	// Trying first to sort stack to ASCENDING ORDER - like in the guide
 
-	right_spot = 0;
 	if (!stacks->stack_b || !stacks->stack_b->next)
+		return ;	
+	// Best algo atm)
+	if (FIRST_A < FIRST_B && FIRST_A > last_value(STACK_B))
 		return ;
-	find_place_from_b(stacks);
-	// Best algo atm
-	// if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && FIRST_A)
-	// 	return ;
+	if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
+		return ;
+	if (stack_in_ascending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
+		return ;
+	if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
+		return ;
+
+		//CHECK IF ANY PERMUTATION USES THIS STATEMENT
+		//Atm only last value of a is using it
 	// if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
-	// 	return ;
-	// if (FIRST_A > FIRST_B && FIRST_A < last_value(STACK_B)/*not_any_bigger*/)
-	// 	return ;
-	// if (FIRST_A < FIRST_B && biggest_in_stack(STACK_B, FIRST_B) && FIRST_A < last_value(STACK_B))
-	// 	return ;
+		// return ;
 	rotate(&stacks, B, 1);
-	print_stacks(stacks);
+	// print_stacks(stacks);
 	rotate_b_to_correct_spot(stacks);
+
+
+	// rotations = find_place_from_b(stacks);
+	// while (rotations)
+	// {
+		// rotate(&stacks, B, 1);
+		// rotations -= 1;
+	// }
+	// rotate_b_to_correct_spot(stacks);
+
+
 	/* First algo */
 	// if (smallest_in_stack(STACK_A, FIRST_A) && smallest_in_stack(STACK_B, FIRST_B))
 	// 	return ;
@@ -237,7 +271,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-		print_stacks(stacks);
+		// print_stacks(stacks);
 	}
 	// while (!biggest_in_stack(STACK_B, FIRST_B))
 	while (STACK_B)
