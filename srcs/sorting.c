@@ -204,7 +204,6 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;	
-	// Best algo atm)
 	if (FIRST_A < FIRST_B && FIRST_A > last_value(STACK_B))
 		return ;
 	if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
@@ -218,31 +217,10 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 		//Atm only last value of a is using it
 	// if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
 		// return ;
+
 	rotate(&stacks, B, 1);
-	// print_stacks(stacks);
+	print_stacks(stacks);
 	rotate_b_to_correct_spot(stacks);
-
-
-	// rotations = find_place_from_b(stacks);
-	// while (rotations)
-	// {
-		// rotate(&stacks, B, 1);
-		// rotations -= 1;
-	// }
-	// rotate_b_to_correct_spot(stacks);
-
-
-	/* First algo */
-	// if (smallest_in_stack(STACK_A, FIRST_A) && smallest_in_stack(STACK_B, FIRST_B))
-	// 	return ;
-	// if (right_spot)
-	// 	return ;
-	// if (FIRST_A > FIRST_B)
-	// 	right_spot = 1;
-	// if (right_spot && FIRST_A < FIRST_B)
-	// 	return ;
-	// rotate(&stacks, B, 1);
-	// print_stacks(stacks);
 }
 
 void	push_all_to_a(t_stacks *stacks)
@@ -273,7 +251,6 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 			chunks = chunks->next;
 		// print_stacks(stacks);
 	}
-	// while (!biggest_in_stack(STACK_B, FIRST_B))
 	while (STACK_B)
 	{
 		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
