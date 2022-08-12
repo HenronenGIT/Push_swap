@@ -163,6 +163,21 @@ int		b_in_order(t_stack *stack_b)
 	// ft_putstr("OK\n");
 }
 
+int	find_place_from_b(t_stacks *stacks)
+{
+	t_stack	*node_pointer;
+	int	index;
+
+	index = 0;
+	while (STACK_B)
+	{
+		if (node_pointer->value > FIRST_A && node_pointer->next->value < FIRST_A)
+			return (index);
+		index += 1;
+	}
+	return (index);
+}
+
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	int	right_spot;
@@ -170,19 +185,18 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	right_spot = 0;
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;
-	// if (FIRST_A < FIRST_B) // make better by searching do we need to rb or rrb
-	// if (!smallest_in_stack(STACK_B, FIRST_B)) // make better by searching do we need to rb or rrb
-	if (b_in_order(STACK_B))
-		return ;
-
-	if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
-		return ;
-	if (FIRST_A > FIRST_B && FIRST_A < last_value(STACK_B)/*not_any_bigger*/)
-		return ;
-	if (FIRST_A < FIRST_B && biggest_in_stack(STACK_B, FIRST_B) && FIRST_A < last_value(STACK_B))
-		return ;
+	find_place_from_b(stacks);
+	// Best algo atm
+	// if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && FIRST_A)
+	// 	return ;
+	// if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
+	// 	return ;
+	// if (FIRST_A > FIRST_B && FIRST_A < last_value(STACK_B)/*not_any_bigger*/)
+	// 	return ;
+	// if (FIRST_A < FIRST_B && biggest_in_stack(STACK_B, FIRST_B) && FIRST_A < last_value(STACK_B))
+	// 	return ;
 	rotate(&stacks, B, 1);
-	// print_stacks(stacks);
+	print_stacks(stacks);
 	rotate_b_to_correct_spot(stacks);
 	/* First algo */
 	// if (smallest_in_stack(STACK_A, FIRST_A) && smallest_in_stack(STACK_B, FIRST_B))
@@ -212,7 +226,6 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	{
 		if (STACK_A)
 		{
-
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
