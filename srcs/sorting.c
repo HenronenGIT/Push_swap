@@ -249,7 +249,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-		// print_stacks(stacks);
+		print_stacks(stacks);
 	}
 	while (STACK_B)
 	{
