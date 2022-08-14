@@ -198,10 +198,52 @@ int		stack_in_ascending_order(t_stack *stack)
 	return (1);
 }
 
+// int	find_correct_spot(t_stacks *stacks)
+int	find_correct_spot(int first_a_value, t_stack *stack)
+{
+
+	int	rotations_needed;
+	int	i;
+
+	i = 0;
+	rotations_needed = 0;
+	while (stack)
+	{
+		if (first_a_value > stack->value && stack->next->value > first_a_value)
+			rotations_needed += 1;
+		stack = stack->next;
+
+	}
+	// while (stack)
+	// {
+	// 		rotations_needed += 1;
+	// 	i += 1;
+	// 	stack = stack->next;
+	// }
+	return (rotations_needed);
+}
+
+int	list_size(t_stack *stack) // can be added to libft with void style
+{
+	int	node_count;
+
+	node_count = 1;
+	while (stack->next)
+	{
+		node_count += 1;
+		stack = stack->next;
+	}
+	return (node_count);
+}
+
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	// Trying first to sort stack to ASCENDING ORDER - like in the guide
+	int	rotation_count;
+	int	test;
 
+	test = 0;
+	rotation_count = 0;
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;	
 	if (FIRST_A < FIRST_B && FIRST_A > last_value(STACK_B))
@@ -212,15 +254,25 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 		return ;
 	if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
 		return ;
+	
+	rotation_count = find_correct_spot(FIRST_A, STACK_B);
+	test = list_size(STACK_B) / 2;
+	if (rotation_count > list_size(STACK_B) / 2)
+		while (--rotation_count + 1)
+			reverse_rotate(&stacks, B, 1);
+	else
+		while (--rotation_count + 1)
+			rotate(&stacks, B, 1);
+
 
 		//CHECK IF ANY PERMUTATION USES THIS STATEMENT
 		//Atm only last value of a is using it
 	// if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
 		// return ;
 
-	rotate(&stacks, B, 1);
+	// rotate(&stacks, B, 1);
 	print_stacks(stacks);
-	rotate_b_to_correct_spot(stacks);
+	// rotate_b_to_correct_spot(stacks);
 }
 
 void	push_all_to_a(t_stacks *stacks)
