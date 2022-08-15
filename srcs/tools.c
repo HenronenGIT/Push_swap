@@ -22,21 +22,24 @@ void	print_stacks(t_stacks *stacks)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	int		index;
 
+	index = 0;
 	stack_a = stacks->stack_a;
 	stack_b = stacks->stack_b;
-	ft_printf("|A||B|\n");
+	ft_printf("[i]\t|A||B|\n");
 	while (stack_a || stack_b)
 	{
 		if (stack_a && stack_b)
-			ft_printf("|%d||%d|\n", stack_a->value, stack_b->value);
+			ft_printf("[%d]\t|%d||%d|\n", index, stack_a->value, stack_b->value);
 		else if (stack_a)
-			ft_printf("|%d|| |\n", stack_a->value);
+			ft_printf("[%d]\t|%d|| |\n", index, stack_a->value);
 		else
-			ft_printf("| ||%d|\n", stack_b->value);
+			ft_printf("[%d]\t| ||%d|\n", index, stack_b->value);
 		if (stack_a)
 			stack_a = stack_a->next;
 		if (stack_b)
 			stack_b = stack_b->next;
+		index += 1;
 	}
 }

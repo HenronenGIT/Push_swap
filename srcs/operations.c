@@ -63,9 +63,14 @@ void	push(t_stacks **stacks, int decider, int output)
 	if ((*source_stack) == NULL)
 		return ;
 	new_head = (*source_stack)->next;
-	(*source_stack)->next = (*dest_stack);
+	(*source_stack)->next = (*dest_stack); // useless?
+
+	// (*source_stack)->back = NULL;
+
 	(*dest_stack) = (*source_stack);
 	(*source_stack) = new_head;
+	if ((*source_stack))
+		(*source_stack)->back = NULL; // NEW
 	if (output && decider == A)
 		ft_putstr("pa\n");
 	else
@@ -90,13 +95,13 @@ void	rotate(t_stacks **stacks, int decider, int output)
 		tail_ptr = tail_ptr->next;
 	tail_ptr->next = (*stack);
 
-	tail_ptr->back = NULL;
+	// tail_ptr->back = NULL;
 	
 	(*stack)->next = NULL;
 
 	(*stack)->back = tail_ptr;
 	(*stack) = new_head;
-
+	(*stack)->back = NULL;
 	if (output && decider == A)// Mayby to own fucntion to save space
 		ft_putstr("ra\n");
 	if (output && decider == B)
