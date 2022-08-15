@@ -284,7 +284,7 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	correct_index = find_correct_spot(FIRST_A, STACK_B, stacks);
 
 	move_value_to_top(correct_index, stacks, B);
-	// print_stacks(stacks);
+	print_stacks(stacks);
 	//rotate(&stacks, B, 1);
 	//print_stacks(stacks);
 	//rotate_b_to_correct_spot(stacks);
@@ -301,9 +301,9 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	int	option_1_index;
 	int	option_2_index;
 
-	while (chunks)
+	while (chunks) 
 	{
-		if (STACK_A)
+		if (STACK_A) //does not work like expected.
 		{
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
@@ -316,7 +316,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-		// print_stacks(stacks);
+		print_stacks(stacks);
 	}
 	while (STACK_B)
 	{
