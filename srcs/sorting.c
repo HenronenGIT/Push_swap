@@ -85,30 +85,56 @@ static int	option_1_need_less_moves(int index_1, int index_2, t_stacks *stacks)
 
 }
 
-void	move_value_to_top(int movable_index, t_stacks *stacks)
+int	list_size(t_stack *stack) // can be added to libft with void style
 {
-	int	middle_point;
-	int	moves_needed;
+	int	node_count;
 
-	middle_point = stacks->stack_size / 2;
+	node_count = 1;
+	while (stack->next)
+	{
+		node_count += 1;
+		stack = stack->next;
+	}
+	return (node_count);
+}
+
+// void	move_value_to_top(int movable_index, t_stacks *stacks)
+void	move_value_to_top(int movable_index, t_stacks *stacks, int decider)
+{
+	int		middle_point;
+	int		moves_needed;
+	t_stack *stack;
+
+	// middle_point = stacks->stack_size / 2;
+	if (decider == A)
+		stack = stacks->stack_a;
+	else
+		stack = stacks->stack_b;
+	middle_point = list_size(stack) / 2;
 	if (movable_index < middle_point)
 	{
 		moves_needed = movable_index;
 		while (moves_needed)
 		{
-			rotate(&stacks, A, 1);  
+			if (decider == A)
+				rotate(&stacks, A, 1);
+			else
+				rotate(&stacks, B, 1);
 			moves_needed -= 1;
 		}
 	}
 	else
 	{
-		moves_needed = stacks->stack_size - movable_index;
+		moves_needed = list_size(stack) - movable_index;
 		while (moves_needed)
 		{
-			reverse_rotate(&stacks, A, 1);
+			if (decider == A)
+				reverse_rotate(&stacks, A, 1);
+			else
+				reverse_rotate(&stacks, B, 1);
+			// reverse_rotate(&stacks, A, 1);
 			moves_needed -= 1;
 		}
-
 	}
 }
 
@@ -199,51 +225,43 @@ int		stack_in_ascending_order(t_stack *stack)
 }
 
 // int	find_correct_spot(t_stacks *stacks)
-int	find_correct_spot(int first_a_value, t_stack *stack)
+int	find_correct_spot(int first_a_value, t_stack *stack, t_stacks *stacks)
 {
-
-	int	rotations_needed;
+	int	correct_index;
 	int	i;
+	int	last_value;
 
-	i = 0;
-	rotations_needed = 0;
+	last_value = 0;
+	i = 1;
+	correct_index = 0;
 	while (stack)
 	{
-		if (first_a_value > stack->value && stack->next->value > first_a_value)
-			rotations_needed += 1;
-		stack = stack->next;
-
-	}
-	// while (stack)
-	// {
-	// 		rotations_needed += 1;
-	// 	i += 1;
-	// 	stack = stack->next;
-	// }
-	return (rotations_needed);
-}
-
-int	list_size(t_stack *stack) // can be added to libft with void style
-{
-	int	node_count;
-
-	node_count = 1;
-	while (stack->next)
-	{
-		node_count += 1;
+		if (first_a_value > stack->value && stack->next && stack->value < stack->next->value && first_a_value < stack->next->value)
+			correct_index = i;
+		else if (first_a_value > stack->value && stack->next && first_a_value > stack->next->value)
+			correct_index = i;
+		else if (STACK_A->next && smallest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, stack->value))
+			return (i);
+		else if (first_a_value < FIRST_B && stack->next && first_a_value < stack->next->value && last_value < stack->value)
+		{
+			correct_index = i;
+			last_value = stack->value;
+		}
+			// return (i);
+		i += 1;
 		stack = stack->next;
 	}
-	return (node_count);
+	return (correct_index);
 }
 
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	// Trying first to sort stack to ASCENDING ORDER - like in the guide
-	int	rotation_count;
-	int	test;
+	int	correct_index;
+	int	stack_size_divided_2;
 
-	test = 0;
-	rotation_count = 0;
+	stack_size_divided_2 = 0;
+	correct_index = 0;
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;	
 	if (FIRST_A < FIRST_B && FIRST_A > last_value(STACK_B))
@@ -255,24 +273,13 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
 		return ;
 	
-	rotation_count = find_correct_spot(FIRST_A, STACK_B);
-	test = list_size(STACK_B) / 2;
-	if (rotation_count > list_size(STACK_B) / 2)
-		while (--rotation_count + 1)
-			reverse_rotate(&stacks, B, 1);
-	else
-		while (--rotation_count + 1)
-			rotate(&stacks, B, 1);
+	correct_index = find_correct_spot(FIRST_A, STACK_B, stacks);
 
-
-		//CHECK IF ANY PERMUTATION USES THIS STATEMENT
-		//Atm only last value of a is using it
-	// if (biggest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, FIRST_B))
-		// return ;
-
-	// rotate(&stacks, B, 1);
-	print_stacks(stacks);
-	// rotate_b_to_correct_spot(stacks);
+	move_value_to_top(correct_index, stacks, B);
+	// print_stacks(stacks);
+	//rotate(&stacks, B, 1);
+	//print_stacks(stacks);
+	//rotate_b_to_correct_spot(stacks);
 }
 
 void	push_all_to_a(t_stacks *stacks)
@@ -293,22 +300,24 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
-				move_value_to_top(option_1_index, stacks);
+				move_value_to_top(option_1_index, stacks, A);
 			else
-				move_value_to_top(option_2_index, stacks);
+				move_value_to_top(option_2_index, stacks, A);
 			rotate_b_to_correct_spot(stacks);
 			push(&stacks, B, 1);
 		}
 		else
 			chunks = chunks->next;
-		print_stacks(stacks);
+		// print_stacks(stacks);
 	}
 	while (STACK_B)
 	{
+		// print_stacks(stacks);
 		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
-			rotate(&stacks, B, 1);
+			reverse_rotate(&stacks, B, 1);
 		else
 			push(&stacks, A, 1);
 		// print_stacks(stacks);
 	}
+		// print_stacks(stacks);
 }
