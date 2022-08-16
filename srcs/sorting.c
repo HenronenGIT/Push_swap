@@ -172,11 +172,11 @@ int	last_value(t_stack *stack)
 	return (stack->value);
 }
 
-int		b_in_order(t_stack *stack_b)
+int		stack_in_descending_order(t_stack *stack)
 {
 	t_stack	*node;
 
-	node = stack_b;
+	node = stack;
 	while (node->next)
 	{
 		if (node->value > node->next->value)
@@ -276,15 +276,17 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 		// return ;
 	if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
 		return ;
-	if (stack_in_ascending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
+	// if (stack_in_ascending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
+		// return ;
+	if (stack_in_descending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
 		return ;
-	if (b_in_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
+	if (stack_in_descending_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
 		return ;
 	/*  */	
 	correct_index = find_correct_spot(FIRST_A, STACK_B, stacks);
 
 	move_value_to_top(correct_index, stacks, B);
-	print_stacks(stacks);
+	// print_stacks(stacks);
 	//rotate(&stacks, B, 1);
 	//print_stacks(stacks);
 	//rotate_b_to_correct_spot(stacks);
@@ -296,17 +298,47 @@ void	push_all_to_a(t_stacks *stacks)
 		push(&stacks, A, 1);
 }
 
+// int	stack_contains_chunk_value(t_stack *stack_a, int *chunk_array, int array_size)
+int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
+{
+	int	i;
+
+	i = 0;
+	while (stack_a)
+	{
+		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
+			return (1);
+		stack_a = stack_a->next;
+	}
+	return (0);
+}
+
 void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 {
 	int	option_1_index;
 	int	option_2_index;
 
-	while (chunks) 
+	int	debug_counter; //temp
+
+	debug_counter = 0;
+
+	// mayby need iterator for chunks so we dont lose head on linked list
+	while (chunks)
 	{
-		if (STACK_A) //does not work like expected.
+		print_stacks(stacks);
+
+		// if (STACK_A) //does not work like expected.
+		// {
+		// if (stack_contains_chunk_value(stacks->stack_a, chunks->array, chunk->array_siz))
+		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
+			//if (option_1_index == 0 && option_2_index == 0 && STACK_A)
+			//{
+			//	chunks = chunks->next;
+			//	continue ;
+			//}
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
 				move_value_to_top(option_1_index, stacks, A);
 			else
@@ -316,15 +348,16 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-		print_stacks(stacks);
+		// print_stacks(stacks);
+		debug_counter += 1;
 	}
+		print_stacks(stacks);
 	while (STACK_B)
 	{
 		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
 			reverse_rotate(&stacks, B, 1);
 		else
 			push(&stacks, A, 1);
-		// print_stacks(stacks);
 	}
-		// print_stacks(stacks);
+	print_stacks(stacks);
 }
