@@ -163,7 +163,6 @@ static int	biggest_in_stack(t_stack *stack, int value)
 	return (1);
 }
 
-
 int	last_value(t_stack *stack)
 {
 	// Check if seg faults
@@ -325,20 +324,12 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	// mayby need iterator for chunks so we dont lose head on linked list
 	while (chunks)
 	{
-		print_stacks(stacks);
+		// print_stacks(stacks);
 
-		// if (STACK_A) //does not work like expected.
-		// {
-		// if (stack_contains_chunk_value(stacks->stack_a, chunks->array, chunk->array_siz))
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
-			//if (option_1_index == 0 && option_2_index == 0 && STACK_A)
-			//{
-			//	chunks = chunks->next;
-			//	continue ;
-			//}
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
 				move_value_to_top(option_1_index, stacks, A);
 			else
@@ -351,7 +342,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		// print_stacks(stacks);
 		debug_counter += 1;
 	}
-		print_stacks(stacks);
+		// print_stacks(stacks);
 	while (STACK_B)
 	{
 		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
@@ -359,5 +350,5 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		else
 			push(&stacks, A, 1);
 	}
-	print_stacks(stacks);
+	// print_stacks(stacks);
 }

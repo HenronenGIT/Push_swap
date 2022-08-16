@@ -61,15 +61,21 @@ static void	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
 	t_chunks	*temp;
 	int			chunk_size;
 	int			i;
+	int			last_chunk_size;
 
 	i = 0;
-	chunk_size = stacks->stack_size / stacks->chunk_count;
-	while (temp)
+	chunk_size = stacks->stack_size / stacks->chunk_count + 0.6;
+	last_chunk_size = chunk_size;
+	last_chunk_size += (stacks->stack_size - (stacks->chunk_count * chunk_size));
+	while (temp->next)
 	{
 		temp->array = (int *)malloc(sizeof(int) * chunk_size);
 		fill_chunk(temp, chunk_size, stacks->sorted_stack);
 		temp = temp->next;
+		i += 1;
 	}
+	temp->array = (int *)malloc(sizeof(int) * last_chunk_size);
+	fill_chunk(temp, last_chunk_size, stacks->sorted_stack);
 	return ;
 }
 
@@ -77,8 +83,13 @@ t_chunks	*create_chunks(t_stacks *stacks)
 {
 	t_chunks	*chunk_list;
 
+	if (stacks->stack_size >= 500)
+		stacks->chunk_count = 11;
+	else if (stacks->stack_size >= 100)
+		stacks->chunk_count = 5;
+	else
+		stacks->chunk_count = 1;	// temp
 	chunk_list = create_chunk_list(stacks->chunk_count);
 	allocate_chunk_arrays(chunk_list, stacks);
-
 	return (chunk_list);
 }
