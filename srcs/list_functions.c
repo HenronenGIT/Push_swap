@@ -17,7 +17,7 @@ t_stack	*create_node(int value)
 	t_stack	*node;
 
 	node = (t_stack *)malloc(sizeof(t_stack));
-	if (node == NULL)
+	if (!node)
 		return (NULL);
 	node->value = value;
 	node->next = NULL;
@@ -26,7 +26,9 @@ t_stack	*create_node(int value)
 
 }
 
-/* Adds node to end of the list and inits it back pointer to previous node */
+/*
+	Adds node to end of the list and inits it back pointer to previous node
+*/
 void	node_add_back(t_stack **stack, t_stack *node)
 {
 	t_stack	*temp;

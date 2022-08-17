@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		exit(1);
 	argv = explode_arguments(argc, argv); // Might cause memory leak?
 	valid_numbers = check_input(argv);
-	create_stacks(valid_numbers, ft_count_pointers(argv), &stacks);
+	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
 	read_instructions(&instructions);
 	execute_instructions(instructions, &stacks);
 	print_stacks(stacks); // TEMP

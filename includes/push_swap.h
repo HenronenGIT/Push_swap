@@ -28,7 +28,7 @@
 # define SECOND_B stacks->stack_b->next->value
 # define HALF_VALUE stacks->half_value
 # define STACK_A stacks->stack_a
-# define STACK_B stacks->stack_b // add to all functions // add to all functions
+# define STACK_B stacks->stack_b
 
 typedef struct s_stacks
 {
@@ -37,7 +37,6 @@ typedef struct s_stacks
 	int				*sorted_stack;
 	int				stack_size;
 	int				chunk_count;
-	// int				half_value;
 }	t_stacks;
 
 typedef struct s_chunks
@@ -61,28 +60,17 @@ typedef struct s_instruction
 	struct s_instruction	*next;
 }	t_instruction;
 
-// typedef enum e_operation
-// {
-// 	sa,
-// 	sb,
-// 	ss,
-// 	pa,
-// 	pb,
-// 	ra,
-// 	rb,
-// 	rr,
-// 	rra,
-// 	rrb,
-// 	rrr
-// }	t_operation;
-
-
 char		**explode_arguments(int argc, char **argv);
 int			*check_input(char **arguments);
-void		create_stacks(int *ints, int arr_len, t_stacks **stacks);
+t_stacks	*create_stacks(int *ints, int arr_len, t_stacks *stacks);
 void		read_instructions(t_instruction **instructions);
 void		execute_instructions(t_instruction *instructions, t_stacks **stacks);
 int			stack_in_order(t_stacks *stacks);
+
+t_chunks		*create_chunks(t_stacks *stacks);
+static t_chunks *create_chunk_list(int chunk_count);
+static int		allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks);
+static void		fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack);
 
 void		panic(char *error_message);
 void		print_stacks(t_stacks *stacks);
@@ -91,12 +79,6 @@ void		swap(t_stacks **stacks, int decider, int output);
 void		push(t_stacks **stacks, int decider, int output);
 void		rotate(t_stacks **stacks, int decider, int output);
 void		reverse_rotate(t_stacks **stacks, int decider, int output);
-// void	swap(t_stacks **stacks, int decider);
-// void	push(t_stacks **stacks, int decider);
-// void	rotate(t_stacks **stacks, int decider);
-// void	reverse_rotate(t_stacks **stacks, int decider);
-
-t_chunks	*create_chunks(t_stacks *stacks);
 
 t_stack		*create_node(int value);
 void		node_add_back(t_stack **stack, t_stack *node);
