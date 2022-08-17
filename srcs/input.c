@@ -12,37 +12,6 @@
 
 #include "push_swap.h"
 
-char	**explode_arguments(int argc, char **argv)
-{
-	if (argc >= 2 && ft_isnumber(argv[0]))
-		return (argv);
-	return (ft_strsplit(argv[0], ' '));
-}
-
-int	*check_input(char **arguments)
-{
-	int		*valid_numbers;
-	long	argument;
-	int		i;
-
-	i = 0;
-	valid_numbers = (int *)malloc(sizeof(int) * (ft_count_pointers(arguments)));
-	while (arguments[i])
-	{
-		if (!ft_isnumber(arguments[i]))
-			panic("Error\n");
-		argument = ft_atol(arguments[i]);
-		if (argument > INT_MAX || argument < INT_MIN)
-			panic("Error\n");
-		if (ft_nbr_in_array((int)argument, valid_numbers, i))
-			panic("Error\n");
-		valid_numbers[i] = (int)argument;
-		i += 1;
-	}
-	// ft_memdel((void *)&valid_numbers);
-	return (valid_numbers);
-}
-
 void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 {
 	t_stack	*node;
@@ -62,8 +31,6 @@ void	create_stacks(int *ints, int arr_len, t_stacks **stacks)
 	(*stacks)->stack_size = arr_len;
 	(*stacks)->sorted_stack = ints;
 	sort_int_tab((*stacks)->sorted_stack, (*stacks)->stack_size);
-
-	// (*stacks)->half_value = (*stacks)->sorted_stack[arr_len / 2]; // mayby useless
 	return ;
 }
 

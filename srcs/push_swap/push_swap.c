@@ -12,92 +12,36 @@
 
 #include "push_swap.h"
 
-int		last_value_bigger(t_stack *stack)
+int	*check_input(char **arguments)
 {
-	int	first_value;
-
-	if (!stack)
-		return (0);
-	first_value = stack->value;
-	while (stack->next)
-		stack = stack->next;
-	if (first_value < stack->value)
-		return (1);
-	return (0);
-}
-
-int	smallest_closer_to_top(t_stack *stack_a, int stack_size)
-{
-	int	smallest_index;
-	int	smallest_value;
-	int	i;
+	int		*valid_numbers;
+	long	argument;
+	int		i;
 
 	i = 0;
-	smallest_value = stack_a->value;
-	smallest_index = 0;
-	while (stack_a)
+	valid_numbers = (int *)malloc(sizeof(int) * (ft_count_pointers(arguments)));
+	while (arguments[i])
 	{
-		if (stack_a->value < smallest_value)
-		{
-			smallest_value = stack_a->value;
-			smallest_index = i;
-		}
+		if (!ft_isnumber(arguments[i]))
+			panic("Error\n");
+		argument = ft_atol(arguments[i]);
+		if (argument > INT_MAX || argument < INT_MIN)
+			panic("Error\n");
+		if (ft_nbr_in_array((int)argument, valid_numbers, i))
+			panic("Error\n");
+		valid_numbers[i] = (int)argument;
 		i += 1;
-		stack_a = stack_a->next;
 	}
-	if (smallest_index < (stack_size / 2))
-		return (1);
-	return (0);
+	// ft_memdel((void *)&valid_numbers);
+	return (valid_numbers);
 }
 
-// t_stacks	*sort_b_stack(t_stacks *stacks)
-// {
-// 	if (b_in_order(STACK_B))
-// 		return (stacks);
-// 	else if (smallest_in_stack(STACK_B, FIRST_B))
-// 		rotate(&stacks, B, 1);
-// 	else if (FIRST_B < SECOND_B)
-// 		swap(&stacks, B, 1);
-// 	else if (last_value_bigger(STACK_B))
-// 		rotate(&stacks, B, 1);
-// 	else
-// 		rotate(&stacks, B, 1);
-// 	if (b_in_order(STACK_B))
-// 		return (stacks);
-// 	return (sort_b_stack(stacks));
-// }
-
-/* Old algo */
-// void	sort_stack(t_stacks *stacks)
-// {
-// 	// if (a_in_order(STACK_A) && b_in_order(STACK_B))
-// 	if (a_in_order(STACK_A) && FIRST_A >= HALF_VALUE)
-// 	{
-// 		stacks = sort_b_stack(stacks); // check if even need return?
-// 		push_all_to_a(stacks);
-// 		return ;
-// 	}
-// 	if (FIRST_A < HALF_VALUE)
-// 		push(&stacks, B, 1);
-// 	else if (biggest_in_stack(STACK_A, FIRST_A))
-// 		reverse_rotate(&stacks, A, 1);
-// 	else if (FIRST_A > SECOND_A)
-// 		swap(&stacks, A, 1);
-// 	else if ((FIRST_A < SECOND_A && STACK_B && stacks->stack_b->next && FIRST_B < SECOND_B) || (STACK_B && !b_in_order(STACK_B)))
-// 		reverse_rotate(&stacks, BOTH, 1); // add macro or define "ROTATE BOTH"
-// 	else if (FIRST_A > SECOND_A && STACK_B &&  stacks->stack_b->next && FIRST_B < SECOND_B)
-// 		swap(&stacks, BOTH, 1);
-// 	else if (FIRST_A > SECOND_A)
-// 		swap(&stacks, A, 1);
-// 	else if (!last_value_bigger(STACK_A))
-// 		reverse_rotate(&stacks, A, 1);
-// 	else
-// 		reverse_rotate(&stacks, A, 1);
-// 	// print_stacks(stacks);
-// 	if (stack_in_order(stacks))
-// 		return ;
-// 	sort_stack(stacks);
-// }
+char	**explode_arguments(int argc, char **argv)
+{
+	if (argc >= 2 && ft_isnumber(argv[0]))
+		return (argv);
+	return (ft_strsplit(argv[0], ' '));
+}
 
 int	main(int argc, char **argv)
 {
