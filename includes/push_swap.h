@@ -39,13 +39,6 @@ typedef struct s_stacks
 	int				chunk_count;
 }	t_stacks;
 
-typedef struct s_chunks
-{
-	int				*array;
-	int				array_size;
-	struct s_chunks	*next;
-}	t_chunks;
-
 typedef struct s_stack
 {
 	struct s_stack	*next;
@@ -53,10 +46,17 @@ typedef struct s_stack
 	int				value;
 }	t_stack;
 
+typedef struct s_chunks
+{
+	int				*array;
+	int				array_size;
+	struct s_chunks	*next;
+}	t_chunks;
+
+
 typedef struct s_instruction
 {
 	char					*operation;
-	// enum					operation;
 	struct s_instruction	*next;
 }	t_instruction;
 
@@ -68,9 +68,9 @@ void		execute_instructions(t_instruction *instructions, t_stacks **stacks);
 int			stack_in_order(t_stacks *stacks);
 
 t_chunks		*create_chunks(t_stacks *stacks);
-static t_chunks *create_chunk_list(int chunk_count);
-static int		allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks);
-static void		fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack);
+// static t_chunks *create_chunk_list(int chunk_count);
+// static int		allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks);
+// static void		fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack);
 
 void		panic(char *error_message);
 void		print_stacks(t_stacks *stacks);
@@ -83,5 +83,7 @@ void		reverse_rotate(t_stacks **stacks, int decider, int output);
 t_stack		*create_node(int value);
 void		node_add_back(t_stack **stack, t_stack *node);
 void		sort_stack(t_stacks *stacks, t_chunks *chunks);
+// static void	free_all_lists(t_stacks **stacks, t_chunks **chunks);
+
 
 #endif

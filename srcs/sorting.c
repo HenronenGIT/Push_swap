@@ -26,20 +26,6 @@ int	fetch_index_from_top(t_stack *stack_a, t_chunks *chunks)
 		i++;
 	}
 	return (0); // temp
-
-	// 	t_stack	*node_pointer;
-	// int	i;
-
-	// i = 0;
-	// node_pointer = stack_a;
-	// while (stack_a)
-	// {
-	// 	if (ft_nbr_in_array(node_pointer->value, chunks->array, chunks->array_size))
-	// 		return (i);
-	// 	node_pointer = node_pointer->next;
-	// 	i++;
-	// }
-	// return (0); // temp
 }
 
 /* Finds index from stack to certain value - starting from bottom */
@@ -224,7 +210,7 @@ int		stack_in_ascending_order(t_stack *stack)
 }
 
 // int	find_correct_spot(t_stacks *stacks)
-int	find_correct_spot(int first_a_value, t_stack *stack, t_stacks *stacks)
+int	find_correct_spot(int first_a_value, t_stack *stack)
 {
 	int	correct_index;
 	int	i;
@@ -282,7 +268,7 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	if (stack_in_descending_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
 		return ;
 	/*  */	
-	correct_index = find_correct_spot(FIRST_A, STACK_B, stacks);
+	correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
 	// print_stacks(stacks);

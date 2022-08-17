@@ -14,7 +14,7 @@ NAME_1 = checker
 NAME_2 = push_swap
 
 CC = gcc
-FLAGS = #-Wall -Wextra -Werror
+FLAGS =# -Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
 CHECKER_SRCS = ./srcs/checker/checker.c ./srcs/handle_input.c ./srcs/operations.c ./srcs/list_functions.c	\
@@ -71,18 +71,19 @@ re: fclean all
 
 test:
 	./eval_tests/test.sh
-# test:
-# 	@echo "#### Compiling with test main.c ####"
-# 	@$(CC) $(FLAGS) $(HEADERS) ./srcs/operations.c ./srcs/tools.c $(LIB) ./eval_tests/main.c -o Push_swap
-# 	@echo "#### Directing output to output.txt ####"
-# 	@./Push_swap > output.txt
 
-leaks: re
+leaks_checker: re
 	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
-#	leaks -atExit -- ./a.out
+	leaks -atExit -- ./checker
 
-sanitize: re
+debug: re
+	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
+
+sanitize_checker: re
 	@$(CC) $(FLAGS) -g -fsanitize=address $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
+	
+sanitize_push_swap: re
+	@$(CC) $(FLAGS) -g -fsanitize=address $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
 
 
 .PHONY: all clean fclean re

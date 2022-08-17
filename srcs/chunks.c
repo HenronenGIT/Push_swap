@@ -12,32 +12,48 @@
 
 #include "push_swap.h"
 
-/*
-	Counts how many chunks there needs to be,
-	so sorting works as efficiently as possible.
-	Calls create_chunk_list() function which allocates t_chunks structure
-	linked list.
-	Calls allocate_chunk_arrays() functions which allocates t_chunks structure
-	int array.
-	Return: Linked list named as chunk_list.
-*/
-t_chunks	*create_chunks(t_stacks *stacks)
+static void	fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack)
 {
-	t_chunks	*chunk_list;
+	int			i;
+	int			j;
+	static int	last_position;
 
-	if (stacks->stack_size >= 500)
-		stacks->chunk_count = 11;
-	else if (stacks->stack_size >= 100)
-		stacks->chunk_count = 5;
-	else
-		stacks->chunk_count = 1;	// temp
-	chunk_list = create_chunk_list(stacks->chunk_count);
-	if (!chunk_list)
-		return (NULL);
-	allocate_chunk_arrays(chunk_list, stacks); //
-	// if (!allocate_chunk_arrays(chunk_list, stacks)) //
-		// return (NULL);
-	return (chunk_list);
+	i = 0;
+	j = last_position;
+	chunk->array_size = chunk_size;
+	while (i < chunk_size)
+	{
+		chunk->array[i] = sorted_stack[j];
+		i++;
+		j++;
+	}
+	last_position += i;
+	return ;
+}
+
+static int	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
+{
+	t_chunks	*temp;
+	int			chunk_size;
+	int			last_chunk_size;
+
+	temp = chunk_list;
+	chunk_size = stacks->stack_size / stacks->chunk_count;
+	last_chunk_size = chunk_size;
+	last_chunk_size += (stacks->stack_size - (stacks->chunk_count * chunk_size));
+	while (temp->next)
+	{
+		temp->array = (int *)malloc(sizeof(int) * chunk_size);
+		if (!temp->array)
+			return (0);
+		fill_chunk(temp, chunk_size, stacks->sorted_stack);
+		temp = temp->next;
+	}
+	temp->array = (int *)malloc(sizeof(int) * last_chunk_size);
+	if (!temp->array)
+		return (0);
+	fill_chunk(temp, last_chunk_size, stacks->sorted_stack);
+	return (1);
 }
 
 static t_chunks *create_chunk_list(int chunk_count)
@@ -66,47 +82,29 @@ static t_chunks *create_chunk_list(int chunk_count)
 	return (head);
 }
 
-static int	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
+/*
+	Counts how many chunks there needs to be,
+	so sorting works as efficiently as possible.
+	Calls create_chunk_list() function which allocates t_chunks structure
+	linked list.
+	Calls allocate_chunk_arrays() functions which allocates t_chunks structure
+	int array.
+	Return: Linked list named as chunk_list.
+*/
+t_chunks	*create_chunks(t_stacks *stacks)
 {
-	t_chunks	*temp;
-	int			chunk_size;
-	int			last_chunk_size;
+	t_chunks	*chunk_list;
 
-	temp = chunk_list;
-	// chunk_size = stacks->stack_size / stacks->chunk_count + 0.6;
-	chunk_size = stacks->stack_size / stacks->chunk_count;
-	last_chunk_size = chunk_size;
-	last_chunk_size += (stacks->stack_size - (stacks->chunk_count * chunk_size));
-	while (temp->next)
-	{
-		temp->array = (int *)malloc(sizeof(int) * chunk_size);
-		if (!temp->array)
-			return (0);
-		fill_chunk(temp, chunk_size, stacks->sorted_stack);
-		temp = temp->next;
-	}
-	temp->array = (int *)malloc(sizeof(int) * last_chunk_size);
-	if (!temp->array)
-		return (0);
-	fill_chunk(temp, last_chunk_size, stacks->sorted_stack);
-	return (1);
-}
-
-static void	fill_chunk(t_chunks *chunk, int chunk_size, int *sorted_stack)
-{
-	static int	last_position;
-	int	i;
-	int	j;
-
-	i = 0;
-	j = last_position; // Can cause problems on first run if last_position is not 0
-	chunk->array_size = chunk_size;
-	while (i < chunk_size)
-	{
-		chunk->array[i] = sorted_stack[j];
-		i++;
-		j++;
-	}
-	last_position += i;
-	return ;
+	if (stacks->stack_size >= 500)
+		stacks->chunk_count = 11;
+	else if (stacks->stack_size >= 100)
+		stacks->chunk_count = 5;
+	else
+		stacks->chunk_count = 1;	// temp
+	chunk_list = create_chunk_list(stacks->chunk_count);
+	if (!chunk_list)
+		return (NULL);
+	if (!allocate_chunk_arrays(chunk_list, stacks))
+		return (NULL);
+	return (chunk_list);
 }

@@ -12,6 +12,18 @@
 
 #include "push_swap.h"
 
+void	free_all_lists(t_stacks **stacks, t_instruction **instructions)
+{
+	// t_stack	*iterator;
+	void	*iterator;
+
+	iterator = (t_stack *)(*stacks)->stack_a;
+	//while (iterator)
+	//{
+//
+	//}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks; 
@@ -28,19 +40,14 @@ int	main(int argc, char **argv)
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
 	read_instructions(&instructions);
 	execute_instructions(instructions, &stacks);
-	print_stacks(stacks); // TEMP
 	if (stack_in_order(stacks))
+	{
 		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
-	// check_stack_order(stacks);
-
-	// free(valid_numbers);
-	// while (stack_a)
-	// {
-	// 	free(stack_a);
-	// 	stack_a = stack_a->next;
-	// }
-	// free(stack_b);
+		free_all_lists(&stacks, &instructions);
+		// exit(0);
+	}
+	ft_printf("KO\n");
+	free_all_lists(&stacks, &instructions);
+	// exit(1);
 	return (0);
 }

@@ -94,7 +94,6 @@ int	stack_in_order(t_stacks *stacks)
 
 	if (stacks->stack_b != NULL)
 		return (0);
-		// panic("KO\n");
 	node = stacks->stack_a;
 	while (node->next)
 	{
