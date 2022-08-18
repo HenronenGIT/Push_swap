@@ -12,11 +12,6 @@
 
 #include "push_swap.h"
 
-// void	output_instruction()
-// {
-
-// }
-
 void	swap(t_stacks **stacks, int decider, int output)
 {
 	int		temp;
@@ -32,8 +27,6 @@ void	swap(t_stacks **stacks, int decider, int output)
 	temp = stack->value;
 	stack->value = stack->next->value;
 	stack->next->value = temp;
-	// if (output)
-		// output_instruction();
 	if (output && decider == A)
 		ft_putstr("sa\n");
 	else if (output && decider == B)
@@ -45,16 +38,12 @@ void	swap(t_stacks **stacks, int decider, int output)
 	return ;
 }
 
-// void	push(t_stacks **stacks, int decider)
 void	push(t_stacks **stacks, int decider, int output)
 {
 	t_stack	*new_head;
 	t_stack	**source_stack;
 	t_stack	**dest_stack;
 
-	// if (output && decider == A)
-	// 	ft_putstr("pa\n");
-	// ft_putstr("pb\n");
 	if (decider == A)
 	{
 		dest_stack = &(*stacks)->stack_a;
@@ -99,27 +88,21 @@ void	rotate(t_stacks **stacks, int decider, int output)
 	while (tail_ptr->next)
 		tail_ptr = tail_ptr->next;
 	tail_ptr->next = (*stack);
-
-	// tail_ptr->back = NULL;
-	
 	(*stack)->next = NULL;
-
 	(*stack)->back = tail_ptr;
 	(*stack) = new_head;
 	(*stack)->back = NULL;
 	if (output && decider == A)// Mayby to own fucntion to save space
 		ft_putstr("ra\n");
-	if (output && decider == B)
+	else if (output && decider == B)
 		ft_putstr("rb\n");
-	if (decider == BOTH)
-	{
+	else if (output && decider == BOTH)
 		ft_putstr("rr\n");
+	if (decider == BOTH)
 		rotate(stacks, B, 0);
-	}
 	return ;
 }
 
-// void	reverse_rotate(t_stacks **stacks, int decider)
 void	reverse_rotate(t_stacks **stacks, int decider, int output)
 {
 	t_stack	*second_last;
@@ -145,10 +128,9 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 		ft_putstr("rra\n");
 	else if (output && decider == B)
 		ft_putstr("rrb\n");
-	if (decider == BOTH)
-	{
+	else if (output && decider == BOTH)
 		ft_putstr("rrr\n");
+	if (decider == BOTH)
 		reverse_rotate(stacks, B, 0);
-	}
 	return ;
 }
