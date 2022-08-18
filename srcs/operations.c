@@ -12,7 +12,11 @@
 
 #include "push_swap.h"
 
-// void	swap(t_stacks **stacks, int decider)
+// void	output_instruction()
+// {
+
+// }
+
 void	swap(t_stacks **stacks, int decider, int output)
 {
 	int		temp;
@@ -28,15 +32,16 @@ void	swap(t_stacks **stacks, int decider, int output)
 	temp = stack->value;
 	stack->value = stack->next->value;
 	stack->next->value = temp;
+	// if (output)
+		// output_instruction();
 	if (output && decider == A)
 		ft_putstr("sa\n");
 	else if (output && decider == B)
 		ft_putstr("sb\n");
-	if (decider == BOTH)
-	{
+	else if (output && decider == BOTH)
 		ft_putstr("ss\n");
+	if (decider == BOTH)
 		swap(stacks, B, 0);
-	}
 	return ;
 }
 
@@ -73,7 +78,7 @@ void	push(t_stacks **stacks, int decider, int output)
 		(*source_stack)->back = NULL; // NEW
 	if (output && decider == A)
 		ft_putstr("pa\n");
-	else
+	else if (output && decider == B)
 		ft_putstr("pb\n");
 }
 
