@@ -14,36 +14,44 @@ FAIL_MSG="[FAIL]"
 # Files
 test_5="./test_files/5_values.txt"
 test_100="./test_files/100_values.txt"
+test_500="./test_files/500_values.txt"
 
 # Values for scores
 max_5=12
 kudos_count=9
+
 max_100=1500
 two_points_100=1300
 three_points_100=1100
 four_points_100=900
 five_points_100=700
 
-# 5 Integer tests
-# echo "${PURPLE}5 INTEGER TEST${OFF}"
-# sleep 2
-# while IFS= read -r line;
-# 	do operation_count=$(../push_swap "$line" | wc -l | xargs);
-# 	operation_count=$((operation_count));
+zero_500=11500
+one_500=11500
+two_500=10000
+three_500=8500
+four_500=5500
 
-# 	if [ $operation_count -gt $max_5 ];
-# 	then
-# 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
-# 	elif [ $operation_count -lt $kudos_count ];
-# 	then
-# 		echo "${GREEN} ${PASS_MSG} + ${CYAN}KUDOS -> ${OFF}$operation_count"
-# 	else
-# 		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count"
-# 	fi
-# done < $test_5
+# 5 Integer tests
+echo "${PURPLE}[5] INTEGER TEST${OFF}"
+sleep 2
+while IFS= read -r line;
+	do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	operation_count=$((operation_count));
+
+	if [ $operation_count -gt $max_5 ];
+	then
+		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
+	elif [ $operation_count -lt $kudos_count ];
+	then
+		echo "${GREEN} ${PASS_MSG} + ${CYAN}KUDOS -> ${OFF}$operation_count"
+	else
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count"
+	fi
+done < $test_5
 
 # 100 Integer tests
-echo "${PURPLE}100 INTEGER TEST${OFF}"
+echo "${PURPLE}[100] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
 	do operation_count=$(../push_swap "$line" | wc -l | xargs);
@@ -63,3 +71,25 @@ while IFS= read -r line;
 		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
 	fi
 done < $test_100
+
+# 500 Integer tests
+echo "${PURPLE}[500] INTEGER TEST${OFF}"
+sleep 2
+while IFS= read -r line;
+	do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	operation_count=$((operation_count));
+
+	if [ $operation_count -ge $zero_500 ];then
+		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
+	elif [ $operation_count -lt $five_500 ];then
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
+	elif [ $operation_count -lt $four_500 ];then
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${GREEN}4${OFF}"
+	elif [ $operation_count -lt $three_500 ];then
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}3${OFF}"
+	elif [ $operation_count -lt $two_500 ];then
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}2${OFF}"
+	else
+		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
+	fi
+done < $test_500
