@@ -15,7 +15,7 @@
 void	panic(char *error_message)
 {
 	ft_puterror(error_message);
-	exit(0);
+	exit(1);
 }
 
 void	print_stacks(t_stacks *stacks)

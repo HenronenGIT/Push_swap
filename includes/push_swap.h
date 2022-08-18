@@ -60,12 +60,12 @@ typedef struct s_instruction
 	struct s_instruction	*next;
 }	t_instruction;
 
-char		**explode_arguments(int argc, char **argv);
-int			*check_input(char **arguments);
-t_stacks	*create_stacks(int *ints, int arr_len, t_stacks *stacks);
-void		read_instructions(t_instruction **instructions);
-void		execute_instructions(t_instruction *instructions, t_stacks **stacks);
-int			stack_in_order(t_stacks *stacks);
+char			**explode_arguments(int argc, char **argv);
+int				*check_input(char **arguments);
+t_stacks		*create_stacks(int *ints, int arr_len, t_stacks *stacks);
+t_instruction	*read_instructions(t_instruction *instructions);
+void			execute_instructions(t_instruction *instructions, t_stacks **stacks);
+int				stack_in_order(t_stacks *stacks);
 
 t_chunks		*create_chunks(t_stacks *stacks);
 // static t_chunks *create_chunk_list(int chunk_count);

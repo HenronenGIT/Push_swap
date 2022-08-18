@@ -17,9 +17,9 @@
 				"-I./includes",
 				// "-I./",
 				/* Debugging checker */
-				// "${workspaceFolder}/srcs/checker/checker.c/*.c",
+				"${workspaceFolder}/srcs/checker/checker.c",
 				/* Debugging push_swap */
-				"${workspaceFolder}/srcs/push_swap/*.c", // Debugging push_swap
+				// "${workspaceFolder}/srcs/push_swap/*.c", // Debugging push_swap
 				
 				//"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
 				// "${workspaceFolder}/libft/*.c", // For debugging lib functions

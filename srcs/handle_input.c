@@ -19,9 +19,15 @@
 */
 char	**explode_arguments(int argc, char **argv)
 {
+	char **exploded_arguments;
+
+	exploded_arguments = NULL;
 	if (argc >= 2 && ft_isnumber(argv[0]))
 		return (argv);
-	return (ft_strsplit(argv[0], ' '));
+	exploded_arguments = ft_strsplit(argv[0], ' ');
+	if (!exploded_arguments)
+		exit(1);
+	return (exploded_arguments);
 }
 
 /*
@@ -38,7 +44,7 @@ int	*check_input(char **arguments)
 	i = 0;
 	valid_numbers = (int *)malloc(sizeof(int) * (ft_count_pointers(arguments)));
 	if (!valid_numbers)
-		return (NULL);
+		exit(1);
 	while (arguments[i])
 	{
 		if (!ft_isnumber(arguments[i]))
@@ -68,15 +74,15 @@ t_stacks	*create_stacks(int *ints, int array_len, t_stacks *stacks)
 	i = 0;
 	stacks = (t_stacks *)malloc(sizeof(t_stacks));
 	if (!stacks)
-		return (NULL);
+		exit(1);
 	stacks->stack_a = create_node(ints[i++]);
 	if (!stacks->stack_a)
-		return (NULL);
+		exit(1);
 	while (i < array_len)
 	{
 		node = create_node(ints[i]);
 		if (!node)
-			return (NULL);
+			exit(1);
 		node_add_back(&stacks->stack_a, node);
 		i += 1;
 	}

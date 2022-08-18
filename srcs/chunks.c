@@ -103,8 +103,8 @@ t_chunks	*create_chunks(t_stacks *stacks)
 		stacks->chunk_count = 1;	// temp
 	chunk_list = create_chunk_list(stacks->chunk_count);
 	if (!chunk_list)
-		return (NULL);
+		exit(1);
 	if (!allocate_chunk_arrays(chunk_list, stacks))
-		return (NULL);
+		exit(1);
 	return (chunk_list);
 }

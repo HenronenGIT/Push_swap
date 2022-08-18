@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	argv = explode_arguments(argc, argv); // Might cause memory leak?
 	valid_numbers = check_input(argv);
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
-	read_instructions(&instructions);
+	instructions = read_instructions(instructions);
 	execute_instructions(instructions, &stacks);
 	if (stack_in_order(stacks))
 	{
@@ -46,7 +46,8 @@ int	main(int argc, char **argv)
 		free_all_lists(&stacks, &instructions);
 		// exit(0);
 	}
-	ft_printf("KO\n");
+	else
+		ft_printf("KO\n");
 	free_all_lists(&stacks, &instructions);
 	// exit(1);
 	return (0);
