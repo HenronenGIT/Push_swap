@@ -1,0 +1,45 @@
+./eval_tests/test.sh
+===== [0;31m5 values #1[0m =====
+[1;32mOperation count =>[0m      15
+===== [0;31m5 values #2[0m =====
+[1;32mOperation count =>[0m      16
+===== [0;31m5 values #3[0m =====
+[1;32mOperation count =>[0m      15
+===== [0;31m5 values #4[0m =====
+[1;32mOperation count =>[0m      12
+===== [0;31m5 values #5[0m =====
+[1;32mOperation count =>[0m      16
+
+===== [0;31m#1 10 values[0m =====
+[1;32mOperation count =>[0m      40
+===== [0;31m#2 10 values[0m =====
+[1;32mOperation count =>[0m      42
+===== [0;31m#3 10 values[0m =====
+[1;32mOperation count =>[0m      39
+===== [0;31m#4 10 values[0m =====
+[1;32mOperation count =>[0m      38
+===== [0;31m#5 10 values[0m =====
+[1;32mOperation count =>[0m      31
+===== [0;31m#5 10 values[0m =====
+[1;32mOperation count =>[0m      35
+===== [0;31m#5 10 values[0m =====
+[1;32mOperation count =>[0m      34
+
+===== [0;31m50 values[0m =====
+[1;32mOperation count =>[0m     480
+
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m     756
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m    1019
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m     745
+===== [0;31m100 values[0m =====
+[1;32mOperation count =>[0m     881
+
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m    7527
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m    7361
+===== [0;31m500 values[0m =====
+[1;32mOperation count =>[0m    7511

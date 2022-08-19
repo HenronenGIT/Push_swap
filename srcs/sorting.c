@@ -174,26 +174,6 @@ int		stack_in_descending_order(t_stack *stack)
 	// ft_putstr("OK\n");
 }
 
-// int	find_place_from_b(t_stacks *stacks)
-// {
-// 	t_stack	*node_ptr;
-// 	int	rotations_needed;
-
-// 	rotations_needed = 1;
-// 	node_ptr = STACK_B;
-// 	if (!node_ptr || !node_ptr->next)
-// 		return (0);
-// 	while (STACK_B)
-// 	{
-// 		if (FIRST_A > node_ptr->value && node_ptr->next && FIRST_A < node_ptr->next->value)
-// 			return (rotations_needed);
-// 		else
-// 			node_ptr = node_ptr->next;
-// 		rotations_needed += 1;
-// 	}
-// 	return (rotations_needed);
-// }
-
 int		stack_in_ascending_order(t_stack *stack)
 {
 	t_stack	*node;
@@ -209,39 +189,24 @@ int		stack_in_ascending_order(t_stack *stack)
 	return (1);
 }
 
-// int	find_correct_spot(t_stacks *stacks)
 int	find_correct_spot(int first_a_value, t_stack *stack)
 {
-	int	correct_index;
 	int	i;
 	int	last_value;
+	int	correct_index;
 
-	last_value = 0;
 	i = 0;
+	last_value = 0;
 	correct_index = 0;
 	while (stack)
 	{
+		// if (first_a_value > stack->value && last_value < stack->value
+		// ||	first_a_value > stack->value && stack->next && first_a_value < stack->next->value )
 		if (first_a_value > stack->value && last_value < stack->value)
 		{
 			correct_index = i;
 			last_value = stack->value;
 		}
-
-
-		// if (first_a_value > stack->value && stack->next && stack->value < stack->next->value && first_a_value < stack->next->value)
-		// {
-		// 	correct_index = i;
-		// 	last_value = stack->value;
-		// }
-		// else if (first_a_value > stack->value && stack->next && first_a_value > stack->next->value && stack->value > last_value)
-		// 	correct_index = i;
-		// else if (STACK_A->next && smallest_in_stack(STACK_A, FIRST_A) && biggest_in_stack(STACK_B, stack->value))
-		// 	return (i);
-		// else if (first_a_value < FIRST_B && stack->next && first_a_value < stack->next->value && last_value < stack->value)
-		// {
-		// 	correct_index = i;
-		// 	last_value = stack->value;
-		// }
 		i += 1;
 		stack = stack->next;
 	}
@@ -250,31 +215,23 @@ int	find_correct_spot(int first_a_value, t_stack *stack)
 
 void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
-	// Trying first to sort stack to ASCENDING ORDER - like in the guide
 	int	correct_index;
 
+	// print_stacks(stacks);
 	correct_index = 0;
 	/* Already in correct spot function */
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;	
-	// if (FIRST_A < FIRST_B && FIRST_A > last_value(STACK_B))
-		// return ;
-	if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
-		return ;
-	// if (stack_in_ascending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
-		// return ;
-	if (stack_in_descending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
-		return ;
-	if (stack_in_descending_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
-		return ;
-	/*  */	
+	//if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
+	//	return ;
+	//if (stack_in_descending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
+	//	return ;
+	//if (stack_in_descending_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
+	//	return ;
 	correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
 	// print_stacks(stacks);
-	//rotate(&stacks, B, 1);
-	//print_stacks(stacks);
-	//rotate_b_to_correct_spot(stacks);
 }
 
 void	push_all_to_a(t_stacks *stacks)
@@ -321,6 +278,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 			else
 				move_value_to_top(option_2_index, stacks, A);
 			rotate_b_to_correct_spot(stacks);
+			// print_stacks(stacks);
 			push(&stacks, B, 1);
 		}
 		else

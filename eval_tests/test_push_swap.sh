@@ -27,10 +27,10 @@ four_points_100=900
 five_points_100=700
 
 zero_500=11500
-one_500=11500
 two_500=10000
 three_500=8500
-four_500=5500
+four_500=7000
+five_500=5500
 
 # 5 Integer tests
 echo "${PURPLE}[5] INTEGER TEST${OFF}"
