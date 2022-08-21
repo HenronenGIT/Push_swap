@@ -189,23 +189,51 @@ int		stack_in_ascending_order(t_stack *stack)
 	return (1);
 }
 
+int	fetch_biggest_index(t_stack *stack)
+{
+	int	biggest;
+	int	index_of_biggest;
+	int	index;
+
+	index = 0;
+	index_of_biggest = 0;
+	biggest = stack->value;
+	while (stack)
+	{
+		if (stack->value > biggest)
+		{
+			biggest = stack->value;
+			index_of_biggest = index;
+		}
+		index += 1;
+		stack = stack->next;
+	}
+	return (index_of_biggest);
+}
+
 int	find_correct_spot(int first_a_value, t_stack *stack)
 {
 	int	i;
-	int	last_value;
+	int	*last_value_2;
 	int	correct_index;
+	int	last_value;
 
+	last_value_2 = NULL;
 	i = 0;
+	// last_value = stack->value;
 	last_value = 0;
 	correct_index = 0;
+	if (smallest_in_stack(stack, first_a_value)) //
+		return(fetch_biggest_index(stack)); //
 	while (stack)
 	{
-		// if (first_a_value > stack->value && last_value < stack->value
-		// ||	first_a_value > stack->value && stack->next && first_a_value < stack->next->value )
-		if (first_a_value > stack->value && last_value < stack->value)
+		// if (first_a_value > stack->value && last_value <= stack->value)
+		if (first_a_value > stack->value &&
+			(!last_value_2 || last_value_2 && *last_value_2 <= stack->value))
 		{
 			correct_index = i;
-			last_value = stack->value;
+			// last_value = stack->value;
+			last_value_2 = (&stack->value);
 		}
 		i += 1;
 		stack = stack->next;
@@ -217,7 +245,6 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	int	correct_index;
 
-	// print_stacks(stacks);
 	correct_index = 0;
 	/* Already in correct spot function */
 	if (!stacks->stack_b || !stacks->stack_b->next)
@@ -231,7 +258,6 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
-	// print_stacks(stacks);
 }
 
 void	push_all_to_a(t_stacks *stacks)
@@ -260,11 +286,6 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	int	option_1_index;
 	int	option_2_index;
 
-	int	debug_counter; //temp
-
-	debug_counter = 0;
-
-	// mayby need iterator for chunks so we dont lose head on linked list
 	while (chunks)
 	{
 		// print_stacks(stacks);
@@ -283,10 +304,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		}
 		else
 			chunks = chunks->next;
-		// print_stacks(stacks);
-		debug_counter += 1;
 	}
-		// print_stacks(stacks);
 	while (STACK_B)
 	{
 		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
@@ -294,5 +312,4 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		else
 			push(&stacks, A, 1);
 	}
-	// print_stacks(stacks);
 }

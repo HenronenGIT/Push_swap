@@ -12,11 +12,14 @@ PASS_MSG="[PASS]"
 FAIL_MSG="[FAIL]"
 
 # Files
+test_3="./test_files/3_values.txt"
 test_5="./test_files/5_values.txt"
 test_100="./test_files/100_values.txt"
 test_500="./test_files/500_values.txt"
 
 # Values for scores
+max_3=3
+
 max_5=12
 kudos_count=9
 
@@ -31,6 +34,20 @@ two_500=10000
 three_500=8500
 four_500=7000
 five_500=5500
+
+# 3 Integer tests
+echo "${PURPLE}[3] INTEGER TEST${OFF}"
+sleep 2
+while IFS= read -r line;
+	do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	operation_count=$((operation_count));
+
+	if [ $operation_count -le $max_3 ]; then
+		echo "${GREEN} ${PASS_MSG} + -> ${OFF}$operation_count"
+	else
+		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
+	fi
+done < $test_3
 
 # 5 Integer tests
 echo "${PURPLE}[5] INTEGER TEST${OFF}"

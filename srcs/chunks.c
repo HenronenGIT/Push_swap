@@ -45,15 +45,15 @@ static int	allocate_chunk_arrays(t_chunks *chunk_list, t_stacks *stacks)
 	{
 		temp->array = (int *)malloc(sizeof(int) * chunk_size);
 		if (!temp->array)
-			return (0);
+			return (0); // change to exit
 		fill_chunk(temp, chunk_size, stacks->sorted_stack);
 		temp = temp->next;
 	}
 	temp->array = (int *)malloc(sizeof(int) * last_chunk_size);
 	if (!temp->array)
-		return (0);
+		return (0); // change to exit
 	fill_chunk(temp, last_chunk_size, stacks->sorted_stack);
-	return (1);
+	return (1); //mayby no need to return anything
 }
 
 static t_chunks *create_chunk_list(int chunk_count)

@@ -53,9 +53,30 @@ int	main(int argc, char **argv)
 	/* if statements for smaller algos */
 
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
+
+	/* Printed sorted tab */
+		// ft_print_tab(stacks->sorted_stack, stacks->stack_size);
+		// exit (0);
+	/* Printed sorted tab */
+
 	if (stack_in_order(stacks))
 		exit(0);
 	chunks = create_chunks(stacks);
+
+	/* Print chunk arrays */
+	// ft_print_tab(chunks->array, 20);
+	// ft_putchar('\n');
+	// ft_print_tab(chunks->next->array, chunks->array_size);
+	// ft_putchar('\n');
+	// ft_print_tab(chunks->next->next->next->next->array, chunks->array_size);
+	// ft_putchar('\n');
+	// exit (0);
+	/* Print chunk arrays */
+
+	// Jump table possible ?
+	if (stacks->stack_size == 3)
+		smallest_sort(stacks, chunks);
+
 	sort_stack(stacks, chunks);
 	free(valid_numbers);
 	free_all_lists(&stacks, &chunks);

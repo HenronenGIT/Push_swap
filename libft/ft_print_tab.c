@@ -17,9 +17,10 @@ void	ft_print_tab(int *tab, size_t tab_size)
 	size_t	i;
 
 	i = 0;
-	while (i <= tab_size)
+ 	while (i < tab_size)
 	{
 		ft_putnbr(tab[i]);
+		ft_putchar('\n');
 		i += 1;
 	}
 	return ;

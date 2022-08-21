@@ -22,7 +22,7 @@
 				"${workspaceFolder}/srcs/push_swap/*.c", // Debugging push_swap
 				
 				//"${workspaceFolder}/eval_tests/main.c", //Debugging operation functions
-				// "${workspaceFolder}/libft/*.c", // For debugging lib functions
+				"${workspaceFolder}/libft/*.c", // For debugging lib functions
 				"${workspaceFolder}/srcs/*.c",
                "-o",
                "${workspaceFolder}/${workspaceFolderBasename}",
