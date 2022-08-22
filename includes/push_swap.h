@@ -86,6 +86,19 @@ void		sort_stack(t_stacks *stacks, t_chunks *chunks);
 void		sort_3_stack(t_stacks *stacks);
 void		sort_5_stack(t_stacks *stacks);
 
+int		stack_in_ascending_order(t_stack *stack);
+int		stack_in_descending_order(t_stack *stack);
+int		biggest_in_stack(t_stack *stack, int value);
+int		smallest_in_stack(t_stack *stack, int value);
+int		find_correct_spot_from_a(int first_a_value, t_stack *stack);
+void	move_value_to_top(int movable_index, t_stacks *stacks, int decider);
+int		smallest_closer_to_top(t_stack *stack, int stack_size);
+
+
+
+
+
+
 
 // static void	free_all_lists(t_stacks **stacks, t_chunks **chunks);
 
