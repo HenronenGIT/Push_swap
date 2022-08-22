@@ -281,6 +281,36 @@ int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 	return (0);
 }
 
+void	sort_3_stack(t_stacks *stacks)
+{
+	if (stack_in_descending_order(stacks->stack_a))
+	{
+		swap(&stacks, A, 1);
+		reverse_rotate(&stacks, A, 1);
+	}
+	else if (biggest_in_stack(stacks->stack_a, stacks->stack_a->value))
+		rotate(&stacks, A, 1);
+	else if (stacks->stack_a->value > stacks->stack_a->next->value)
+		swap(&stacks, A, 1);
+	else if (smallest_in_stack(stacks->stack_a, stacks->stack_a->value))
+	{
+		swap(&stacks, A, 1);
+		rotate(&stacks, A, 1);
+	}
+	else if (biggest_in_stack(stacks->stack_a, stacks->stack_a->next->value))
+		reverse_rotate(&stacks, A, 1);
+}
+
+void sort_5_stack(t_stacks *stacks)
+{
+	print_stacks(stacks);
+	// if (stacks->stack_b->value < stacks->stack_a->value &&
+		// stacks->stack_b->value > stacks->stack_a->next->value)
+	find_correct_spot(stacks->stack_b->value, )
+		rotate(&stacks, A, 1);
+	sort_5_stack(stacks);
+}
+
 void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 {
 	int	option_1_index;

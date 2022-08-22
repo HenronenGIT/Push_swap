@@ -75,9 +75,16 @@ int	main(int argc, char **argv)
 
 	// Jump table possible ?
 	if (stacks->stack_size == 3)
-		smallest_sort(stacks, chunks);
-
-	sort_stack(stacks, chunks);
+		sort_3_stack(stacks);
+	else if (stacks->stack_size == 5)
+	{	
+		push(&stacks, B, 1);
+		push(&stacks, B, 1);
+		sort_3_stack(stacks);
+		sort_5_stack(stacks);
+	}
+	else
+		sort_stack(stacks, chunks);
 	free(valid_numbers);
 	free_all_lists(&stacks, &chunks);
 }

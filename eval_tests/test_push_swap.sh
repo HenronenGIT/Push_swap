@@ -39,11 +39,12 @@ five_500=5500
 echo "${PURPLE}[3] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	operation_count=$((operation_count));
-
-	if [ $operation_count -le $max_3 ]; then
-		echo "${GREEN} ${PASS_MSG} + -> ${OFF}$operation_count"
+	do output=$(../push_swap "$line" | ./checker $line);
+		operation_count=$(../push_swap "$line" | wc -l | xargs);
+	if [ $output == "KO" ]; then
+		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
+	elif [ $operation_count -le $max_3 ]; then
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count"
 	else
 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
 	fi
@@ -53,10 +54,13 @@ done < $test_3
 echo "${PURPLE}[5] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	operation_count=$((operation_count));
-
-	if [ $operation_count -gt $max_5 ];
+	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	# operation_count=$((operation_count));
+	do output=$(../push_swap "$line" | ./checker $line);
+		operation_count=$(../push_swap "$line" | wc -l | xargs);
+	if [ $output == "KO" ]; then
+		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
+	elif [ $operation_count -gt $max_5 ];
 	then
 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
 	elif [ $operation_count -lt $kudos_count ];
