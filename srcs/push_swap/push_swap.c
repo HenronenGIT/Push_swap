@@ -82,9 +82,11 @@ int	main(int argc, char **argv)
 		push(&stacks, B, 1);
 		sort_3_stack(stacks);
 		sort_5_stack(stacks);
+
 	}
 	else
 		sort_stack(stacks, chunks);
+	// print_stacks(stacks);
 	free(valid_numbers);
 	free_all_lists(&stacks, &chunks);
 }

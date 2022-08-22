@@ -12,6 +12,39 @@
 
 #include "push_swap.h"
 
+int	fetch_smallest_index(t_stack *stack)
+{
+	int	smallest;
+	int	index_of_smallest;
+	int	index;
+
+	index = 0;
+	index_of_smallest = 0;
+	smallest = stack->value;
+	while (stack)
+	{
+		if (stack->value < smallest)
+		{
+			smallest = stack->value;
+			index_of_smallest = index;
+		}
+		index += 1;
+		stack = stack->next;
+	}
+	return (index_of_smallest);
+}
+
+int smallest_closer_to_top(t_stack *stack, int stack_size)
+{
+	int index_of_smallest;
+	int i;
+
+	i = 0;
+	index_of_smallest = fetch_smallest_index(stack);
+	if (index_of_smallest < (stack_size / 2))
+		return (1);
+	return (0);
+}
 /* Finds index from stack to certain value - starting from top */
 int	fetch_index_from_top(t_stack *stack_a, t_chunks *chunks)
 {
@@ -97,7 +130,8 @@ void	move_value_to_top(int movable_index, t_stacks *stacks, int decider)
 	else
 		stack = stacks->stack_b;
 	middle_point = list_size(stack) / 2;
-	if (movable_index < middle_point)
+	// if (movable_index < middle_point)
+	if (movable_index <= middle_point)
 	{
 		moves_needed = movable_index;
 		while (moves_needed)
@@ -140,9 +174,9 @@ static int	smallest_in_stack(t_stack *stack, int value)
 
 static int	biggest_in_stack(t_stack *stack, int value)
 {
-	while (stack->next)
+	while (stack)
 	{
-		if (value < stack->next->value)
+		if (value < stack->value)
 			return (0);
 		stack = stack->next;
 	}
@@ -211,30 +245,56 @@ int	fetch_biggest_index(t_stack *stack)
 	return (index_of_biggest);
 }
 
+
+
 int	find_correct_spot(int first_a_value, t_stack *stack)
 {
 	int	i;
-	int	*last_value_2;
+	int	*last_value;
 	int	correct_index;
-	int	last_value;
 
-	last_value_2 = NULL;
 	i = 0;
-	// last_value = stack->value;
-	last_value = 0;
+	last_value = NULL;
 	correct_index = 0;
-	if (smallest_in_stack(stack, first_a_value)) //
-		return(fetch_biggest_index(stack)); //
+	if (smallest_in_stack(stack, first_a_value))
+		return(fetch_biggest_index(stack));
 	while (stack)
 	{
-		// if (first_a_value > stack->value && last_value <= stack->value)
-		if (first_a_value > stack->value &&
-			(!last_value_2 || last_value_2 && *last_value_2 <= stack->value))
-		{
-			correct_index = i;
-			// last_value = stack->value;
-			last_value_2 = (&stack->value);
-		}
+		// if (first_a_value > stack->value &&
+		// (!last_value || last_value && (*last_value <= stack->value)))
+		if (first_a_value > stack->value)
+			if ((last_value && *last_value <= stack->value) || !last_value)
+			{
+				correct_index = i;
+				last_value = (&stack->value);
+			}
+		i += 1;
+		stack = stack->next;
+	}
+	return (correct_index);
+}
+
+int	find_correct_spot_from_a(int first_a_value, t_stack *stack)
+{
+	int	i;
+	int	*last_value;
+	int	correct_index;
+
+	i = 0;
+	last_value = NULL;
+	correct_index = 0;
+	if (biggest_in_stack(stack, first_a_value))
+		return(fetch_smallest_index(stack));
+	while (stack)
+	{
+		// if (first_a_value > stack->value &&
+		// (!last_value || last_value && (*last_value <= stack->value)))
+		if (first_a_value < stack->value)
+			if ((last_value && *last_value >= stack->value) || !last_value)
+			{
+				correct_index = i;
+				last_value = (&stack->value);
+			}
 		i += 1;
 		stack = stack->next;
 	}
@@ -249,12 +309,6 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	/* Already in correct spot function */
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;	
-	//if (FIRST_A < FIRST_B && smallest_in_stack(STACK_B, FIRST_B))
-	//	return ;
-	//if (stack_in_descending_order(STACK_B) && FIRST_A > FIRST_B && FIRST_A > last_value(STACK_B))
-	//	return ;
-	//if (stack_in_descending_order(STACK_B) && FIRST_A > last_value(STACK_B) && smallest_in_stack(STACK_B, FIRST_B))
-	//	return ;
 	correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
@@ -263,7 +317,12 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 void	push_all_to_a(t_stacks *stacks)
 {
 	while (STACK_B)
-		push(&stacks, A, 1);
+	{
+		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
+			reverse_rotate(&stacks, B, 1);
+		else
+			push(&stacks, A, 1);
+	}
 }
 
 // int	stack_contains_chunk_value(t_stack *stack_a, int *chunk_array, int array_size)
@@ -283,6 +342,8 @@ int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 
 void	sort_3_stack(t_stacks *stacks)
 {
+	if (stack_in_ascending_order(stacks->stack_a))
+		return ;
 	if (stack_in_descending_order(stacks->stack_a))
 	{
 		swap(&stacks, A, 1);
@@ -303,11 +364,25 @@ void	sort_3_stack(t_stacks *stacks)
 
 void sort_5_stack(t_stacks *stacks)
 {
-	print_stacks(stacks);
-	// if (stacks->stack_b->value < stacks->stack_a->value &&
-		// stacks->stack_b->value > stacks->stack_a->next->value)
-	find_correct_spot(stacks->stack_b->value, )
-		rotate(&stacks, A, 1);
+	int	rotation_count;
+
+	rotation_count = 0;
+	// print_stacks(stacks);
+	rotation_count = find_correct_spot_from_a(stacks->stack_b->value, stacks->stack_a);
+	move_value_to_top(rotation_count, stacks, A);
+
+	push(&stacks, A, 1);
+	if (!stacks->stack_b)
+	{
+			// print_stacks(stacks);
+		if (smallest_closer_to_top(stacks->stack_a, stacks->stack_size))
+			while (!smallest_in_stack(stacks->stack_a, stacks->stack_a->value))
+				rotate(&stacks, A, 1);
+		else
+			while (!smallest_in_stack(stacks->stack_a, stacks->stack_a->value))
+				reverse_rotate(&stacks, A, 1);
+		return ;
+	}
 	sort_5_stack(stacks);
 }
 
@@ -318,7 +393,6 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 
 	while (chunks)
 	{
-		// print_stacks(stacks);
 
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
@@ -329,17 +403,17 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 			else
 				move_value_to_top(option_2_index, stacks, A);
 			rotate_b_to_correct_spot(stacks);
-			// print_stacks(stacks);
 			push(&stacks, B, 1);
 		}
 		else
 			chunks = chunks->next;
 	}
-	while (STACK_B)
-	{
-		if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
-			reverse_rotate(&stacks, B, 1);
-		else
-			push(&stacks, A, 1);
-	}
+	push_all_to_a(stacks);
+	// while (STACK_B)
+	// {
+	// 	if (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
+	// 		reverse_rotate(&stacks, B, 1);
+	// 	else
+	// 		push(&stacks, A, 1);
+	// }
 }

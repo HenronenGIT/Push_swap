@@ -62,12 +62,13 @@ while IFS= read -r line;
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
 	elif [ $operation_count -gt $max_5 ];
 	then
-		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count"
+		echo "${RED}${FAIL_MSG} -> ${OFF}$operation_count"
 	elif [ $operation_count -lt $kudos_count ];
 	then
-		echo "${GREEN} ${PASS_MSG} + ${CYAN}KUDOS -> ${OFF}$operation_count"
+		echo "${GREEN}${CYAN}[KUDOS] -> ${OFF}$operation_count"
+		# echo "${GREEN}${PASS_MSG} + ${CYAN}KUDOS -> ${OFF}$operation_count"
 	else
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count"
 	fi
 done < $test_5
 
