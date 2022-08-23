@@ -106,8 +106,10 @@ void	rotate(t_stacks **stacks, int decider, int output)
 void	reverse_rotate(t_stacks **stacks, int decider, int output)
 {
 	t_stack	*second_last;
-	t_stack	*tail;
+	// t_stack	*tail;
 	t_stack	**stack;
+	t_stack	*old_head;
+
 
 	if (decider == A || decider == BOTH)
 		stack = &(*stacks)->stack_a;
@@ -115,15 +117,27 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 		stack = &(*stacks)->stack_b;
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	tail = (*stack);
 	second_last = (*stack);
-	while (tail->next)
-		tail = tail->next;
+	old_head = (*stack);
+	// tail = (*stack);
 	while (second_last->next->next)
 		second_last = second_last->next;
-	tail->next = (*stack);
+	(*stack) = second_last->next;
+	(*stack)->next = old_head;
+	// while (tail->next)
+		// tail = tail->next;
+	if (decider == A)
+{
+	(*stack)->back = NULL;
+	(*stack)->next->back = (*stack);
+
+}
 	second_last->next = NULL;
-	(*stack) = tail;
+	// (*stack) = tail;
+	// (*stack)->next = old_head;
+	// (*stack)->back = NULL;
+
+
 	if (output && decider == A)
 		ft_putstr("rra\n");
 	else if (output && decider == B)

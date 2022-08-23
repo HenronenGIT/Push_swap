@@ -350,13 +350,14 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	{
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
-			print_stacks(stacks);
+			// print_stacks(stacks);
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
 				move_value_to_top(option_1_index, stacks, A);
 			else
 				move_value_to_top(option_2_index, stacks, A);
+			// print_stacks(stacks);
 			rotate_b_to_correct_spot(stacks);
 			push(&stacks, B, 1);
 		}
