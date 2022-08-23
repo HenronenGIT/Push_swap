@@ -43,3 +43,20 @@ void	print_stacks(t_stacks *stacks)
 		index += 1;
 	}
 }
+
+int	is_stack_sorted(t_stacks *stacks)
+{
+	t_stack	*node;
+
+	if (stacks->stack_b != NULL)
+		return (0);
+	node = stacks->stack_a;
+	while (node->next)
+	{
+		if (node->value < node->next->value)
+			node = node->next;
+		else
+			return (0);
+	}
+	return (1);
+}

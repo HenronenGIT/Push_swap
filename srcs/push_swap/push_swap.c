@@ -47,33 +47,12 @@ int	main(int argc, char **argv)
 	argv++;
 	if (argc < 2)
 		exit(1);
-	argv = explode_arguments(argc, argv); // Might cause memory leak?
+	argv = explode_arguments(argc, argv);
 	valid_numbers = check_input(argv);
-
-	/* if statements for smaller algos */
-
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
-
-	/* Printed sorted tab */
-		// ft_print_tab(stacks->sorted_stack, stacks->stack_size);
-		// exit (0);
-	/* Printed sorted tab */
-
-	if (stack_in_order(stacks))
+	if (is_stack_sorted(stacks))
 		exit(0);
 	chunks = create_chunks(stacks);
-
-	/* Print chunk arrays */
-	// ft_print_tab(chunks->array, 20);
-	// ft_putchar('\n');
-	// ft_print_tab(chunks->next->array, chunks->array_size);
-	// ft_putchar('\n');
-	// ft_print_tab(chunks->next->next->next->next->array, chunks->array_size);
-	// ft_putchar('\n');
-	// exit (0);
-	/* Print chunk arrays */
-
-	// Jump table possible ?
 	if (stacks->stack_size == 3)
 		sort_3_stack(stacks);
 	else if (stacks->stack_size == 5)
@@ -82,11 +61,14 @@ int	main(int argc, char **argv)
 		push(&stacks, B, 1);
 		sort_3_stack(stacks);
 		sort_5_stack(stacks);
-
 	}
 	else
 		sort_stack(stacks, chunks);
-	// print_stacks(stacks);
+	print_stacks(stacks);
+	if (is_stack_sorted(stacks))
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
 	free(valid_numbers);
 	free_all_lists(&stacks, &chunks);
 }

@@ -12,18 +12,22 @@
 
 #include "push_swap.h"
 
+/*
+	Allocates t_stack structure and
+	initializes its variable "value" to that parameter what is received.
+	Return value is allocated node.
+*/
 t_stack	*create_node(int value)
 {
 	t_stack	*node;
 
 	node = (t_stack *)malloc(sizeof(t_stack));
 	if (!node)
-		return (NULL);
+		exit(1);
 	node->value = value;
 	node->next = NULL;
 	node->back = NULL;
 	return (node);
-
 }
 
 /*
@@ -39,6 +43,6 @@ void	node_add_back(t_stack **stack, t_stack *node)
 	while (temp->next != 0)
 		temp = temp->next;
 	temp->next = node;
-	node->back = temp; // Check if causes problems
+	node->back = temp;
 	node->next = NULL;
 }

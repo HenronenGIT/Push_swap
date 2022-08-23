@@ -54,8 +54,6 @@ done < $test_3
 echo "${PURPLE}[5] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	# operation_count=$((operation_count));
 	do output=$(../push_swap "$line" | ./checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
@@ -66,7 +64,6 @@ while IFS= read -r line;
 	elif [ $operation_count -lt $kudos_count ];
 	then
 		echo "${GREEN}${CYAN}[KUDOS] -> ${OFF}$operation_count"
-		# echo "${GREEN}${PASS_MSG} + ${CYAN}KUDOS -> ${OFF}$operation_count"
 	else
 		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count"
 	fi
@@ -76,10 +73,14 @@ done < $test_5
 echo "${PURPLE}[100] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	operation_count=$((operation_count));
+	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	# operation_count=$((operation_count));
+	do output=$(../push_swap "$line" | ./checker $line);
+		operation_count=$(../push_swap "$line" | wc -l | xargs);
+if [ $output == "KO" ]; then
+		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
 
-	if [ $operation_count -ge $max_100 ];then
+	elif [ $operation_count -ge $max_100 ];then
 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
 	elif [ $operation_count -lt $five_points_100 ];then
 		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
@@ -98,10 +99,14 @@ done < $test_100
 echo "${PURPLE}[500] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	operation_count=$((operation_count));
+	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
+	# operation_count=$((operation_count));
+	do output=$(../push_swap "$line" | ./checker $line);
+		operation_count=$(../push_swap "$line" | wc -l | xargs);
+	if [ $output == "KO" ]; then
+		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
 
-	if [ $operation_count -ge $zero_500 ];then
+	elif [ $operation_count -ge $zero_500 ];then
 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
 	elif [ $operation_count -lt $five_500 ];then
 		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"

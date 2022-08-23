@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
 	instructions = read_instructions(instructions);
 	execute_instructions(instructions, &stacks);
-	if (stack_in_order(stacks))
+	if (is_stack_sorted(stacks))
 	{
 		ft_printf("OK\n");
 		free_all_lists(&stacks, &instructions);

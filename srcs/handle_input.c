@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 09:14:00 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/07/22 09:14:02 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/08/23 11:59:48 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/08/23 11:59:49 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 char	**explode_arguments(int argc, char **argv)
 {
-	char **exploded_arguments;
+	char	**exploded_arguments;
 
 	exploded_arguments = NULL;
 	if (argc >= 2 && ft_isnumber(argv[0]))
@@ -92,21 +92,4 @@ t_stacks	*create_stacks(int *ints, int array_len, t_stacks *stacks)
 	stacks->sorted_stack = ints;
 	sort_int_tab(stacks->sorted_stack, stacks->stack_size);
 	return (stacks);
-}
-
-int	stack_in_order(t_stacks *stacks)
-{
-	t_stack	*node;
-
-	if (stacks->stack_b != NULL)
-		return (0);
-	node = stacks->stack_a;
-	while (node->next)
-	{
-		if (node->value < node->next->value)
-			node = node->next;
-		else
-			return (0);
-	}
-	return (1);
 }
