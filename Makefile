@@ -20,8 +20,9 @@ DB_FLAG = -g $(FLAGS)
 CHECKER_SRCS = ./srcs/checker/checker.c ./srcs/handle_input.c ./srcs/operations.c ./srcs/list_functions.c	\
 ./srcs/tools.c ./srcs/instructions.c
 
-PS_SRCS = ./srcs/push_swap/push_swap.c ./srcs/operations.c ./srcs/handle_input.c ./srcs/list_functions.c \
-./srcs/tools.c ./srcs/chunks.c ./srcs/sorting.c ./srcs/sort_smaller.c
+PS_SRCS = ./srcs/push_swap/push_swap.c ./srcs/operations.c ./srcs/handle_input.c	\
+./srcs/list_functions.c ./srcs/tools.c ./srcs/chunks.c ./srcs/sorting.c			\
+./srcs/sort_smaller.c ./srcs/fetching.c
 	
 OBJS = $(CHECKER_SRCS:.c=.o)
 

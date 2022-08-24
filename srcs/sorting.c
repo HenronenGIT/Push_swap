@@ -105,10 +105,10 @@ void	move_value_to_top(int movable_index, t_stacks *stacks, int decider)
 int	smallest_in_stack(t_stack *stack, int value)
 {
 	if (!stack)
-		return (0);
-	while (stack->next)
+		return (1);
+	while (stack)
 	{
-		if (value > stack->next->value)
+		if (value > stack->value)
 			return (0);
 		stack = stack->next;
 	}
@@ -177,8 +177,6 @@ int	find_correct_spot(int first_a_value, t_stack *stack)
 		// return(fetch_biggest_index(stack));
 	while (stack)
 	{
-		// if (first_a_value > stack->value &&
-		// (!last_value || last_value && (*last_value <= stack->value)))
 		if (first_a_value > stack->value)
 			if ((last_value && *last_value <= stack->value) || !last_value)
 			{
@@ -225,11 +223,12 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	correct_index = 0;
 	// print_stacks(stacks);
 	/* Already in correct spot function */
-	// if (!stacks->stack_b)
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;
-
-	correct_index = find_correct_spot(FIRST_A, STACK_B);
+	if (smallest_in_stack(stacks->stack_b, stacks->stack_a->value))
+		correct_index = fetch_biggest_index(stacks->stack_b);
+	else
+		correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
 }
@@ -276,14 +275,13 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	{
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
-			print_stacks(stacks);
+			// print_stacks(stacks);
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
 				move_value_to_top(option_1_index, stacks, A);
 			else
 				move_value_to_top(option_2_index, stacks, A);
-			// print_stacks(stacks);
 			if (list_size(stacks->stack_b) == 2
 				&& stacks->stack_b->next
 				&& stacks->stack_b->value < stacks->stack_b->next->value)
@@ -294,6 +292,5 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 		else
 			chunks = chunks->next;
 	}
-	// print_stacks(stacks);
 	push_all_to_a(stacks);
 }

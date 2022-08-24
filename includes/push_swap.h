@@ -92,6 +92,10 @@ int			is_stack_sorted(t_stacks *stacks);
 
 int			fetch_smallest_value(t_stack *stack);
 int			fetch_smallest_index(t_stack *stack);
+int			fetch_index_from_top(t_stack *stack_a, t_chunks *chunks);
+int			fetch_index_from_bottom(t_stack *stack_a, t_chunks *chunks);
+int			fetch_biggest_index(t_stack *stack);
+
 
 
 

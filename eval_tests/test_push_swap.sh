@@ -73,13 +73,10 @@ done < $test_5
 echo "${PURPLE}[100] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	# operation_count=$((operation_count));
 	do output=$(../push_swap "$line" | ./checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
-if [ $output == "KO" ]; then
+	if [ $output == "KO" ]; then
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
-
 	elif [ $operation_count -ge $max_100 ];then
 		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
 	elif [ $operation_count -lt $five_points_100 ];then
@@ -99,8 +96,6 @@ done < $test_100
 echo "${PURPLE}[500] INTEGER TEST${OFF}"
 sleep 2
 while IFS= read -r line;
-	# do operation_count=$(../push_swap "$line" | wc -l | xargs);
-	# operation_count=$((operation_count));
 	do output=$(../push_swap "$line" | ./checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
