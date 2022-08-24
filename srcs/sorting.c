@@ -12,29 +12,6 @@
 
 #include "push_swap.h"
 
-
-int	fetch_smallest_index(t_stack *stack)
-{
-	int	smallest;
-	int	index_of_smallest;
-	int	index;
-
-	index = 0;
-	index_of_smallest = 0;
-	smallest = stack->value;
-	while (stack)
-	{
-		if (stack->value < smallest)
-		{
-			smallest = stack->value;
-			index_of_smallest = index;
-		}
-		index += 1;
-		stack = stack->next;
-	}
-	return (index_of_smallest);
-}
-
 int smallest_closer_to_top(t_stack *stack, int stack_size)
 {
 	int index_of_smallest;
@@ -45,42 +22,6 @@ int smallest_closer_to_top(t_stack *stack, int stack_size)
 	if (index_of_smallest < (stack_size / 2))
 		return (1);
 	return (0);
-}
-/* Finds index from stack to certain value - starting from top */
-int	fetch_index_from_top(t_stack *stack_a, t_chunks *chunks)
-{
-	int	i;
-
-	i = 0;
-	while (stack_a)
-	{
-		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
-			return (i);
-		stack_a = stack_a->next;
-		i++;
-	}
-	return (0); // temp
-}
-
-/* Finds index from stack to certain value - starting from bottom */
-int	fetch_index_from_bottom(t_stack *stack_a, t_chunks *chunks)
-{
-	int	i;
-
-	i = 0;
-	while (stack_a->next)
-	{
-		stack_a = stack_a->next;
-		i++;
-	}
-	while (stack_a)
-	{
-		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))
-			return (i);
-		stack_a = stack_a->back;
-		i--;
-	}
-	return (0); // temp
 }
 
 static int	option_1_need_less_moves(int index_1, int index_2, t_stacks *stacks)
@@ -105,11 +46,13 @@ static int	option_1_need_less_moves(int index_1, int index_2, t_stacks *stacks)
 
 }
 
-int	list_size(t_stack *stack) // can be added to libft with void style
+int	list_size(t_stack *stack) // can be added to libft with casting to void?
 {
 	int	node_count;
 
 	node_count = 1;
+	if (!stack)
+		return (0);
 	while (stack->next)
 	{
 		node_count += 1;
@@ -221,28 +164,6 @@ int		stack_in_ascending_order(t_stack *stack)
 	return (1);
 }
 
-int	fetch_biggest_index(t_stack *stack)
-{
-	int	biggest;
-	int	index_of_biggest;
-	int	index;
-
-	index = 0;
-	index_of_biggest = 0;
-	biggest = stack->value;
-	while (stack)
-	{
-		if (stack->value > biggest)
-		{
-			biggest = stack->value;
-			index_of_biggest = index;
-		}
-		index += 1;
-		stack = stack->next;
-	}
-	return (index_of_biggest);
-}
-
 int	find_correct_spot(int first_a_value, t_stack *stack)
 {
 	int	i;
@@ -252,8 +173,8 @@ int	find_correct_spot(int first_a_value, t_stack *stack)
 	i = 0;
 	last_value = NULL;
 	correct_index = 0;
-	if (smallest_in_stack(stack, first_a_value))
-		return(fetch_biggest_index(stack));
+	// if (smallest_in_stack(stack, first_a_value))
+		// return(fetch_biggest_index(stack));
 	while (stack)
 	{
 		// if (first_a_value > stack->value &&
@@ -302,9 +223,12 @@ void	rotate_b_to_correct_spot(t_stacks *stacks)
 	int	correct_index;
 
 	correct_index = 0;
+	// print_stacks(stacks);
 	/* Already in correct spot function */
+	// if (!stacks->stack_b)
 	if (!stacks->stack_b || !stacks->stack_b->next)
-		return ;	
+		return ;
+
 	correct_index = find_correct_spot(FIRST_A, STACK_B);
 
 	move_value_to_top(correct_index, stacks, B);
@@ -322,11 +246,13 @@ void	push_all_to_a(t_stacks *stacks)
 			while (!biggest_in_stack(STACK_B, FIRST_B)) // Make better to find if bigger is closer to top than bottom
 				reverse_rotate(&stacks, B, 1);
 	while (STACK_B)
+	{
+		// print_stacks(stacks);
 		push(&stacks, A, 1);
+	}
 	// }
 }
 
-// int	stack_contains_chunk_value(t_stack *stack_a, int *chunk_array, int array_size)
 int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 {
 	int	i;
@@ -350,7 +276,7 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 	{
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
-			// print_stacks(stacks);
+			print_stacks(stacks);
 			option_1_index = fetch_index_from_top(STACK_A, chunks);
 			option_2_index = fetch_index_from_bottom(STACK_A, chunks);
 			if (option_1_need_less_moves(option_1_index, option_2_index, stacks))
@@ -358,11 +284,16 @@ void	sort_stack(t_stacks *stacks, t_chunks *chunks)
 			else
 				move_value_to_top(option_2_index, stacks, A);
 			// print_stacks(stacks);
+			if (list_size(stacks->stack_b) == 2
+				&& stacks->stack_b->next
+				&& stacks->stack_b->value < stacks->stack_b->next->value)
+					swap(&stacks, A, 1);
 			rotate_b_to_correct_spot(stacks);
 			push(&stacks, B, 1);
 		}
 		else
 			chunks = chunks->next;
 	}
+	// print_stacks(stacks);
 	push_all_to_a(stacks);
 }

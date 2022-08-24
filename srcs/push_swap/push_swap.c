@@ -65,10 +65,10 @@ int	main(int argc, char **argv)
 	else
 		sort_stack(stacks, chunks);
 	print_stacks(stacks);
-	if (is_stack_sorted(stacks))
-		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
+	// if (is_stack_sorted(stacks))
+		// ft_printf("OK\n");
+	// else
+		// ft_printf("KO\n");
 	free(valid_numbers);
 	free_all_lists(&stacks, &chunks);
 }

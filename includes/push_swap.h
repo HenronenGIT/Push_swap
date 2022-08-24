@@ -90,6 +90,8 @@ void		panic(char *error_message);
 void		print_stacks(t_stacks *stacks);
 int			is_stack_sorted(t_stacks *stacks);
 
+int			fetch_smallest_value(t_stack *stack);
+int			fetch_smallest_index(t_stack *stack);
 
 
 
