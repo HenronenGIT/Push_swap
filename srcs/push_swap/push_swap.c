@@ -12,11 +12,12 @@
 
 #include "push_swap.h"
 
-static void	free_all_lists(t_stacks **stacks, t_chunks **chunks)
+static void	free_all(t_stacks **stacks, t_chunks **chunks, int **array)
 {
 	t_stack		*next;
 	t_chunks	*iterator;
 
+	free(*array);
 	while ((*stacks)->stack_a)
 	{
 		next = (*stacks)->stack_a->next;
@@ -63,12 +64,6 @@ int	main(int argc, char **argv)
 		sort_5_stack(stacks);
 	}
 	else
-		sort_stack(stacks, chunks);
-	// print_stacks(stacks);
-	// if (is_stack_sorted(stacks))
-		// ft_printf("OK\n");
-	// else
-		// ft_printf("KO\n");
-	free(valid_numbers);
-	free_all_lists(&stacks, &chunks);
+		sort_big_stacks(stacks, chunks);
+	free_all(&stacks, &chunks, &valid_numbers);
 }
