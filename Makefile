@@ -17,12 +17,24 @@ CC = gcc
 FLAGS =# -Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
-CHECKER_SRCS = ./srcs/checker/checker.c ./srcs/handle_input.c ./srcs/operations.c ./srcs/list_functions.c	\
-./srcs/tools.c ./srcs/instructions.c
+CHECKER_SRCS =	./srcs/checker/checker.c	\
+				./srcs/handle_input.c		\
+				./srcs/operations.c			\
+				./srcs/list_functions.c		\
+				./srcs/tools.c				\
+					./srcs/checker/instructions.c
 
-PS_SRCS = ./srcs/push_swap/push_swap.c ./srcs/operations.c ./srcs/handle_input.c	\
-./srcs/list_functions.c ./srcs/tools.c ./srcs/chunks.c ./srcs/sorting.c			\
-./srcs/sort_smaller.c ./srcs/fetching.c
+PS_SRCS =	./srcs/push_swap/push_swap.c	\
+			./srcs/handle_input.c			\
+			./srcs/operations.c 			\
+			./srcs/list_functions.c			\
+			./srcs/tools.c		 			\
+				./srcs/push_swap/chunks.c			\
+				./srcs/push_swap/fetching.c			\
+				./srcs/push_swap/sort_smaller.c		\
+				./srcs/push_swap/sort_large.c		\
+				./srcs/push_swap/stack_inspecting.c	\
+				./srcs/push_swap/stack_manipulating.c
 	
 OBJS = $(CHECKER_SRCS:.c=.o)
 

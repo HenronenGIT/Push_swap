@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void	output_operation(int decider)
+{
+	static char	*operations[3][4] = {
+	{"sa", "pa", "ra", "rra"},
+	{"sb", "pb", "rb", "rrb"},
+	{"ss", "rr", "rrr"}
+	};
+}
+
 void	swap(t_stacks **stacks, int decider, int output)
 {
 	int		temp;
@@ -27,16 +36,19 @@ void	swap(t_stacks **stacks, int decider, int output)
 	temp = stack->value;
 	stack->value = stack->next->value;
 	stack->next->value = temp;
-	if (output && decider == A)
-		ft_putstr("sa\n");
-	else if (output && decider == B)
-		ft_putstr("sb\n");
-	else if (output && decider == BOTH)
-		ft_putstr("ss\n");
-	if (decider == BOTH)
-		swap(stacks, B, 0);
-	return ;
-}
+
+	if (output)
+		output_operation(decider, );
+// 	if (output && decider == A)
+// 		ft_putstr("sa\n");
+// 	else if (output && decider == B)
+// 		ft_putstr("sb\n");
+// 	else if (output && decider == BOTH)
+// 		ft_putstr("ss\n");
+// 	if (decider == BOTH)
+// 		swap(stacks, B, 0);
+// 	return ;
+// }
 
 void	push(t_stacks **stacks, int decider, int output)
 {
@@ -57,14 +69,11 @@ void	push(t_stacks **stacks, int decider, int output)
 	if ((*source_stack) == NULL)
 		return ;
 	new_head = (*source_stack)->next;
-	(*source_stack)->next = (*dest_stack); // useless?
-
-	// (*source_stack)->back = NULL;
-
+	(*source_stack)->next = (*dest_stack);
 	(*dest_stack) = (*source_stack);
 	(*source_stack) = new_head;
 	if ((*source_stack))
-		(*source_stack)->back = NULL; // NEW
+		(*source_stack)->back = NULL;
 	if (output && decider == A)
 		ft_putstr("pa\n");
 	else if (output && decider == B)
@@ -106,10 +115,8 @@ void	rotate(t_stacks **stacks, int decider, int output)
 void	reverse_rotate(t_stacks **stacks, int decider, int output)
 {
 	t_stack	*second_last;
-	// t_stack	*tail;
 	t_stack	**stack;
 	t_stack	*old_head;
-
 
 	if (decider == A || decider == BOTH)
 		stack = &(*stacks)->stack_a;
@@ -119,25 +126,16 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 		return ;
 	second_last = (*stack);
 	old_head = (*stack);
-	// tail = (*stack);
 	while (second_last->next->next)
 		second_last = second_last->next;
 	(*stack) = second_last->next;
 	(*stack)->next = old_head;
-	// while (tail->next)
-		// tail = tail->next;
 	if (decider == A)
-{
-	(*stack)->back = NULL;
-	(*stack)->next->back = (*stack);
-
-}
+	{
+		(*stack)->back = NULL;
+		(*stack)->next->back = (*stack);
+	}
 	second_last->next = NULL;
-	// (*stack) = tail;
-	// (*stack)->next = old_head;
-	// (*stack)->back = NULL;
-
-
 	if (output && decider == A)
 		ft_putstr("rra\n");
 	else if (output && decider == B)

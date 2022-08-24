@@ -25,7 +25,6 @@ void	instruction_addback(t_instruction **list, t_instruction *node)
 	node->next = NULL;
 }
 
-// void	add_to_list(t_instruction **instructions)
 void	add_to_list(char *instruction, t_instruction **instructions)
 {
 	t_instruction	*node;
@@ -33,43 +32,29 @@ void	add_to_list(char *instruction, t_instruction **instructions)
 	if (!(*instructions))
 	{
 		(*instructions) = (t_instruction *)malloc(sizeof(t_instruction));
+		if (!(*instructions))
+			exit(1);
 		(*instructions)->operation = ft_strdup(instruction);
+		if (!(*instructions)->operation)
+			exit(1);
 		(*instructions)->next = NULL;
 	}
 	else
 	{
 		node = (t_instruction *)malloc(sizeof(t_instruction));
+		if (!node)
+			exit(1);
 		node->operation = ft_strdup(instruction);
+		if (!node->operation)
+			exit(1);
 		node->next = NULL;
 		instruction_addback(instructions, node);
-		// free(node);	
 	}
-}
-
-t_instruction	*read_instructions(t_instruction *instructions)
-{
-	char *instruction;
-
-	instruction = NULL;
-	while (ft_get_next_line(0, &instruction))
-	{
-		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
-			!ft_strcmp("ss", instruction) || !ft_strcmp("pa", instruction) ||
-			!ft_strcmp("pb", instruction) || !ft_strcmp("ra", instruction) ||
-			!ft_strcmp("rb", instruction) || !ft_strcmp("rr", instruction) ||
-			!ft_strcmp("rra", instruction) || !ft_strcmp("rrb", instruction) ||
-			!ft_strcmp("rrr", instruction))
-				add_to_list(instruction, &instructions);
-		else
-				panic("Error\n");
-		free(instruction);
-	}
-	return (instructions);
 }
 
 void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 {
-	while (instructions) // Jump table possible ???
+	while (instructions)
 	{
 		if (!ft_strcmp(instructions->operation, "sa"))
 			swap(stacks, A, 0);
@@ -97,4 +82,25 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 			panic("Error\n");
 		instructions = instructions->next;
 	}
+}
+
+t_instruction	*read_instructions(t_instruction *instructions)
+{
+	char	*instruction;
+
+	instruction = NULL;
+	while (ft_get_next_line(0, &instruction))
+	{
+		if (!ft_strcmp("sa", instruction) || !ft_strcmp("sb", instruction) ||
+			!ft_strcmp("ss", instruction) || !ft_strcmp("pa", instruction) ||
+			!ft_strcmp("pb", instruction) || !ft_strcmp("ra", instruction) ||
+			!ft_strcmp("rb", instruction) || !ft_strcmp("rr", instruction) ||
+			!ft_strcmp("rra", instruction) || !ft_strcmp("rrb", instruction) ||
+			!ft_strcmp("rrr", instruction))
+			add_to_list(instruction, &instructions);
+		else
+			panic("Error\n");
+		free(instruction);
+	}
+	return (instructions);
 }

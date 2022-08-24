@@ -46,3 +46,19 @@ void	node_add_back(t_stack **stack, t_stack *node)
 	node->back = temp;
 	node->next = NULL;
 }
+
+int	list_size(t_stack *stack)
+{
+	int	node_count;
+
+	if (!stack)
+		return (0);
+	node_count = 1;
+	while (stack->next)
+	{
+		node_count += 1;
+		stack = stack->next;
+	}
+	return (node_count);
+}
+
