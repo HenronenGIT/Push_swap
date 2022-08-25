@@ -33,6 +33,13 @@
 
 typedef enum
 {
+	a,
+	b,
+	both
+}	e_stack;
+
+typedef enum
+{
 	s,
 	p,
 	r,
@@ -67,6 +74,8 @@ typedef struct s_instruction
 	char					*operation;
 	struct s_instruction	*next;
 }	t_instruction;
+
+typedef void	t_operation(t_stacks **stacks, int decider, int output);
 
 void		swap(t_stacks **stacks, int decider, int output);
 void		push(t_stacks **stacks, int decider, int output);

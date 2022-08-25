@@ -119,11 +119,8 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 		second_last = second_last->next;
 	(*stack) = second_last->next;
 	(*stack)->next = old_head;
-	if (decider == A)
-	{
-		(*stack)->back = NULL;
-		(*stack)->next->back = (*stack);
-	}
+	(*stack)->back = NULL;
+	(*stack)->next->back = (*stack);
 	second_last->next = NULL;
 	if (output)
 		output_operation(decider, rr);
