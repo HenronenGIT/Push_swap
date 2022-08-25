@@ -12,33 +12,6 @@
 
 #include "push_swap.h"
 
-static void	free_all(t_stacks **stacks, t_chunks **chunks, int **array)
-{
-	t_stack		*next;
-	t_chunks	*iterator;
-
-	free(*array);
-	while ((*stacks)->stack_a)
-	{
-		next = (*stacks)->stack_a->next;
-		free((*stacks)->stack_a);
-		(*stacks)->stack_a = next;
-	}
-	while ((*stacks)->stack_b)
-	{
-		next = (*stacks)->stack_b->next;
-		free((*stacks)->stack_b);
-		(*stacks)->stack_b = next;
-	}
-	while ((*chunks))
-	{
-		iterator = (*chunks)->next;
-		free((*chunks)->array);
-		free((*chunks));
-		(*chunks) = iterator;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
@@ -65,5 +38,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		sort_big_stacks(stacks, chunks);
-	free_all(&stacks, &chunks, &valid_numbers);
+	exit (0);
 }

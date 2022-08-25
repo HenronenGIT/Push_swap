@@ -85,16 +85,16 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 			|| !ft_strcmp(instructions->operation, "pa")
 			|| !ft_strcmp(instructions->operation, "ra")
 			|| !ft_strcmp(instructions->operation, "rra"))
-			jump_table(stacks, a, 0, instructions->operation);
+			jump_table(stacks, A, 0, instructions->operation);
 		else if (!ft_strcmp(instructions->operation, "sb")
 			|| !ft_strcmp(instructions->operation, "pb")
 			|| !ft_strcmp(instructions->operation, "rb")
 			|| !ft_strcmp(instructions->operation, "rrb"))
-			jump_table(stacks, b, 0, instructions->operation);
+			jump_table(stacks, B, 0, instructions->operation);
 		else if (!ft_strcmp(instructions->operation, "ss")
 			|| !ft_strcmp(instructions->operation, "rr")
 			|| !ft_strcmp(instructions->operation, "rrr"))
-			jump_table(stacks, both, 0, instructions->operation);
+			jump_table(stacks, BOTH, 0, instructions->operation);
 		else
 			panic("Error\n");
 		instructions = instructions->next;

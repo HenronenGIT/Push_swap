@@ -33,13 +33,6 @@
 
 typedef enum
 {
-	a,
-	b,
-	both
-}	e_stack;
-
-typedef enum
-{
 	s,
 	p,
 	r,
