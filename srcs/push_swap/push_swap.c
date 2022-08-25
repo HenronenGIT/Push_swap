@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 		exit(1);
 	argv = explode_arguments(argc, argv);
 	valid_numbers = check_input(argv);
-	free(valid_numbers);
 	stacks = create_stacks(valid_numbers, ft_count_pointers(argv), stacks);
 	if (is_stack_sorted(stacks))
 		exit(0);
