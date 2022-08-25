@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	output_executt_temp(int row, t_temp operation)
+void	output_operation(int row, t_temp operation)
 {
 	static char	*operations[3][4] = {
 	{"sa\n", "pa\n", "ra\n", "rra\n"},
@@ -40,7 +40,9 @@ void	swap(t_stacks **stacks, int decider, int output)
 	stack->value = stack->next->value;
 	stack->next->value = temp;
 	if (output)
-		output_executt_temp(decider, s);
+		output_operation(decider, s);
+	if (decider == BOTH)
+		swap(stacks, B, 0);
 	return ;
 }
 
@@ -69,7 +71,7 @@ void	push(t_stacks **stacks, int decider, int output)
 	if ((*source_stack))
 		(*source_stack)->back = NULL;
 	if (output)
-		output_executt_temp(decider, p);
+		output_operation(decider, p);
 	return ;
 }
 
@@ -95,7 +97,7 @@ void	rotate(t_stacks **stacks, int decider, int output)
 	(*stack) = new_head;
 	(*stack)->back = NULL;
 	if (output)
-		output_executt_temp(decider, r);
+		output_operation(decider, r);
 	if (decider == BOTH)
 		rotate(stacks, B, 0);
 	return ;
@@ -123,7 +125,7 @@ void	reverse_rotate(t_stacks **stacks, int decider, int output)
 	(*stack)->next->back = (*stack);
 	second_last->next = NULL;
 	if (output)
-		output_executt_temp(decider, rr);
+		output_operation(decider, rr);
 	if (decider == BOTH)
 		reverse_rotate(stacks, B, 0);
 }

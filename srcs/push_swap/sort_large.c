@@ -73,9 +73,6 @@ static void	rotate_b_to_correct_spot(t_stacks *stacks)
 
 static int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 {
-	int	i;
-
-	i = 0;
 	while (stack_a)
 	{
 		if (ft_nbr_in_array(stack_a->value, chunks->array, chunks->array_size))

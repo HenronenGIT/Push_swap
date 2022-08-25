@@ -22,7 +22,6 @@
 # define BOTH 2
 # define ROTATE 3
 # define REVERSE_ROTATE 4
-# define SWAP 4
 
 typedef enum e_operation_style
 {

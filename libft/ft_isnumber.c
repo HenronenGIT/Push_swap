@@ -16,7 +16,7 @@ int	ft_isnumber(char *string)
 {
 	if (string == NULL || *string == '\0')
 		return (0);
-	if (*string == '-')
+	if (*string == '-' && ft_isdigit(string[1]))
 		string++;
 	while (*string)
 	{
