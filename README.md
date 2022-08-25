@@ -14,8 +14,7 @@
 <a href="./README/push_swap.en.pdf">Push_swap PDF</a>
 
 ### Keywords
-- Project scalability
-- Reverse engineering
-- Variadic functions
-- Dispatcher/Jump table in C
-- Array of function pointers
+- Sorting
+- Algorithms
+- Stacks in Computer Science
+- Optimization
