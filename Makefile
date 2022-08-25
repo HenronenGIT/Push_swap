@@ -14,7 +14,7 @@ NAME_1 = checker
 NAME_2 = push_swap
 
 CC = gcc
-FLAGS =# -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 
 CHECKER_SRCS =	./srcs/checker/checker.c	\
