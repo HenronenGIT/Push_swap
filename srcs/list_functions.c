@@ -61,4 +61,3 @@ int	list_size(t_stack *stack)
 	}
 	return (node_count);
 }
-
