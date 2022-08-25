@@ -35,11 +35,13 @@ three_500=8500
 four_500=7000
 five_500=5500
 
+make -C ../ re
+
 # 3 Integer tests
 echo "${PURPLE}[3] INTEGER TEST${OFF}"
-sleep 2
+sleep 1
 while IFS= read -r line;
-	do output=$(../push_swap "$line" | ./checker $line);
+	do output=$(../push_swap "$line" | ../checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
@@ -52,9 +54,9 @@ done < $test_3
 
 # 5 Integer tests
 echo "${PURPLE}[5] INTEGER TEST${OFF}"
-sleep 2
+sleep 1
 while IFS= read -r line;
-	do output=$(../push_swap "$line" | ./checker $line);
+	do output=$(../push_swap "$line" | ../checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
@@ -71,46 +73,46 @@ done < $test_5
 
 # 100 Integer tests
 echo "${PURPLE}[100] INTEGER TEST${OFF}"
-sleep 2
+sleep 1
 while IFS= read -r line;
-	do output=$(../push_swap "$line" | ./checker $line);
+	do output=$(../push_swap "$line" | ../checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
 	elif [ $operation_count -ge $max_100 ];then
-		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
+		echo "${RED}${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
 	elif [ $operation_count -lt $five_points_100 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
 	elif [ $operation_count -lt $four_points_100 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${GREEN}4${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${GREEN}4${OFF}"
 	elif [ $operation_count -lt $three_points_100 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}3${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}3${OFF}"
 	elif [ $operation_count -lt $two_points_100 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}2${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}2${OFF}"
 	else
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
 	fi
 done < $test_100
 
 # 500 Integer tests
 echo "${PURPLE}[500] INTEGER TEST${OFF}"
-sleep 2
+sleep 1
 while IFS= read -r line;
-	do output=$(../push_swap "$line" | ./checker $line);
+	do output=$(../push_swap "$line" | ../checker $line);
 		operation_count=$(../push_swap "$line" | wc -l | xargs);
 	if [ $output == "KO" ]; then
 		echo "${RED}[FAIL] -> ARRAY NOT SORTED${OFF}"
 	elif [ $operation_count -ge $zero_500 ];then
-		echo "${RED} ${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
+		echo "${RED}${FAIL_MSG} -> ${OFF}$operation_count -> ${RED}0${OFF}"
 	elif [ $operation_count -lt $five_500 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${BGREEN}5${OFF}"
 	elif [ $operation_count -lt $four_500 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${GREEN}4${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${GREEN}4${OFF}"
 	elif [ $operation_count -lt $three_500 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}3${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}3${OFF}"
 	elif [ $operation_count -lt $two_500 ];then
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}2${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${YELLOW}2${OFF}"
 	else
-		echo "${GREEN} ${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
+		echo "${GREEN}${PASS_MSG} -> ${OFF}$operation_count -> ${RED}1${OFF}"
 	fi
 done < $test_500

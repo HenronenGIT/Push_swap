@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-void	instruction_addback(t_instruction **list, t_instruction *node)
+void	instruction_addback(t_operation **list, t_operation *node)
 {
-	t_instruction	*temp;
+	t_operation	*temp;
 
 	if (!*list || !node)
 		return ;
@@ -25,13 +25,13 @@ void	instruction_addback(t_instruction **list, t_instruction *node)
 	node->next = NULL;
 }
 
-void	add_to_list(char *instruction, t_instruction **instructions)
+void	add_to_list(char *instruction, t_operation **instructions)
 {
-	t_instruction	*node;
+	t_operation	*node;
 
 	if (!(*instructions))
 	{
-		(*instructions) = (t_instruction *)malloc(sizeof(t_instruction));
+		(*instructions) = (t_operation *)malloc(sizeof(t_operation));
 		if (!(*instructions))
 			exit(1);
 		(*instructions)->operation = ft_strdup(instruction);
@@ -41,7 +41,7 @@ void	add_to_list(char *instruction, t_instruction **instructions)
 	}
 	else
 	{
-		node = (t_instruction *)malloc(sizeof(t_instruction));
+		node = (t_operation *)malloc(sizeof(t_operation));
 		if (!node)
 			exit(1);
 		node->operation = ft_strdup(instruction);
@@ -54,10 +54,10 @@ void	add_to_list(char *instruction, t_instruction **instructions)
 
 static void	jump_table(t_stacks **stacks, int decider, int output, char *str)
 {
-	int					index;
-	static char			*operation_arr[] = {"sa", "sb", "ss", "pa", "pb", "ra",
-		"rb", "rr", "rra", "rrb", "rrr"};
-	static t_operation	*jump_table[11] = {
+	int							index;
+	static char					*operation_arr[] = {"sa", "sb", "ss", "pa",
+		"pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+	static t_executt_temp		*jump_table[11] = {
 		swap,
 		swap,
 		swap,
@@ -77,7 +77,7 @@ static void	jump_table(t_stacks **stacks, int decider, int output, char *str)
 	jump_table[index](stacks, decider, output);
 }
 
-void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
+void	execute_instructions(t_operation *instructions, t_stacks **stacks)
 {
 	while (instructions)
 	{
@@ -101,7 +101,7 @@ void	execute_instructions(t_instruction *instructions, t_stacks **stacks)
 	}
 }
 
-t_instruction	*read_instructions(t_instruction *instructions)
+t_operation	*read_instructions(t_operation *instructions)
 {
 	char	*instruction;
 

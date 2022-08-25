@@ -82,13 +82,6 @@ fclean: clean
 
 re: fclean all
 
-test:
-	./eval_tests/test.sh
-
-leaks_checker: re
-	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(CHECKER_SRCS) -o checker
-	leaks -atExit -- ./checker
-
 debug: re
 	@$(CC) $(FLAGS) -g $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
 
@@ -97,6 +90,5 @@ sanitize_checker: re
 	
 sanitize_push_swap: re
 	@$(CC) $(FLAGS) -g -fsanitize=address $(HEADERS) $(LIB) $(PS_SRCS) -o push_swap
-
 
 .PHONY: all clean fclean re

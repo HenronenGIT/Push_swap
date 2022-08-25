@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-void	rotate_many(int rotations, t_stacks **stacks, int stack, int operation)
+void	rotate_many(int moves, t_stacks **stacks, int stack, int operation)
 {
-	while (rotations)
+	while (moves)
 	{
 		if (stack == A && operation == ROTATE)
 			rotate(stacks, A, 1);
@@ -24,7 +24,7 @@ void	rotate_many(int rotations, t_stacks **stacks, int stack, int operation)
 			rotate(stacks, B, 1);
 		else if (stack == B && operation == REVERSE_ROTATE)
 			reverse_rotate(stacks, B, 1);
-		rotations -= 1;
+		moves -= 1;
 	}
 	return ;
 }

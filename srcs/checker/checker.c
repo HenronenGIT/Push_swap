@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_stacks		*stacks;
-	t_instruction	*instructions;
+	t_operation		*instructions;
 	int				*valid_numbers;
 
 	stacks = NULL;

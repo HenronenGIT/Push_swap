@@ -59,16 +59,16 @@ static int	find_correct_spot(int first_a_value, t_stack *stack)
 
 static void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
-	int	correct_index;
+	int	correct_i;
 
-	correct_index = 0;
+	correct_i = 0;
 	if (!stacks->stack_b || !stacks->stack_b->next)
 		return ;
 	if (smallest_in_stack(stacks->stack_b, stacks->stack_a->value))
-		correct_index = fetch_biggest_index(stacks->stack_b);
+		correct_i = fetch_biggest_index(stacks->stack_b);
 	else
-		correct_index = find_correct_spot(FIRST_A, STACK_B);
-	move_value_to_top(correct_index, stacks, B);
+		correct_i = find_correct_spot(stacks->stack_a->value, stacks->stack_b);
+	move_value_to_top(correct_i, stacks, B);
 }
 
 static int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
@@ -89,8 +89,8 @@ static int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 	Sorts all the stacks which are larger than 5.
 	Fetches 2 indexes which are in the chunk array.
 	Rotates that index to top of the stack which needs less moves.
-	Pushes that value to STACK_B.
-	After STACK_A is empty pushes all values from B to A.
+	Pushes that value to B.
+	After A stack is empty pushes all values from B to A.
 */
 void	sort_big_stacks(t_stacks *stacks, t_chunks *chunks)
 {
@@ -101,8 +101,8 @@ void	sort_big_stacks(t_stacks *stacks, t_chunks *chunks)
 	{
 		if (stack_contains_chunk_value(stacks->stack_a, chunks))
 		{
-			index_1 = fetch_index_from_top(STACK_A, chunks);
-			index_2 = fetch_index_from_bottom(STACK_A, chunks);
+			index_1 = fetch_index_from_top(stacks->stack_a, chunks);
+			index_2 = fetch_index_from_bottom(stacks->stack_a, chunks);
 			if (option_1_need_less_moves(index_1, index_2, stacks))
 				move_value_to_top(index_1, stacks, A);
 			else

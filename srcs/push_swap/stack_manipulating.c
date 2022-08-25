@@ -44,11 +44,11 @@ void	move_value_to_top(int movable_index, t_stacks *stacks, int decider)
 void	push_all_to_a(t_stacks *stacks)
 {
 	if (smallest_closer_to_top(stacks->stack_b, stacks->stack_size))
-		while (!biggest_in_stack(STACK_B, FIRST_B))
+		while (!biggest_in_stack(stacks->stack_b, stacks->stack_b->value))
 			rotate(&stacks, B, 1);
 	else
-		while (!biggest_in_stack(STACK_B, FIRST_B))
+		while (!biggest_in_stack(stacks->stack_b, stacks->stack_b->value))
 			reverse_rotate(&stacks, B, 1);
-	while (STACK_B)
+	while (stacks->stack_b)
 		push(&stacks, A, 1);
 }
