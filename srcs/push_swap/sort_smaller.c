@@ -12,17 +12,17 @@
 
 #include "push_swap.h"
 
-void	rotate_many(int moves, t_stacks **stacks, int stack, int operation)
+void	rotate_many(int moves, t_stacks **stacks, int stack, t_style style)
 {
 	while (moves)
 	{
-		if (stack == A && operation == ROTATE)
+		if (stack == A && style == r)
 			rotate(stacks, A, 1);
-		else if (stack == A && operation == REVERSE_ROTATE)
+		else if (stack == A && style == rr)
 			reverse_rotate(stacks, A, 1);
-		else if (stack == B && operation == ROTATE)
+		else if (stack == B && style == r)
 			rotate(stacks, B, 1);
-		else if (stack == B && operation == REVERSE_ROTATE)
+		else if (stack == B && style == rr)
 			reverse_rotate(stacks, B, 1);
 		moves -= 1;
 	}

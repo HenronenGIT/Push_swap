@@ -57,7 +57,7 @@ static void	jump_table(t_stacks **stacks, int decider, int output, char *str)
 	int							index;
 	static char					*operation_arr[] = {"sa", "sb", "ss", "pa",
 		"pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-	static t_executt_temp		*jump_table[11] = {
+	static t_executt_style		*jump_table[11] = {
 		swap,
 		swap,
 		swap,

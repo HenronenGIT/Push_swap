@@ -27,17 +27,17 @@ void	move_value_to_top(int movable_index, t_stacks *stacks, int decider)
 	{
 		moves_needed = movable_index;
 		if (decider == A)
-			rotate_many(moves_needed, &stacks, A, ROTATE);
+			rotate_many(moves_needed, &stacks, A, r);
 		else
-			rotate_many(moves_needed, &stacks, B, ROTATE);
+			rotate_many(moves_needed, &stacks, B, r);
 	}
 	else
 	{
 		moves_needed = list_size(stack) - movable_index;
 		if (decider == A)
-			rotate_many(moves_needed, &stacks, A, REVERSE_ROTATE);
+			rotate_many(moves_needed, &stacks, A, rr);
 		else
-			rotate_many(moves_needed, &stacks, B, REVERSE_ROTATE);
+			rotate_many(moves_needed, &stacks, B, rr);
 	}
 }
 

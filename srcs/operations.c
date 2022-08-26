@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	output_operation(int row, t_temp operation)
+void	output_operation(int row, t_style operation)
 {
 	static char	*operations[3][4] = {
 	{"sa\n", "pa\n", "ra\n", "rra\n"},

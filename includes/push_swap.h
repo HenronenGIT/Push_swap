@@ -20,8 +20,6 @@
 # define A 0
 # define B 1
 # define BOTH 2
-# define ROTATE 3
-# define REVERSE_ROTATE 4
 
 typedef enum e_operation_style
 {
@@ -29,7 +27,7 @@ typedef enum e_operation_style
 	p,
 	r,
 	rr
-}	t_temp;
+}	t_style;
 
 typedef struct s_stacks
 {
@@ -60,7 +58,7 @@ typedef struct s_operation
 	struct s_operation	*next;
 }	t_operation;
 
-typedef void	t_executt_temp(t_stacks **stacks, int decider, int output);
+typedef void	t_executt_style(t_stacks **stacks, int decider, int output);
 
 void		swap(t_stacks **stacks, int decider, int output);
 void		push(t_stacks **stacks, int decider, int output);
@@ -87,7 +85,7 @@ int			smallest_closer_to_top(t_stack *stack, int stack_size);
 
 void		move_value_to_top(int movable_index, t_stacks *stacks, int decider);
 void		push_all_to_a(t_stacks *stacks);
-void		rotate_many(int moves, t_stacks **stacks, int stack, int operation);
+void		rotate_many(int moves, t_stacks **stacks, int stack, t_style style);
 
 t_stack		*create_node(int value);
 void		node_add_back(t_stack **stack, t_stack *node);
