@@ -66,7 +66,6 @@ static int	find_correct_spot(int first_a_value, t_stack *stack)
 	return (correct_index);
 }
 
-
 static void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	int	correct_i;
