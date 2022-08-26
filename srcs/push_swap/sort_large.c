@@ -12,6 +12,10 @@
 
 #include "push_swap.h"
 
+/*
+	Compares indexes of 2 values found from stack and calculates which one
+	needs lesser operations to get that value top of the stack.
+*/
 static int	option_1_need_less_moves(int index_1, int index_2, t_stacks *stacks)
 {
 	int	middle_point;
@@ -32,6 +36,11 @@ static int	option_1_need_less_moves(int index_1, int index_2, t_stacks *stacks)
 	return (0);
 }
 
+/*
+	Iterates trought stack linked list and finds "corrext_index".
+	Correct index is place where "first_a_value" need to be placed so stack
+	stays in order.
+*/
 static int	find_correct_spot(int first_a_value, t_stack *stack)
 {
 	int	i;
@@ -57,6 +66,7 @@ static int	find_correct_spot(int first_a_value, t_stack *stack)
 	return (correct_index);
 }
 
+
 static void	rotate_b_to_correct_spot(t_stacks *stacks)
 {
 	int	correct_i;
@@ -71,6 +81,10 @@ static void	rotate_b_to_correct_spot(t_stacks *stacks)
 	move_value_to_top(correct_i, stacks, B);
 }
 
+/*
+	Function checks if stack_a is containing any values found from
+	chunks->array.
+*/
 static int	stack_contains_chunk_value(t_stack *stack_a, t_chunks *chunks)
 {
 	while (stack_a)
