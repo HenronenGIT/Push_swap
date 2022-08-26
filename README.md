@@ -1,8 +1,12 @@
-<p align="left"><img src="./README/stack.jpg" ></p>
+<p align="left"><img src="./README/pics/stack.jpg" ></p>
 
 # Push_swap - Because Swap_push isn’t as natural
 
+<!-- Gif here -->
+
 <p align="left"><img src="./README/pics/score.png" height="150" /></p>
+
+## Description
 
 > <em> This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions. To succeed you’ll have to manipulate various types of algorithms and choose the one (of many) most appropriate solution for an optimized data sorting. </em>
 
@@ -28,26 +32,39 @@ Arguments has to be:
 
 Otherwise you get an `Error` message
 
+<p align="left"><img src="./README/pics/push_swap_output.png" height="150"/></p>
+
 ### checker
 
 1. `checker` takes integers as an argument as well.\
 `./checker <set of integers>`
 
-2. After running `checker` program with set of integers terminal will wait instructions.
+2. After running `checker` program with set of integers, terminal will wait instructions.
 
-![](README/video/my_video.mov)
+<video width="320" height="240" controls>
+  <source src="./README/video/checker.mov" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
-<p align="left"><img src="./README/pics/push_swap_output.png" /></p>
+<video width="320" height="240" controls>
+  <source src="./README/video/checker_gif.mov" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
-## Description
+3. After when you are done with your instructions end the instruction phase with `CTRL + D` key combination.
 
+4. If the stack is sorted with all instructions what was given, program outputs `OK` if not output is `KO`.
 
+### push_swap and checker together
+
+1. 
 
 ## PDF
 
 <a href="./README/push_swap.en.pdf">Push_swap PDF</a>
 
 ### Keywords
+
 - Sorting
 - Algorithms
 - Stacks in Computer Science
