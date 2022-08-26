@@ -55,9 +55,24 @@ Your browser does not support the video tag.
 
 4. If the stack is sorted with all instructions what was given, program outputs `OK` if not output is `KO`.
 
+All valid instructions
+
+- `sa` - Swap first 2 elements at the top of stack a
+- `sb` - Swap first 2 elements at the top of stack b
+- `ss` - `sa` and `sb` at the same time
+- `pa` - Take first element from stack b and put that to top of stack a
+- `pb` - Take first element from stack a and put that to top of stack b
+- `ra` - Shift up all elements of stack a by 1
+- `rb` - Shift up all elements of stack b by 1
+- `rr` - `ra` and `rb` at the same time
+- `rra` - Shift down all elements of stack a by 1
+- `rrb` - Shift down all elements of stack b by 1
+- `rrr` - `rra` and `rrb` at the same time
+
 ### push_swap and checker together
 
-1. 
+1. We can redirect the outpuf of `push_swap` program to `checker` program. This allows us to see if `push_swap` program sorted the stack correctly.\
+`ARG="1 5 3 4 0"; ./push_swap $ARG | ./checker $ARG`
 
 ## PDF
 
