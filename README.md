@@ -2,11 +2,9 @@
 
 # Push_swap - Because Swap_push isn’t as natural
 
+<a href="url"><img src="https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif"  width="300" ></a>
+<p align="middle"><img src="./README/pics/score.png" height="150" /></p>
 <!-- ![](https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif) -->
-
-<a href="url"><img src="https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif" align="left" width="300" ></a>
-
-<p align="left`"><img src="./README/pics/score.png" height="150" /></p></br>
 
 ## Description
 
