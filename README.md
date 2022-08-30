@@ -41,10 +41,7 @@ Otherwise you get an `Error` message
 
 2. After running `checker` program with set of integers, terminal will wait instructions.
 
-<video width="320" height="240" controls>
-  <source src="./README/video/checker.mov" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+<video width="320" height="240" src="./README/video/visual.mov"></video>
 
 <video width="320" height="240" controls>
   <source src="./README/video/checker_gif.mov" type="video/mp4">
