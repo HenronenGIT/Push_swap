@@ -2,9 +2,9 @@
 
 # Push_swap - Because Swap_push isn’t as natural
 
-<!-- Gif here -->
-
-<p align="left"><img src="./README/pics/score.png" height="150" /></p>
+<a href="url"><img src="https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif"  width="300" ></a>
+<p align="middle"><img src="./README/pics/score.png" height="150" /></p>
+<!-- ![](https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif) -->
 
 ## Description
 
@@ -41,13 +41,9 @@ Otherwise you get an `Error` message
 
 2. After running `checker` program with set of integers, terminal will wait instructions.
 
-<video width="320" height="240" controls>
-  <source src="./README/video/checker.mov" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+![](https://im4.ezgif.com/tmp/ezgif-4-58541e815e.gif)
 
-<video width="320" height="240" controls>
-  <source src="./README/video/checker_gif.mov" type="video/mp4">
+
 Your browser does not support the video tag.
 </video>
 
@@ -56,18 +52,19 @@ Your browser does not support the video tag.
 4. If the stack is sorted with all instructions what was given, program outputs `OK` if not output is `KO`.
 
 All valid instructions
-
-- `sa` - Swap first 2 elements at the top of stack a
-- `sb` - Swap first 2 elements at the top of stack b
-- `ss` - `sa` and `sb` at the same time
-- `pa` - Take first element from stack b and put that to top of stack a
-- `pb` - Take first element from stack a and put that to top of stack b
-- `ra` - Shift up all elements of stack a by 1
-- `rb` - Shift up all elements of stack b by 1
-- `rr` - `ra` and `rb` at the same time
-- `rra` - Shift down all elements of stack a by 1
-- `rrb` - Shift down all elements of stack b by 1
-- `rrr` - `rra` and `rrb` at the same time
+| Operation | Description |
+| --------- | ----------  |
+| sa  | Swap first 2 elements at the top of stack a |
+| sb  | Swap first 2 elements at the top of stack b |
+| ss  | sa and sb at the same time |
+| pa  | Take first element from stack b and put that to top of stack a |
+| pb  | Take first element from stack a and put that to top of stack b |
+| ra  | Shift up all elements of stack a by 1 |
+| rb  | Shift up all elements of stack b by 1 |
+| rr  | ra and rb at the same time |
+| rra | Shift down all elements of stack a by 1 |
+| rrb | Shift down all elements of stack b by 1 |
+| rrr | rra and rrb at the same time |
 
 ### push_swap and checker together
 
