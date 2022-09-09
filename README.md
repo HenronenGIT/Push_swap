@@ -2,7 +2,7 @@
 
 # Push_swap - Because Swap_push isn’t as natural
 
-<a href="url"><img src="https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif"  width="300" ></a>
+<a href="gif"><img src="./README/video/visual_algo.gif"  width="300" ></a>
 <p align="middle"><img src="./README/pics/score.png" height="150" /></p>
 <!-- ![](https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif) -->
 
@@ -41,7 +41,7 @@ Otherwise you get an `Error` message
 
 2. After running `checker` program with set of integers, terminal will wait instructions.
 
-![](https://im4.ezgif.com/tmp/ezgif-4-58541e815e.gif)
+<a href="gif"><img src="./README/video/checker_guide.gif">
 
 
 Your browser does not support the video tag.
