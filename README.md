@@ -1,10 +1,11 @@
-<p align="left"><img src="./README/pics/stack.jpg" ></p>
+<p align="left"><img src="./README/pics/stack.jpg"></p>
 
 # Push_swap - Because Swap_push isn’t as natural
 
-<a href="gif"><img src="./README/video/visual_algo.gif"  width="300" ></a>
-<p align="middle"><img src="./README/pics/score.png" height="150" /></p>
-<!-- ![](https://im4.ezgif.com/tmp/ezgif-4-502d12b95b.gif) -->
+<div>
+  <a><img src="./README/video/visual_algo.gif"  width="300" ></a>
+  <a><img src="./README/pics/score.png" height="150" /></a>
+</div>
 
 ## Description
 
@@ -41,11 +42,7 @@ Otherwise you get an `Error` message
 
 2. After running `checker` program with set of integers, terminal will wait instructions.
 
-<a href="gif"><img src="./README/video/checker_guide.gif">
-
-
-Your browser does not support the video tag.
-</video>
+<a ><img src="./README/video/checker_guide.gif" height="200">
 
 3. After when you are done with your instructions end the instruction phase with `CTRL + D` key combination.
 
