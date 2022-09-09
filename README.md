@@ -2,10 +2,7 @@
 
 # Push_swap - Because Swap_push isn’t as natural
 
-<div>
-  <a><img src="./README/video/visual_algo.gif"  width="300" ></a>
-  <a><img src="./README/pics/score.png" height="150" /></a>
-</div>
+<a><img src="./README/video/visual_algo.gif" width="300"></a>
 
 ## Description
 
